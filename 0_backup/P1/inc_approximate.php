@@ -1,0 +1,5 @@
+<?php
+
+
+Location("");
+exit();

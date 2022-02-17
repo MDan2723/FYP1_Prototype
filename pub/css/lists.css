@@ -1,0 +1,31 @@
+nav{
+    margin:auto;
+}
+
+ul{
+    list-style-type: none;
+    padding:0px;
+    justify-content:center;
+
+}
+.navList{
+    display: inline;
+    padding:15px;
+
+    border-radius:30px;
+}
+
+.navList:hover{
+	transition:0.25s;
+    
+	color: White;
+    background-color: grey;
+}
+.nlSel{
+    display: inline;
+    padding:15px;
+
+    border-radius:30px;
+	color: White;
+    background-color: grey;
+}

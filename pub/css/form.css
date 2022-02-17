@@ -1,0 +1,37 @@
+form{
+    padding:10px;
+    margin:10px;
+    background-color:lightGrey;
+    border: 1px solid Grey;
+    border-radius:5px;
+}
+.in1{
+    height:2em;
+    width:15em;
+
+    padding:0px;
+    margin: 3px 0px 3px 0px;
+
+    background-color:lightGrey;
+    border: 1px solid Grey;
+    border-radius:20px;
+
+    text-align:center;
+    color:black;
+}
+.in1:hover{
+    transition:0.25s;
+    background-color:white;
+    border: 1px solid Grey;
+}
+.in1:focus{
+    background-color:white;
+    border: 1px solid Grey;
+}
+/*
+.clr::-webkit-outer-spin-button,
+.clr::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+*/

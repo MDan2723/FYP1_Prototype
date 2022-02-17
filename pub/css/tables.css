@@ -1,0 +1,20 @@
+.tbl1{
+    border:1px solid lightGrey;
+}
+.tbl1 td,.tbl1 th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.setTbl{
+    padding:0px;
+}
+.setTbl td,.setTbl th {
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    
+    padding: 8px;
+    margin: 0px;
+
+}

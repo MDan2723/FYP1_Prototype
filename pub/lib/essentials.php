@@ -292,8 +292,19 @@ function formModify(){
 	<?php
 }
 
-function scripts(){
+function scripts_graph(){
 	?>
-	<script src="pub/js/graph.js"></script>
+	<script src="pub/JS/parseURL.js"></script>
+	<script src="pub/JS/mathEval.js"></script>
+	<script src="pub/JS/Graph.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/nerdamer.core.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/Algebra.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/Calculus.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/Solve.js"></script>
+
+	<script src="pub/JS/methods/Bisection.js"></script>
+	<script src="pub/JS/methods/Secant.js"></script>
+	<script src="pub/JS/methods/Newton.js"></script>
 	<?php
 }

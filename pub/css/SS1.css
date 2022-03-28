@@ -48,6 +48,13 @@ body{
 	justify-content: center;
 }
 
+.g_cent{
+	display: grid;
+	grid-column: 2;
+	grid-auto-flow: column;
+	justify-content: center;
+}
+
 .desc{
 	margin: 10px;
 

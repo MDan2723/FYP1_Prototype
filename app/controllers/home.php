@@ -19,6 +19,10 @@ class Home extends Controller
         $this->view('pg_results/index', []);
     }
 
+    public function stepbystepguide( $data='' ){
+        $this->view('pg_stepbystep/index', []);
+    }
+
     public function forum( $data='' ){
         $this->view('pg_forum/index', []);
     }

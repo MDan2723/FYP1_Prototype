@@ -5,7 +5,7 @@ class Database{
 	private $host	= "localhost";
 	private $uname	= "root";
 	private $pwd	= "";
-	private $name	= "dbmots";
+	private $name	= "numericalsimulator";
 	private $conn;
 	
 	

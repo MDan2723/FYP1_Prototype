@@ -1,12 +1,12 @@
 
 <head>
     <style>
-        <?php require_once 'pub/css/SS1.css';?>
-        <?php require_once 'pub/css/form.css';?>
-        <?php require_once 'pub/css/texts.css';?>
-        <?php require_once 'pub/css/lists.css';?>
-        <?php require_once 'pub/css/tables.css';?>
-        <?php require_once 'pub/css/graphs.css';?>
+        <?php require_once 'pub/lib/css/SS1.css';?>
+        <?php require_once 'pub/lib/css/form.css';?>
+        <?php require_once 'pub/lib/css/texts.css';?>
+        <?php require_once 'pub/lib/css/lists.css';?>
+        <?php require_once 'pub/lib/css/tables.css';?>
+        <?php require_once 'pub/lib/css/graphs.css';?>
     </style>
 </head>
 
@@ -294,17 +294,17 @@ function formModify(){
 
 function scripts_graph(){
 	?>
-	<script src="pub/JS/parseURL.js"></script>
-	<script src="pub/JS/mathEval.js"></script>
-	<script src="pub/JS/Graph.js"></script>
+	<script src="pub/lib/js/parseURL.js"></script>
+	<script src="pub/lib/js/mathEval.js"></script>
+	<script src="pub/lib/js/Graph.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/nerdamer.core.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/Algebra.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/Calculus.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/Solve.js"></script>
 
-	<script src="pub/JS/methods/Bisection.js"></script>
-	<script src="pub/JS/methods/Secant.js"></script>
-	<script src="pub/JS/methods/Newton.js"></script>
+	<script src="pub/lib/js/methods/Bisection.js"></script>
+	<script src="pub/lib/js/methods/Secant.js"></script>
+	<script src="pub/lib/js/methods/Newton.js"></script>
 	<?php
 }

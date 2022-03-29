@@ -9,25 +9,32 @@ class Home extends Controller
         $this->view('home/index', []);
     }
     public function notes( $data='' ){
-        $this->view('pg_notes/index', []);
+        $this->view('home/notes', []);
     }
     public function exercises( $data='' ){
-        $this->view('pg_exercises/index', []);
+        $this->view('home/exercises', []);
     }
     
-    public function results( $data='' ){
-        $this->view('pg_results/index', []);
+    public function simulation( $data='' ){
+        $this->view('home/simulation', []);
     }
 
     public function stepbystepguide( $data='' ){
-        $this->view('pg_stepbystep/index', []);
+        $this->view('home/stepbystepguide', []);
     }
 
     public function forum( $data='' ){
-        $this->view('pg_forum/index', []);
+        $this->view('home/forum', []);
     }
 
     public function settings( $data='' ){
-        $this->view('pg_settings/index', []);
+        $this->view('home/settings', []);
+    }
+
+    public function signup( $data='' ){
+        $this->view('home/signup', []);
+    }
+    public function login( $data='' ){
+        $this->view('home/login', []);
     }
 }

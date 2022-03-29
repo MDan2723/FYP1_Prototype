@@ -63,7 +63,7 @@
 		</div>
 	</body>
 	<?php scripts_graph(); ?>
-		<script src="pub/JS/controls/stepbystep.js"></script>
+		<script src="pub/lib/js/controls/stepbystep.js"></script>
 	
 	
 </html>

@@ -18,8 +18,7 @@ class Bisection{
 	}
 
 	iteration(){
-		c_log("----------------------------------")
-		c_log("ITERATING... [ "+this.a+", "+this.b+" ]")
+		c_log(">> ITERATING... [ "+this.a+", "+this.b+" ]");
 
 		var a = this.a,
 			b = this.b,
@@ -163,18 +162,20 @@ class Bisection{
 		document.getElementById('viewLink').innerHTML = "<a class='' href='/stepbystepguide/"+link+"'>View Step-by-Step</a>";
 	}
 	listTable(){
-		let str = '<tr> <th>steps, n</th> <th>a</th> <th>b</th> <th>midpoint, x</th> <th>f(x)</th> <th>error, e</th> </tr>';
+		let str = '<thead><tr> <th>steps, n</th> <th>a</th> <th>b</th> <th>midpoint, x</th> <th>f(x)</th> <th>error, e</th> </tr></thead>';
 		let row = this.tableItr.length;
 		
+		str += "<tbody>";
 		for(let i = 1; i < row; i++) {
 			
 			str += "<tr>";
-			str += "<td>"+ (i) +"</td>";
+			str += "<td class='td-cent'>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
-				str += "<td> "+itm+ "</td>";
+				str += "<td > "+itm+ "</td>";
 			});
 			str += "</tr>";
 		}
+		str += "</tbody>";
 
 		document.getElementById("tableIter").innerHTML = str;
 	}

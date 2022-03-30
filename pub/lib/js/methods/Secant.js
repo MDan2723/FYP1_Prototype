@@ -148,17 +148,19 @@ class Secant{
 		document.getElementById('viewLink').innerHTML = "<a class='' href='../stepbystepguide/index.html"+link+"'>View Step-by-Step</a>";
 	}
 	listTable(){
-		var str = '<tr> <th>steps, n</th> <th>Xn</th> <th>f(Xn)</th> <th>Xn+1</th> <th>error, e</th> </tr>';
+		var str = '<thead><tr> <th>steps, n</th> <th>Xn</th> <th>f(Xn)</th> <th>Xn+1</th> <th>error, e</th> </tr></thead>';
 
+        str += "<tbody>";
 		for(var i = 0; i < this.tableItr.length; i++) {
-			
+            
 			str += "<tr>";
 			str += "<td>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
-				str += "<td> "+itm+ "</td>";
+                str += "<td> "+itm+ "</td>";
 			});
 			str += "</tr>";
 		}
+        str += "</tbody>";
 
 		document.getElementById("tableIter").innerHTML = str;
 	}

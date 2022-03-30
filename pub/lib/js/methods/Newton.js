@@ -17,7 +17,6 @@ class Newton{
 		document.getElementById("inputCrit").innerHTML = " Criteria <br> x1: <input id='fieldX1' type='number' />";
     }
 
-
     iteration(){
         const N = this;
         N.guide = [];
@@ -26,12 +25,12 @@ class Newton{
         var root = findRootExpr();
         if(root.length>1){
 			c_log('more than 1 root detected');
-			c_log(root);
+			// c_log(root);
 			
 			root = findNearestRoot(root,this.x[0]);
 		}
         c_log(root);
-        graphCenter( root, math.abs(root-this.x[0]) );
+        N.G.graphCenter( root, math.abs(root-this.x[0]) );
 
         // c_log( expr );
         var expr2 = math.derivative(expr,'x').toString();
@@ -68,7 +67,7 @@ class Newton{
         N.result = result;
         c_log(result.toString() +' ≈ '+ Math.round(parseFloat(result.toString())));
         
-        refreshCanvas();
+        N.G.refreshCanvas();
 
         if(N.boolWrite){
             N.writeLink();
@@ -90,31 +89,34 @@ class Newton{
 
 
     drawGuides(){
-		var g = this.guide,
+        const   N = this,
+                G = N.G,
+                gCtx = G.ctxGraph;
+		var g = N.guide,
             i = 1;
 		g.forEach(el => {
-			ctx.beginPath();
-			ctx.arc( findCoords('math',el[0],'x'), findCoords('math',el[1],'y'), 2 , 0, 2*Math.PI );
-			ctx.stroke();
-            ctx.fillText( "X"+i, findCoords('math',el[0],'x'), findCoords('math',el[1],'y') );
+			gCtx.beginPath();
+			gCtx.arc( G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y'), 2 , 0, 2*Math.PI );
+			gCtx.stroke();
+            gCtx.fillText( "X"+i, G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y') );
             i++;
 		});
 
-        ctx.beginPath();
+        gCtx.beginPath();
         for( var i=1; i<g.length; i++ ){
-			ctx.moveTo( findCoords('math',g[i-1][0],'x'), findCoords('math',g[i-1][1],'y') );
-			ctx.lineTo( findCoords('math',g[i][0],'x'), findCoords('math',0,'y') );
+			gCtx.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
+			gCtx.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
         }
-		ctx.stroke();
+		gCtx.stroke();
 
-        ctx.setLineDash([4, 2]);
-        ctx.beginPath();
+        gCtx.setLineDash([4, 2]);
+        gCtx.beginPath();
         for(var i=1; i<g.length; i++) {
-            ctx.moveTo( findCoords('math',g[i][0],'x'), findCoords('math',0,'y') );
-            ctx.lineTo( findCoords('math',g[i][0],'x'), findCoords('math',g[i][1],'y') );
+            gCtx.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
+            gCtx.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
         }
-        ctx.stroke();
-        ctx.setLineDash([0, 0]);
+        gCtx.stroke();
+        gCtx.setLineDash([0, 0]);
 	}
 
     // Writings
@@ -155,7 +157,7 @@ class Newton{
         input.change( function (e) {
             N.x[0] = parseFloat(input.val());
             N.iteration();
-            refreshCanvas();
+            N.G.refreshCanvas();
         });
     }
 	fieldTolCrit(){
@@ -170,7 +172,7 @@ class Newton{
 				// c_log(parseFloat(input.val())!=0);
 				N.tol = parseFloat(input.val());
 				N.iteration();
-				refreshCanvas();
+				N.G.refreshCanvas();
 
 			}else if( input.val()=='' ){
 				c_log("missing tolerance");

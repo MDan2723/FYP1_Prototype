@@ -199,6 +199,7 @@ class Graph{
 
 	// Field Handling
 	fieldFunc(){
+		const G = this;
 		let input = $('#fieldFunc');
 		input.val(expr); // Set the initial text value programmatically using jQuery.
 			
@@ -211,11 +212,11 @@ class Graph{
 					tree = mathGraph.parse(expr, scope);
 					if( tree.name != 'ParseError' ){
 						numSim.iteration();
-						refreshCanvas();
+						G.refreshCanvas();
 					}
 					else{
 						console.log("error detected in function provided");
-						clearCanvas(this.cnvGraph,this.ctxGraph);
+						G.clearCanvas(this.cnvGraph,this.ctxGraph);
 					}
 				}
 			}
@@ -265,7 +266,7 @@ class Graph{
 
 	}
 	magnify(m){
-		const	gD = this.graphData;
+		const gD = this.graphData;
 
 		gD.size += m*2;
 		gD.size = (Math.round(gD.size*100000))/100000;
@@ -350,7 +351,7 @@ class Graph{
 	}
 
 	// Finder
-	findCoords(from,valXY,attXY){	// !! --> change grid-context
+	findCoords(from,valXY,attXY){
 		const	cnvG = this.cnvGraph,
 				gW = this.graphData.mathWindow,
 				point = this.pointer;

@@ -154,12 +154,12 @@ class Bisection{
 	// Writings
 	writeLink(){
 		var link = '';
-		link += ''+1;
-		link += '/'+expr;
-		link += '/['+this.a+','+this.b+']';
-		link += '/'+this.tol;
+		link += '?m='+1;
+		link += '&f='+expr;
+		link += '&x=['+this.a+','+this.b+']';
+		link += '&tol='+this.tol;
 		// c_log(link);
-		document.getElementById('viewLink').innerHTML = "<a class='' href='/stepbystepguide/"+link+"'>View Step-by-Step</a>";
+		document.getElementById('viewLink').innerHTML = "<a class='' href='/stepbystepguide"+link+"'>View Step-by-Step</a>";
 	}
 	listTable(){
 		let str = '<thead><tr> <th>steps, n</th> <th>a</th> <th>b</th> <th>midpoint, x</th> <th>f(x)</th> <th>error, e</th> </tr></thead>';

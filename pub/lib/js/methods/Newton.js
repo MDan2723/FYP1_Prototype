@@ -124,7 +124,7 @@ class Newton{
 		var link = '';
 		link += '?m='+3;
 		link += '&f='+expr;
-		link += '&x='+this.x[0];
+		link += '&x=['+this.x[0]+']';
 		link += '&tol='+this.tol;
 		// c_log(link);
 		document.getElementById('viewLink').innerHTML = "<a class='' href='../stepbystepguide/index.html"+link+"'>View Step-by-Step</a>";

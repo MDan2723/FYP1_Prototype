@@ -141,8 +141,7 @@ class Secant{
 		var link = '';
 		link += '?m='+2;
 		link += '&f='+expr;
-		link += '&a='+this.a;
-		link += '&b='+this.b;
+		link += '&x=['+this.x[0]+']';
 		link += '&tol='+this.tol;
 		// c_log(link);
 		document.getElementById('viewLink').innerHTML = "<a class='' href='../stepbystepguide/index.html"+link+"'>View Step-by-Step</a>";

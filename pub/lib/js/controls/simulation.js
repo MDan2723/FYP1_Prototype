@@ -1,3 +1,4 @@
+var urlParams = parseURLParams(document.URL);
 let G = new Graph();
 
 G.refreshCanvas();

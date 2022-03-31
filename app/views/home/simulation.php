@@ -72,7 +72,7 @@
 	
 		</div>
 		<?php scripts_graph();?>
-		<script src="pub/lib/js/controls/results.js"></script>
+		<script src="pub/lib/js/controls/simulation.js"></script>
 	</body>
 	
 </html>

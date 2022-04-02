@@ -18,6 +18,9 @@ class Home extends Controller
     public function simulation( $data='' ){
         $this->view('home/simulation', []);
     }
+    public function simhistory( $data='' ){
+        $this->view('home/simhistory', []);
+    }
 
     public function stepbystepguide( $data='' ){
         $this->view('home/stepbystepguide', []);

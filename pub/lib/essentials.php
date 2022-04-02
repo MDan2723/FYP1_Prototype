@@ -1,13 +1,15 @@
 
 <head>
     <style>
-        <?php require_once 'pub/lib/css/SS1.css';?>
+        <?php require_once 'pub/lib/css/SS2.css';?>
         <?php require_once 'pub/lib/css/form.css';?>
         <?php require_once 'pub/lib/css/texts.css';?>
         <?php require_once 'pub/lib/css/lists.css';?>
         <?php require_once 'pub/lib/css/tables.css';?>
         <?php require_once 'pub/lib/css/graphs.css';?>
-    </style>
+        <?php require_once 'pub/lib/css/sidebar.css';?>
+	</style>
+	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <?php 
@@ -35,28 +37,68 @@ function footing(){
 
 function navHeader( $page ){
 	$pages = [	['1','&#9750','../'],
-				['2','EXERCISES','/exercises'],
+				['2','SIM HISTORY','/simhistory'],
 				['3','NOTES','/notes'],
 				['4','FORUM','/forum'],
 				['5','SETTINGS','/settings'],
 				];
 	
-		?>
-		<div class='cent pad f_cent'>
-		<nav>
-			<ul>
-				<?php
-					for( $i=0; $i<count($pages); $i++ ){
-						if( $page!=$pages[$i][0] )
-							echo "<a class='' href='".$pages[$i][2]."'><li class='navList'>".$pages[$i][1]."</li></a>";
-						else
-							echo "<a class='' href='".$pages[$i][2]."'><li class='nlSel'>".$pages[$i][1]."</li></a>";
-					}
-				?>
-			</ul>
-		</nav>
-		</div>
-		<?php
+	?>
+	<div class="sidebar">
+        <div class="logo-content">
+            <div class="logo">
+				<a href="/">
+					<i class='bx bx-chart'></i>
+					<div class="logo-name">NumericalSim</div>
+				</a>
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+        </div>
+        <ul>
+            <li>
+                <i class='bx bx-search'></i><input type="text" placeholder="Search..." value="">
+                <span class="tooltip">Search</span>
+            </li>
+			<li><a href="/simhistory">
+				<i class='bx bx-history'></i><span class="links-name">Sim History</span>
+				</a><span class="tooltip">Sim History</span>
+			</li>
+            <li><a href="/notes">
+                <i class='bx bx-notepad'></i><span class="links-name">Notes</span>
+                </a><span class="tooltip">Notes</span>
+            </li>
+			<li><a href="/exercises">
+				<i class='bx bx-file-blank'></i><span class="links-name">Exercises</span>
+                </a><span class="tooltip">Exercises</span>
+            </li>
+            <li><a href="/forum">
+                <i class='bx bxs-conversation'></i><span class="links-name">Forum</span>
+                </a><span class="tooltip">Forum</span>
+            </li>
+            <li><a href="/settings">
+                <i class='bx bx-cog' ></i><span class="links-name">Setting</span>
+                </a><span class="tooltip">Setting</span>
+            </li>
+        </ul>
+        <div class="profile-content">
+            <div class="profile">
+                <div class="profile-details">
+                    <!-- <profile image here> -->
+					<a href="/account">
+						<i class="bx bx-user"></i>
+					</a>
+                    <div class="name-job">
+                        <div class="name">Muhammad Danial</div>
+                        <div class="job">MMU Undergraduate</div>
+                    </div>
+                </div>
+                <a href="/login"><i class="bx bx-log-in" id="loggings"></i></a>
+				<span class="tooltip">Login/Singup</span>
+                <!-- <i class="bx bx-log-out" id="loggings"></i><span class="tooltip">Logout</span> -->
+            </div>
+        </div>
+    </div>
+	<?php
 }
 
 function exercisesTbl1(){
@@ -122,13 +164,13 @@ function notesTbl1(){
 }
 
 function forumTbl1(){
+	$DB = new Database();
 	?>
 	<div class='f_cent'>
 		<table class='tbl1'>
 			<tr>
 				<th>Author</th>
 				<th>Title</th>
-				<th>Comment</th>
 				<th>Date</th>
 				<th>Rating</th>
 			</tr>
@@ -136,11 +178,10 @@ function forumTbl1(){
 			for( $i=0; $i<3; $i++ ){
 				?>
 				<tr>
-					<td>author_<?=$i+123?></td>
-					<td>title_<?=$i+123?></td>
-					<td>comment_<?=$i+123?></td>
-					<td>15/11/2021 11:50</td>
-					<td>45%</td>
+					<td><?=$i+123?></td>
+					<td><?=$i+123?></td>
+					<td><?=$i+123?></td>
+					<td></td>
 				</tr>
 				<?php
 			}
@@ -291,7 +332,12 @@ function formModify(){
 	</div>
 	<?php
 }
-
+function sciptings(){
+	testData("scripting");
+	?>
+	<script src="pub/lib/js/sidebar.js"></script>
+	<?php
+}
 function scripts_graph(){
 	?>
 	<script src="pub/lib/js/parseURL.js"></script>

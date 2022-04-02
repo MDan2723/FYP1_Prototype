@@ -8,6 +8,7 @@
     
     <div class='cent pad marg t_cent'>
         <h1>
+            <i class='bx bx-chart' ></i>
             NUMERICAL SIMULATOR
         </h1>
     </div>
@@ -51,6 +52,7 @@
         <?=forumTbl1();?>
     </div>
 
+    <?=sciptings()?>
     <script src="pub/lib/js/controls/home.js"></script>
 
 </body>

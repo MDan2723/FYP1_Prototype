@@ -1,5 +1,3 @@
-<html>
-
 <head>
     <title>FYP: Notes</title>
 </head>
@@ -10,7 +8,7 @@
     </div>
 </header>
 
-<body>
+<body class="main-body">
     
     <?php navHeader(3); ?>
 
@@ -22,8 +20,8 @@
         <?=notesTbl1()?>
 
     </div>
+
+    <?=scriptings()?>
+
 </body>
-
 <?=footing()?>
-
-</html>

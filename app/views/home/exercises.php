@@ -1,4 +1,3 @@
-<html>
 
 <head>
     <title>Exercises</title>
@@ -10,7 +9,7 @@
     </div>
 </header>
 
-<body>
+<body class="main-body">
     
     <?php navHeader(2); ?>
 
@@ -22,8 +21,9 @@
         <?=exercisesTbl1()?>
 
     </div>
+
+	<?=scriptings();?>
+    
 </body>
 
 <?=footing()?>
-
-</html>

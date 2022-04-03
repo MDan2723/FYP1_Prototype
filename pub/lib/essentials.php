@@ -8,6 +8,7 @@
         <?php require_once 'pub/lib/css/tables.css';?>
         <?php require_once 'pub/lib/css/graphs.css';?>
         <?php require_once 'pub/lib/css/sidebar.css';?>
+        <?php require_once 'pub/lib/css/forums.css';?>
 	</style>
 	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -17,13 +18,6 @@
 require_once "config.php";
 require_once "ess.debug.php";
 
-function hd( $type, $str ){
-	
-	echo "<head>";
-
-  
-	echo "</head>";
-}
 
 function footing(){
 	?>
@@ -163,31 +157,42 @@ function notesTbl1(){
 	<?php
 }
 
-function forumTbl1(){
+function forumList(){
 	$DB = new Database();
+	// testData($DB);
 	?>
-	<div class='f_cent'>
-		<table class='tbl1'>
-			<tr>
-				<th>Author</th>
-				<th>Title</th>
-				<th>Date</th>
-				<th>Rating</th>
-			</tr>
+	<div class='forum'>
+		<ol>
 			<?php
 			for( $i=0; $i<3; $i++ ){
 				?>
-				<tr>
-					<td><?=$i+123?></td>
-					<td><?=$i+123?></td>
-					<td><?=$i+123?></td>
-					<td></td>
-				</tr>
+				<li class="row">
+					<a href="/thread?id=">
+						<h4 class="title">
+							Start
+							<!-- <?="title"?> -->
+						</h4>
+						<div class="bottom">
+							<p class="timestamp">
+								4/3/2022 12:00
+								<!-- <?="timestamp"?> -->
+							</p>
+							<p class="comment-count">
+								0 comments
+								<!-- <?="comment number"?> -->
+							</p>
+							<p class="rating">
+								0 Ratings
+								<!-- <?="comment number"?> -->
+							</p>
+						</div>
+					</a>
+				</li>
 				<?php
 			}
-			
 			?>
-		</table>
+			
+		</ol>
 
 	</div>
 	<?php
@@ -332,10 +337,15 @@ function formModify(){
 	</div>
 	<?php
 }
-function sciptings(){
-	testData("scripting");
+function scriptings(){
 	?>
 	<script src="pub/lib/js/sidebar.js"></script>
+	<?php
+}
+function scripts_forum(){
+	?>
+	<script src="pub/lib/js/control/forum.js"></script>
+	<script src="pub/lib/js/control/thread.js"></script>
 	<?php
 }
 function scripts_graph(){

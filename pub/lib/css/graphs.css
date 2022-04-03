@@ -3,7 +3,7 @@
 	z-index:1;
 
 	min-width: 350px;
-	height:500px;
+	height:525px;
 	
 	margin:5px;
 	padding:10px;
@@ -17,9 +17,10 @@
 #graph{
 	position:relative;
 	z-index:1;
+	/* overflow:hidden; */
 
-	width:500px;
-	height:500px;
+	width:525px;
+	height:525px;
 
 	margin:5px;
 	padding:10px;

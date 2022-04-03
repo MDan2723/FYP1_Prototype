@@ -1,5 +1,3 @@
-<html>
-
 <head>
     <title>Settings</title>
 </head>
@@ -12,7 +10,7 @@
     </div>
 </header>
 
-<body>
+<body class="main-body">
     <?php navHeader(5); ?>
 
     <div class='cent pad marg'>
@@ -104,8 +102,7 @@
 
     </div>
 
+	<?=scriptings();?>
+    
 </body>
-
 <?=footing()?>
-
-</html>

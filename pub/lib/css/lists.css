@@ -1,13 +1,11 @@
 nav{
-    margin:auto;
 }
 
 ul{
     list-style-type: none;
     padding:0px;
-    justify-content:center;
-
 }
+
 .navList{
     display: inline;
     padding:15px;
@@ -29,3 +27,7 @@ ul{
 	color: White;
     background-color: grey;
 }
+
+
+.forum ol{}
+.forum ol li{}

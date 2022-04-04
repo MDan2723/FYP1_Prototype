@@ -52,6 +52,5 @@
 
     <?=scriptings()?>
     <script src="pub/lib/js/controls/home.js"></script>
-
 </body>
 <?=footers()?>

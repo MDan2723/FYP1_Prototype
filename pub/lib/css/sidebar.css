@@ -1,5 +1,9 @@
 
 
+.pointer{
+    cursor:pointer;
+}
+
 .main-body{
     position: relative;
     min-height: 100vh;
@@ -46,7 +50,7 @@
     font-weight: 400;
 }
 
-.sidebar #btn{
+.sidebar #menu-btn{
     position: absolute;
     color: #fff;
     left: 50%;
@@ -58,7 +62,7 @@
     line-height: 50px;
     transform: translateX(-50%);
 }
-.sidebar.active #btn{
+.sidebar.active #menu-btn{
     left: 90%;
 }
 .sidebar ul{
@@ -188,11 +192,6 @@
     object-fit: cover;
     border-radius: 12px;
 }
-.profile .profile-details a i{
-    margin: 5px 10px 5px 10px;
-    font-size: 24px;
-    color: #fff;
-}
 .profile .profile-details a .name-job{
     margin-left: 10px;
     color: #fff;
@@ -203,6 +202,23 @@
 }
 .profile .profile-details .job{
     font-size: 12px;
+}
+.profile .profile-details a .log-btn{
+    bottom: 5px;
+
+    min-width: 50px;
+    line-height: 50px;
+    text-align: center;
+
+    color: #fff;
+    font-size: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.profile .profile-details a .log-btn:hover{
+    background-color: #fff;
+    color: #11101d;
 }
 
 .profile #loggings{

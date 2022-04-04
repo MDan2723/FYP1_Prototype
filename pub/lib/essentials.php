@@ -9,6 +9,8 @@ function heads( $title ){
 	?>
 
 	<head>
+		<!-- <link rel="shortcut icon" type="image/png" href="<?=BASE_URL?>pub/icons/chart-solid-48.png"> -->
+		<link rel="shortcut icon" type="image/svg" href="<?=BASE_URL?>pub/icons/bxs-chart.svg">
 		<style>
 			<?php require_once 'pub/lib/css/SS2.css';?>
 			<?php require_once 'pub/lib/css/form.css';?>
@@ -43,11 +45,11 @@ function navHeader( $page ){
 					<div class="logo-name">NumericalSim</div>
 				</a>
             </div>
-            <i class='bx bx-menu' id="btn"></i>
+            <i class='bx bx-menu pointer' id="menu-btn"></i>
         </div>
         <ul>
             <li>
-                <i class='bx bx-search'></i><input type="text" placeholder="Search..." value="">
+                <i class='bx bx-search pointer'></i><input type="text" placeholder="Search..." value="">
                 <span class="tooltip">Search</span>
             </li>
 			<li><a href="/simulator/simhistory">
@@ -77,44 +79,41 @@ function navHeader( $page ){
 					<?php
 					
 					if (session_status() === PHP_SESSION_NONE){ session_start(); }
-					if( !isset($_SESSION["user"]) ){
-						?>
-						<a href="/user/login"><i class="bx bx-log-in"></i></a>
-						<span class="tooltip">Login/Singup</span>
-						<?php
-					}
-					else{
-						?>
-						<a href="/user/logout"><i class="bx bx-log-out"></i></a>
-						<span class="tooltip">Logout</span>
-						<?php
-					}
 					
 					// testDataHere($user->getData());
 					if(isset($_SESSION['user'])){
+						?>
+						<a><i class="bx bx-log-out log-btn" id="logout-btn"></i></a>
+						<?php
 						$user = unserialize($_SESSION['user']);
 						?>
 						<!-- <profile image here> -->
 						<a href="/user">
-						<div class="name-job">
-							<div class="name"><?=$user->getdata()["name"] ?></div>
-							<div class="job"><?=$user->getdata()["email"] ?></div>
-						</div>
+							<div class="name-job">
+								<div class="name"><?=$user->getdata()["name"] ?></div>
+								<div class="job"><?=$user->getdata()["email"] ?></div>
+							</div>
 						</a>
 						<?php
 
 					}
 					else{
 						?>
-						<div class="name-job">
-							<div class="name">Login or Signup</div>
-							<div class="job">for additional features</div>
-						</div>
+						<a href="/user/login"><i class="bx bx-log-in log-btn"></i></a>
+						<?php
+						?>
+						<a>
+							<div class="name-job">
+								<div class="name">Login or Signup</div>
+								<div class="job">for additional features</div>
+							</div>
+						</a>
 						<?php
 					}
 					?>
                 </div>
-				<i class="bx bx-user" id="loggings"></i>
+				<i class="bx bx-user pointer" id="loggings"></i>
+				<span class="tooltip">My Account</span>
             </div>
         </div>
     </div>
@@ -194,39 +193,36 @@ function notesTbl1(){
 // ----------- FORUM -----------
 function forumList(){
 	$DB = new Database();
-	$list_data =  $DB->readTbl("forum","*","");
-	// testData($list_data->num_rows);
+	$result =  $DB->readTbl("forum","*","");
+	$list_data =  $DB->tableToListRow($result);
+	// testData($list_data);
 	?>
 	<div class='forum'>
 		<ol>
 			<?php
-			if($list_data->num_rows == 0){
+			if(count($list_data) == 0){
 				?>
 				<p class="">
 					No posts found; server error.
 				</p>
 				<?php
 			}else{
-				for( $i=0; $i<$list_data->num_rows; $i++ ){
+				for( $i=0; $i<count($list_data); $i++ ){
 					?>
 					<li class="row">
-						<a href="/thread?id=">
+						<a href="<?=BASE_URL?>forum/thread?id=<?=$list_data[$i]["id"]?>">
 							<h4 class="title">
-								Start
-								<!-- <?="title"?> -->
+								<?=$list_data[$i]["title"]?>
 							</h4>
 							<div class="bottom">
 								<p class="timestamp">
-									4/3/2022 12:00
-									<!-- <?="timestamp"?> -->
+									<?=$list_data[$i]["date"]?>
 								</p>
 								<p class="comment-count">
-									0 comments
-									<!-- <?="comment number"?> -->
+									<!-- <?=$list_data[$i]["title"]?> -->
 								</p>
 								<p class="rating">
-									0 Ratings
-									<!-- <?="comment number"?> -->
+									<?=$list_data[$i]["rating"]?>
 								</p>
 							</div>
 						</a>
@@ -293,9 +289,9 @@ function scriptings(){
 }
 function scripts_forum(){
 	?>
-	<script src="<?=BASE_URL?>pub/lib/js/controls/data.js"></script>
+	<!-- <script src="<?=BASE_URL?>pub/lib/js/controls/data.js"></script>
 	<script src="<?=BASE_URL?>pub/lib/js/controls/forum.js"></script>
-	<script src="<?=BASE_URL?>pub/lib/js/controls/thread.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/controls/thread.js"></script> -->
 	<?php
 }
 function scripts_graph(){

@@ -115,7 +115,6 @@ class Account{
 		$_SESSION['success'] = 'Account ['.$id.'] deleted.';
 	}
 	
-	
 	public function close(){
 		$this->die();
 	}

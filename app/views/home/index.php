@@ -15,7 +15,8 @@
     
     <div class='cent pad marg'>
         <div class='desc'>
-            SIMULATE <hr> make a quick numerical approximation here
+            <h3>SIMULATE</h3> 
+            <hr> make a quick numerical approximation here
         </div>
         <div id='formSimulation' class='form-sim'>
 
@@ -42,9 +43,11 @@
     
 	<div class='cent pad marg'>
         <div class='desc'>
-            FORUM <hr> looking to ask questions? start a dialogue or read the what other's have left. Rated for your education.
+            <h3>FORUM</h3>
+            <p>looking to ask questions? start a dialogue or read the what other's have left. Rated for your education.</p>
+            <hr> 
+            <?=forumList();?>
 		</div>
-        <?=forumList();?>
     </div>
 
     <?=scriptings()?>

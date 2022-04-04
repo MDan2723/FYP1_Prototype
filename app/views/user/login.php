@@ -41,7 +41,7 @@
 				</form>
 				<hr>
 				<p class="">Create an account to get additional features.</p>
-				<button><a href="<?=BASE_URL?>signup">SIGN UP</a></button>
+				<button><a href="<?=BASE_URL?>user/signup">SIGN UP</a></button>
 			</div>
 		</main>
 	</div>

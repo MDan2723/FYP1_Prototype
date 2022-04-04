@@ -11,11 +11,12 @@
     <?php navHeader(2); ?>
 
     <div class='cent pad marg'>
-        
-        <h3 class='t_cent'>LIST</h3>
-        <hr>
-        <br>
-        <?=exercisesTbl1()?>
+        <div class="desc">
+            <h3>LIST</h3>
+            <hr>
+            <?=simHistoryList()?>
+
+        </div>
 
     </div>
     <?=scriptings();?>

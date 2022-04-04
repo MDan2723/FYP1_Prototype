@@ -26,7 +26,7 @@ class Controller
             require_once 'pub/lib/essentials.php';
             
             // if( $url[0]=="home" ) require_once 'pub/lib/ess_cat_prd.php';
-            if( $url[0]=="admin" ) require_once 'pub/lib/ess.admin.php';
+            // if( $url[0]=="admin" ) require_once 'pub/lib/ess.admin.php';
             
             // testDataHere($view);
             require_once "app/views/".$view.".php";

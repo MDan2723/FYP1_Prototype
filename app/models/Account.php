@@ -12,6 +12,7 @@ class Account{
 	public function login_acc(){
 		$db = new Database;
 			
+		$type = "user";
 		// $type = $_POST['type'];
 		$mailuname = $_POST['mailuname'];
 		$password = $_POST['pwd'];
@@ -23,19 +24,20 @@ class Account{
 		else{
 			if($row = mysqli_fetch_assoc($result)){
 				$pwdCheck = password_verify($password, $row['password']);
-				
+				// testDataHere($row);
 				if($pwdCheck){
 					$user = new Account($row);
+					// testDataHere($user);
 					$_SESSION[$type] = serialize($user);
 	
 					if($type=='user') unset($_SESSION['guest']);
 					
-					// if($type=='admin'){
-					// 	go_to("admin");
-					// }
-					// else{
-					// 	rtrn();
-					// }
+					if($type=='admin'){
+						go_to("admin");
+					}
+					else{
+						rtrn();
+					}
 				}
 				else{ go_to("login/wrongpwd"); }
 			}

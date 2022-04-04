@@ -146,6 +146,7 @@
 .sidebar .links-name{
     opacity: 0;
     pointer-events: none;
+    transition: all 0.2s ease;
 }
 .sidebar.active .links-name{
     opacity: 1;
@@ -188,12 +189,13 @@
     border-radius: 12px;
 }
 .profile .profile-details a i{
-    margin: 5px 0 0 5px;
-    color: #fff;
+    margin: 5px 10px 5px 10px;
     font-size: 24px;
+    color: #fff;
 }
-.profile .profile-details .name-job{
+.profile .profile-details a .name-job{
     margin-left: 10px;
+    color: #fff;
 }
 .profile .profile-details .name{
     font-size: 15px;
@@ -203,7 +205,7 @@
     font-size: 12px;
 }
 
-.profile a #loggings{
+.profile #loggings{
     position: absolute;
     left: 50%;
     bottom: 5px;
@@ -217,10 +219,10 @@
     background-color: #1d1b31;
     color: #fff;
 }
-.sidebar.active .profile a #loggings{
+.sidebar.active .profile #loggings{
     left: 88%;
 }
-.sidebar.active .profile a #loggings{
+.sidebar.active .profile #loggings{
     background: none;
 }
 .sidebar .profile .tooltip{

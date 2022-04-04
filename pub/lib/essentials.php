@@ -4,7 +4,7 @@
 require_once "config.php";
 require_once "ess.debug.php";
 
-
+// ----------- HEAD HEADER FOOTER -----------
 function heads( $title ){
 	?>
 
@@ -26,7 +26,6 @@ function heads( $title ){
 
 	<?php
 }
-
 function navHeader( $page ){
 	$pages = [	['1','&#9750','../'],
 				['2','SIM HISTORY','/simhistory'],
@@ -76,62 +75,46 @@ function navHeader( $page ){
             <div class="profile">
                 <div class="profile-details">
 					<?php
-					$user = unserialize($_SESSION['user']);
-					// testDataHere($user->getData());
-					if (session_status() === PHP_SESSION_NONE){
-						session_start();
+					
+					if (session_status() === PHP_SESSION_NONE){ session_start(); }
+					if( !isset($_SESSION["user"]) ){
 						?>
-						<!-- <profile image here> -->
-						<a href="/account">
-							<i class="bx bx-user"></i>
-						</a>
-						<div class="name-job">
-							<div class="name">Muhammad Danial</div>
-							<div class="job">MMU Undergraduate</div>
-						</div>
+						<a href="/user/login"><i class="bx bx-log-in"></i></a>
+						<span class="tooltip">Login/Singup</span>
 						<?php
-					} 
+					}
 					else{
 						?>
-						<a href="/account">
-							<i class="bx bx-user"></i>
-						</a>
+						<a href="/user/logout"><i class="bx bx-log-out"></i></a>
+						<span class="tooltip">Logout</span>
+						<?php
+					}
+					
+					// testDataHere($user->getData());
+					if(isset($_SESSION['user'])){
+						$user = unserialize($_SESSION['user']);
+						?>
+						<!-- <profile image here> -->
+						<a href="/user">
 						<div class="name-job">
 							<div class="name"><?=$user->getdata()["name"] ?></div>
 							<div class="job"><?=$user->getdata()["email"] ?></div>
 						</div>
+						</a>
 						<?php
-					}
 
-					?>
-                </div>
-				
-				<?php
-					
-				if (session_status() === PHP_SESSION_NONE){
-					session_start();
-					if( !isset($_SESSION["user"]) ){
-						?>
-						<a href="/login"><i class="bx bx-log-in" id="loggings"></i></a>
-						<span class="tooltip">Login/Singup</span>
-						<?php
-					}
-				} 
-				else{
-					if( !isset($_SESSION["user"]) ){
-						?>
-						<a href="/login"><i class="bx bx-log-in" id="loggings"></i></a>
-						<span class="tooltip">Login/Singup</span>
-						<?php
 					}
 					else{
 						?>
-						<a href="/logout"><i class="bx bx-log-out" id="loggings"></i></a>
-						<span class="tooltip">Logout</span>
+						<div class="name-job">
+							<div class="name">Login or Signup</div>
+							<div class="job">for additional features</div>
+						</div>
 						<?php
 					}
-				}
-				?>
+					?>
+                </div>
+				<i class="bx bx-user" id="loggings"></i>
             </div>
         </div>
     </div>
@@ -147,6 +130,7 @@ function footers(){
 	<?php
 }
 
+// ----------- NOTES & EXERCISE -----------
 function exercisesTbl1(){
 	?>
 	<div class='f_cent'>
@@ -178,8 +162,6 @@ function exercisesTbl1(){
 	</div>
 	<?php
 }
-
-
 function notesTbl1(){
 	?>
 	<div class='f_cent'>
@@ -209,6 +191,7 @@ function notesTbl1(){
 	<?php
 }
 
+// ----------- FORUM -----------
 function forumList(){
 	$DB = new Database();
 	$list_data =  $DB->readTbl("forum","*","");
@@ -259,146 +242,50 @@ function forumList(){
 	</div>
 	<?php
 }
-
-function plotGraph(){
+function simHistoryList(){
+	$DB = new Database();
+	$list_data =  $DB->readTbl("sim_history","*","");
+	// testData($list_data->num_rows);
 	?>
-	<div class='pad'>
-		<div class="graph f_cent">
-		<div id="graph">
-    		<canvas width="400" height="400" id="graphCanvas"></canvas>
-		</div>
-		<div>	
-	        <?=formModify()?>
-		</div>
-
-		</div>
-	</div>	
-	<?php
-}
-
-function tblIterate($meth){
-	
-	echo "<table class='tbl1'>";
-	switch($meth){
-		case 1: iterBisect();
-			break;
-		case 2: iterSecant();
-		break;
-		case 3: iterNewton();
-		break;
-	}
-	echo '</table>';
-}
-function iterList($col){
-	for( $i=0; $i<5; $i++ ){
-		?>
-		<tr>
+	<div class='forum'>
+		<ol>
 			<?php
-			for( $j=0; $j<$col; $j++ )
-				echo "<td>000000</td>";
+			if($list_data->num_rows == 0){
+				?>
+				<p class="">
+					No sim history found; try simulating.
+				</p>
+				<?php
+			}else{
+				for( $i=0; $i<$list_data->num_rows; $i++ ){
+					?>
+					<li class="row">
+						<a href="/thread?id=">
+							<h4 class="title">
+								Start
+								<!-- <?="title"?> -->
+							</h4>
+							<div class="bottom">
+								<p class="">
+									4/3/2022 12:00
+									<!-- <?="timestamp"?> -->
+								</p>
+							</div>
+						</a>
+					</li>
+					<?php
+				}
+					
+			}
 			?>
-		</tr>
-		<?php	
-	}
-}
-function iterBisect(){
-	?>
-		<tr>
-			<th>Steps, n</th>
-			<th>a</th>
-			<th>b</th>
-			<th>Midpoint, x</th>
-			<th>f(x)</th>
-			<th>error, e</th>
-		</tr>
-	<?php
-	iterList(6);
-}
+			
+		</ol>
 
-function iterSecant(){
-	?>
-		<tr>
-			<th>Steps, n</th>
-			<th>xn</th>
-			<th>f(xn)</th>
-			<th>f'(xn)</th>
-			<th>xn+1</th>
-			<th>error, e</th>
-		</tr>
-	<?php
-}
-
-function iterNewton(){
-	?>
-		<tr>
-			<th>Steps, n</th>
-			<th>xn</th>
-			<th>f(xn)</th>
-			<th>f'(xn)</th>
-			<th>xn+1</th>
-			<th>error, e</th>
-		</tr>
-	<?php
-}
-
-function formModify0(){
-	?>
-	<form method='POST' action='/results'>
-		<div>
-			<select name="numMeth" class='in1 block'>
-				<?php
-					$methods = [ Bisection, Secant, Newton ];
-					for($i=0; $i<3; $i++){
-						if( ($i+1)!=$_POST['numMeth'] )
-							echo "<option value='".($i+1)."'>".$methods[$i]." Method</option>";
-						else
-							echo "<option value='".($i+1)."' selected>".$methods[$i]." Method</option>";
-					}
-				?>
-			</selection>
-		</div>
-
-		<div class='block'>
-			<input class='in1' type='text' name='func' placeholder='f(x) = <?=$_POST['func']?>'>
-			<input class='in1' type='number' name='start' placeholder='a = <?=$_POST['start']?>'>
-			<input class='in1' type='number' name='end' placeholder='b = <?=$_POST['end']?>'>
-			<input class='in1' type='number' name='tol' step="0.000001" placeholder='tolerance = <?=$_POST['tol']?>'>
-		</div>
-
-		<div class='block'>
-			<button class='in1' type='submit'>MODIFY</button>
-			<input class='in1' type='reset'>
-		</div>
-	</form>
-	<?php
-}
-
-function formModify(){
-	?>
-	<div>
-		<div>
-			<select name="numMeth" class='in1 block'>
-				<?php
-					$methods = [ Bisection, Secant, Newton ];
-					for($i=0; $i<3; $i++){
-						if( ($i+1)!=$_POST['numMeth'] )
-							echo "<option value='".($i+1)."'>".$methods[$i]." Method</option>";
-						else
-							echo "<option value='".($i+1)."' selected>".$methods[$i]." Method</option>";
-					}
-				?>
-			</selection>
-		</div>
-
-		<div class='block'>
-			<input class='in1' id="fieldFunc" type='text' name='func' placeholder='f(x) = <?=$_POST['func']?>'>
-			<input class='in1' type='number' name='start' placeholder='a = <?=$_POST['start']?>'>
-			<input class='in1' type='number' name='end' placeholder='b = <?=$_POST['end']?>'>
-			<input class='in1' type='number' name='tol' step="0.000001" placeholder='tolerance = <?=$_POST['tol']?>'>
-		</div>
 	</div>
 	<?php
 }
+
+// ----------- SCRIPTS -----------
 function scriptings(){
 	?>
 	<script src="<?=BASE_URL?>pub/lib/js/sidebar.js"></script>

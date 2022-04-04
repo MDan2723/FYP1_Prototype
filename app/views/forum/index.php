@@ -13,10 +13,11 @@
 
     <div class='cent pad marg'>
         <div class='desc'>
-            FORUM <hr> Dialogues, Comments and Ratings! Have Fun!
+            <h3>THREADS</h3>
+            <hr>
+            <?=forumList();?>
         </div>
         
-        <?=forumList();?>
 
     </div>
 

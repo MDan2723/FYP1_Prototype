@@ -1,6 +1,4 @@
-<head>
-    <title>FYP: Notes</title>
-</head>
+<?=heads("Notes")?>
 
 <header>
     <div class='cent pad marg t_cent'>
@@ -24,4 +22,4 @@
     <?=scriptings()?>
 
 </body>
-<?=footing()?>
+<?=footers()?>

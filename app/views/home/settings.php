@@ -1,6 +1,4 @@
-<head>
-    <title>Settings</title>
-</head>
+<?=heads("Settings")?>
 
 <header>
     <div class='cent pad marg t_cent'>
@@ -105,4 +103,4 @@
 	<?=scriptings();?>
     
 </body>
-<?=footing()?>
+<?=footers()?>

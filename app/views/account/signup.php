@@ -4,7 +4,8 @@
 		exit();
 	}
 ?>
-	
+<?=heads("Signup")?>
+
 <body>
 	<div class="cent pad marg f_cent t_cent">
 		<main class="">
@@ -13,14 +14,16 @@
 				if( $data!=null AND $data=='success'){
 					?>
 					<h1> SIGN UP: successful! </h1>
+					<hr>
 					<h4> <a href="<?=BASE_URL?>login">Login to your new user account.</a> </h4>
 					<?php
 				}
 				else{
 					?>
 					<h1> SIGN UP </h1>
+					<hr>
 					<p>  </p>
-					<form action='<?=BASE_URL?>lib/php/account.inc.php' method='post'>
+					<form action='<?=BASE_URL?>includes/account' method='post'>
 							<br><input type='text' name='name' placeholder='User Name' required/>
 							<br><input type='text' name='email' placeholder='E-mail' required/>
 							<br><input type='password' name='pass' placeholder='Password' required/>

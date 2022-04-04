@@ -1,6 +1,4 @@
-<head>
-    <title>Homepage</title>
-</head>
+<?=heads("Numerical Simulator")?>
 
 <header>
     
@@ -36,7 +34,7 @@
             </div>
             
             <div class='block'>
-                <a id="simlink" href="/simulation"><button class='in1' type='submit'>Submit</button><a>
+                <a id="simlink" href="/simulator"><button class='in1' type='submit'>Submit</button><a>
                 <!-- <input class='in1' type='reset'> -->
             </div>
         </div>
@@ -53,4 +51,4 @@
     <script src="pub/lib/js/controls/home.js"></script>
 
 </body>
-<?=footing()?>
+<?=footers()?>

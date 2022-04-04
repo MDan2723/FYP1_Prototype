@@ -1,12 +1,12 @@
+<?=heads("Graphing Calculator")?>
 <head>
 	<meta charset=utf-8 />
-	<title>Graphing Calculator</title>
-		
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/0.15.0/math.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 	<script src="https://unpkg.com/mathjs@10.1.1/lib/browser/math.js"></script>
 		
 </head>
+
 <header>
 	<div class='cent pad marg t_cent'>
 		<h1>
@@ -75,4 +75,4 @@
 	<script src="pub/lib/js/controls/simulation.js"></script>
 	
 </body>
-<?=footing()?>
+<?=footers()?>

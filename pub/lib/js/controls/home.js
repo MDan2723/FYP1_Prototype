@@ -25,7 +25,7 @@ class Home{
     updateLink(){
         const H = this;
         let x2;
-        H.simlink.href = "/simulation?";
+        H.simlink.href = "/simulator?";
         H.simlink.href += "m="+document.getElementById("sim_method").value;
         H.simlink.href += "&f="+document.getElementById("sim_func").value;
         if( x2 = document.getElementById("sim_x2") ){

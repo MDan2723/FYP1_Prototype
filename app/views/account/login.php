@@ -6,16 +6,18 @@
 	
 	$page_name = "Login";
 ?>
-	
+<?=heads("Login")?>
+
 <body>
 	<div class="cent pad marg f_cent t_cent">
 
 		<main class="">
 			<div class="">
 				<h1> LOGIN </h1>
+				<hrZ>
 				<p>  </p>
 			
-				<form action='<?=BASE_URL?>lib/php/account.inc.php' method='POST'>
+				<form action='<?=BASE_URL?>includes/account' method='POST'>
 					<input type='hidden' name='type' value='user'/>
 					<br><input type='text' name='mailuname' placeholder='USER NAME / E-MAIL' required/>
 					<br><input type='password' name='pwd' placeholder='PASSWORD' required/>

@@ -31,3 +31,6 @@ ul{
 
 .forum ol{}
 .forum ol li{}
+.forum ol li:nth-child(even) {
+    background-color: #f2f2f2;
+}

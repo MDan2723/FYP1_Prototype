@@ -1,7 +1,5 @@
 
-<head>
-    <title>Exercises</title>
-</head>
+<?=heads("Exercises")?>
 
 <header>
     <div class='cent pad marg t_cent'>
@@ -26,4 +24,4 @@
     
 </body>
 
-<?=footing()?>
+<?=footers()?>

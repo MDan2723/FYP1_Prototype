@@ -1,7 +1,4 @@
-
-<head>
-    <title>Exercises</title>
-</head>
+<?=heads("Sim History")?>
 
 <header>
     <div class='cent pad marg t_cent'>
@@ -23,4 +20,4 @@
     </div>
     <?=scriptings();?>
 </body>
-<?=footing();?>
+<?=footers();?>

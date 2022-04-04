@@ -10,9 +10,9 @@ class Account{
 
 
 	public function login_acc(){
-		//$db = new Database;
+		$db = new Database;
 			
-		$type = $_POST['type'];
+		// $type = $_POST['type'];
 		$mailuname = $_POST['mailuname'];
 		$password = $_POST['pwd'];
 		// testDataHere($type);
@@ -25,17 +25,17 @@ class Account{
 				$pwdCheck = password_verify($password, $row['password']);
 				
 				if($pwdCheck){
-					$user = new User($row);
+					$user = new Account($row);
 					$_SESSION[$type] = serialize($user);
 	
 					if($type=='user') unset($_SESSION['guest']);
 					
-					if($type=='admin'){
-						go_to("admin");
-					}
-					else{
-						rtrn();
-					}
+					// if($type=='admin'){
+					// 	go_to("admin");
+					// }
+					// else{
+					// 	rtrn();
+					// }
 				}
 				else{ go_to("login/wrongpwd"); }
 			}
@@ -50,7 +50,7 @@ class Account{
 		$pass = $_POST['pass'];
 		$passRepeat = $_POST['pass-repeat'];
 		
-		//$db = new Database;
+		$db = new Database;
 		
 		if( empty($name) || empty($email) || empty($pass) || empty($passRepeat)){
 			go_to("signup/emptyfields");
@@ -73,7 +73,7 @@ class Account{
 			}
 			else{
 				$hashedPwd = password_hash($pass, PASSWORD_DEFAULT);
-				$qry = "INSERT INTO accounts ( name, email, address, password ) VALUES ( '$name', '$email', '$address', '$hashedPwd' )";
+				$qry = "INSERT INTO accounts ( name, email, password ) VALUES ( '$name', '$email', '$hashedPwd' )";
 				if($db->runQuery($qry))
 					go_to("signup/success");
 				else 
@@ -87,15 +87,14 @@ class Account{
 		$id = $_POST['id'];
 		$name = $_POST['name'];
 		$email = $_POST['email'];
-		$address = $_POST['address'];
 		
-		//$db = new Database;
+		$db = new Database;
 		
 		if($name!="")	{ $db->runQuery("UPDATE accounts SET name='$name' WHERE id = '$id'"); }
 		if($url!="")	{ $db->runQuery("UPDATE accounts SET email='$email' WHERE id = '$id'"); }
 		if($status!="")	{ $db->runQuery("UPDATE accounts SET address='$address' WHERE id = '$id'"); }
 		
-		//$db->runQuery($qry);
+		$db->runQuery($qry);
 			
 		$_SESSION['success'] = 'Account "'.$name.'" editted.';
 	}
@@ -104,7 +103,7 @@ class Account{
 		
 		$id = $_POST['id'];
 		
-		//$db = new Database;
+		$db = new Database;
 		$qry = "DELETE FROM accounts WHERE id = '$id'";
 		$db->runQuery($qry);
 		

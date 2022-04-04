@@ -144,7 +144,7 @@ class Secant{
 		link += '&x=['+this.x[0]+']';
 		link += '&tol='+this.tol;
 		// c_log(link);
-		document.getElementById('viewLink').innerHTML = "<a class='' href='../stepbystepguide/index.html"+link+"'>View Step-by-Step</a>";
+		document.getElementById('viewLink').innerHTML = "<a class='' href='/simulator/stepbystepguide/index.html"+link+"'>View Step-by-Step</a>";
 	}
 	listTable(){
 		var str = '<thead><tr> <th>steps, n</th> <th>Xn</th> <th>f(Xn)</th> <th>Xn+1</th> <th>error, e</th> </tr></thead>';

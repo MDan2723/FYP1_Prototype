@@ -1,10 +1,10 @@
 <?php
 if (session_status() === PHP_SESSION_NONE){ session_start(); }
-require_once "../lib/config.php";
-require_once "../lib/ess.debug.php";
-require_once "ess.inc.php";
+require_once BASE_DIR."pub/lib/config.php";
+require_once BASE_DIR."pub/lib/ess.debug.php";
+require_once BASE_DIR."app/views/includes/ess.inc.php";
 require_once BASE_DIR."app/models/Database.php";
-require_once BASE_DIR."app/models/User.php";
+require_once BASE_DIR."app/models/Account.php";
 
 function rtrn(){
 	if( isset($_SESSION['from']) ){

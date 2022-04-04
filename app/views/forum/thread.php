@@ -33,4 +33,4 @@
 
 </body>
 
-<?=footing()?>
+<?=footers()?>

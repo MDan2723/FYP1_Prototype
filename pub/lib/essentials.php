@@ -1,31 +1,29 @@
 
-<head>
-    <style>
-        <?php require_once 'pub/lib/css/SS2.css';?>
-        <?php require_once 'pub/lib/css/form.css';?>
-        <?php require_once 'pub/lib/css/texts.css';?>
-        <?php require_once 'pub/lib/css/lists.css';?>
-        <?php require_once 'pub/lib/css/tables.css';?>
-        <?php require_once 'pub/lib/css/graphs.css';?>
-        <?php require_once 'pub/lib/css/sidebar.css';?>
-        <?php require_once 'pub/lib/css/forums.css';?>
-	</style>
-	<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
-</head>
-
 <?php 
 
 require_once "config.php";
 require_once "ess.debug.php";
 
 
-function footing(){
+function heads( $title ){
 	?>
-	<footer>
-		<div class='cent pad marg f_cent'>
-			FOOTER
-		</div>
-	</footer>	
+
+	<head>
+		<style>
+			<?php require_once 'pub/lib/css/SS2.css';?>
+			<?php require_once 'pub/lib/css/form.css';?>
+			<?php require_once 'pub/lib/css/texts.css';?>
+			<?php require_once 'pub/lib/css/lists.css';?>
+			<?php require_once 'pub/lib/css/tables.css';?>
+			<?php require_once 'pub/lib/css/graphs.css';?>
+			<?php require_once 'pub/lib/css/sidebar.css';?>
+			<?php require_once 'pub/lib/css/forums.css';?>
+		</style>
+		<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+		<title><?=$title?></title>
+	</head>
+
 	<?php
 }
 
@@ -53,7 +51,7 @@ function navHeader( $page ){
                 <i class='bx bx-search'></i><input type="text" placeholder="Search..." value="">
                 <span class="tooltip">Search</span>
             </li>
-			<li><a href="/simhistory">
+			<li><a href="/simulator/simhistory">
 				<i class='bx bx-history'></i><span class="links-name">Sim History</span>
 				</a><span class="tooltip">Sim History</span>
 			</li>
@@ -77,21 +75,75 @@ function navHeader( $page ){
         <div class="profile-content">
             <div class="profile">
                 <div class="profile-details">
-                    <!-- <profile image here> -->
-					<a href="/account">
-						<i class="bx bx-user"></i>
-					</a>
-                    <div class="name-job">
-                        <div class="name">Muhammad Danial</div>
-                        <div class="job">MMU Undergraduate</div>
-                    </div>
+					<?php
+					$user = unserialize($_SESSION['user']);
+					// testDataHere($user->getData());
+					if (session_status() === PHP_SESSION_NONE){
+						session_start();
+						?>
+						<!-- <profile image here> -->
+						<a href="/account">
+							<i class="bx bx-user"></i>
+						</a>
+						<div class="name-job">
+							<div class="name">Muhammad Danial</div>
+							<div class="job">MMU Undergraduate</div>
+						</div>
+						<?php
+					} 
+					else{
+						?>
+						<a href="/account">
+							<i class="bx bx-user"></i>
+						</a>
+						<div class="name-job">
+							<div class="name"><?=$user->getdata()["name"] ?></div>
+							<div class="job"><?=$user->getdata()["email"] ?></div>
+						</div>
+						<?php
+					}
+
+					?>
                 </div>
-                <a href="/login"><i class="bx bx-log-in" id="loggings"></i></a>
-				<span class="tooltip">Login/Singup</span>
-                <!-- <i class="bx bx-log-out" id="loggings"></i><span class="tooltip">Logout</span> -->
+				
+				<?php
+					
+				if (session_status() === PHP_SESSION_NONE){
+					session_start();
+					if( !isset($_SESSION["user"]) ){
+						?>
+						<a href="/login"><i class="bx bx-log-in" id="loggings"></i></a>
+						<span class="tooltip">Login/Singup</span>
+						<?php
+					}
+				} 
+				else{
+					if( !isset($_SESSION["user"]) ){
+						?>
+						<a href="/login"><i class="bx bx-log-in" id="loggings"></i></a>
+						<span class="tooltip">Login/Singup</span>
+						<?php
+					}
+					else{
+						?>
+						<a href="/logout"><i class="bx bx-log-out" id="loggings"></i></a>
+						<span class="tooltip">Logout</span>
+						<?php
+					}
+				}
+				?>
             </div>
         </div>
     </div>
+	<?php
+}
+function footers(){
+	?>
+	<footer>
+		<div class='cent pad marg f_cent'>
+			<p class="">MMU Cyberjaya | Faculty of Computer & Informatics | Muhammad Danial</p>
+		</div>
+	</footer>	
 	<?php
 }
 
@@ -159,36 +211,46 @@ function notesTbl1(){
 
 function forumList(){
 	$DB = new Database();
-	// testData($DB);
+	$list_data =  $DB->readTbl("forum","*","");
+	// testData($list_data->num_rows);
 	?>
 	<div class='forum'>
 		<ol>
 			<?php
-			for( $i=0; $i<3; $i++ ){
+			if($list_data->num_rows == 0){
 				?>
-				<li class="row">
-					<a href="/thread?id=">
-						<h4 class="title">
-							Start
-							<!-- <?="title"?> -->
-						</h4>
-						<div class="bottom">
-							<p class="timestamp">
-								4/3/2022 12:00
-								<!-- <?="timestamp"?> -->
-							</p>
-							<p class="comment-count">
-								0 comments
-								<!-- <?="comment number"?> -->
-							</p>
-							<p class="rating">
-								0 Ratings
-								<!-- <?="comment number"?> -->
-							</p>
-						</div>
-					</a>
-				</li>
+				<p class="">
+					No posts found; server error.
+				</p>
 				<?php
+			}else{
+				for( $i=0; $i<$list_data->num_rows; $i++ ){
+					?>
+					<li class="row">
+						<a href="/thread?id=">
+							<h4 class="title">
+								Start
+								<!-- <?="title"?> -->
+							</h4>
+							<div class="bottom">
+								<p class="timestamp">
+									4/3/2022 12:00
+									<!-- <?="timestamp"?> -->
+								</p>
+								<p class="comment-count">
+									0 comments
+									<!-- <?="comment number"?> -->
+								</p>
+								<p class="rating">
+									0 Ratings
+									<!-- <?="comment number"?> -->
+								</p>
+							</div>
+						</a>
+					</li>
+					<?php
+				}
+					
 			}
 			?>
 			
@@ -339,28 +401,29 @@ function formModify(){
 }
 function scriptings(){
 	?>
-	<script src="pub/lib/js/sidebar.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/sidebar.js"></script>
 	<?php
 }
 function scripts_forum(){
 	?>
-	<script src="pub/lib/js/control/forum.js"></script>
-	<script src="pub/lib/js/control/thread.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/controls/data.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/controls/forum.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/controls/thread.js"></script>
 	<?php
 }
 function scripts_graph(){
 	?>
-	<script src="pub/lib/js/parseURL.js"></script>
-	<script src="pub/lib/js/mathEval.js"></script>
-	<script src="pub/lib/js/Graph.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/graph/parseURL.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/graph/mathEval.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/graph/Graph.js"></script>
 
 	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/nerdamer.core.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/Algebra.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/Calculus.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/nerdamer@latest/Solve.js"></script>
 
-	<script src="pub/lib/js/methods/Bisection.js"></script>
-	<script src="pub/lib/js/methods/Secant.js"></script>
-	<script src="pub/lib/js/methods/Newton.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/methods/Bisection.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/methods/Secant.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/methods/Newton.js"></script>
 	<?php
 }

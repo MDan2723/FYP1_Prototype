@@ -159,7 +159,7 @@ class Bisection{
 		link += '&x=['+this.a+','+this.b+']';
 		link += '&tol='+this.tol;
 		// c_log(link);
-		document.getElementById('viewLink').innerHTML = "<a class='' href='/stepbystepguide"+link+"'>View Step-by-Step</a>";
+		document.getElementById('viewLink').innerHTML = "<a class='' href='/simulator/stepbystepguide"+link+"'>View Step-by-Step</a>";
 	}
 	listTable(){
 		let str = '<thead><tr> <th>steps, n</th> <th>a</th> <th>b</th> <th>midpoint, x</th> <th>f(x)</th> <th>error, e</th> </tr></thead>';

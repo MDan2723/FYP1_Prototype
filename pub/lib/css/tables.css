@@ -1,9 +1,11 @@
 .tbl1{
     border:1px solid lightGrey;
+    border-collapse: collapse;
 }
 .tbl1 td,.tbl1 th {
     border: 1px solid #dddddd;
     padding: 8px;
+    /* margin: 0; */
 }
 
 .setTbl{
@@ -17,7 +19,7 @@
     margin: 0px;
 }
 
-thead, tbody { display: block; }
+/* thead tr, tbody { display: block; } */
 
 tbody {
     height: 300px;       /* Just for the demo          */
@@ -28,3 +30,8 @@ tbody {
 
 .td-cent{ text-align: center; }
 .td-right{ text-align: right; }
+
+/* ---------------- graph table ---------------- */
+.table-iteration{
+    display: table-header-group;
+}

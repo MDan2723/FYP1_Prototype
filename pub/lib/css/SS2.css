@@ -41,7 +41,6 @@ body{
 .top{
 	width:100%;
 }
-
 .cent{
 	margin-left:auto;
 	margin-right:auto;
@@ -51,11 +50,19 @@ body{
 	border-radius:10px;
 }
 
+.flex{
+	display: flex;
+}
 .f_cent{
 	display: flex;
 	justify-content: center;
 }
 
+.grid-2{
+	display: grid;
+	grid-column: 2;
+	grid-auto-flow: column;
+}
 .g_cent{
 	display: grid;
 	grid-column: 2;
@@ -65,9 +72,7 @@ body{
 
 .desc{
 	margin: 10px;
-
 }
-
 .menu{
 	background-color: lightGrey;
 	width:10em;

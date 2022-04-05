@@ -16,16 +16,19 @@ class Home{
 
     inputTrigger(){
         const H = this;
-        H.formSim.addEventListener("change",function(e){
-            H.updateLink();
-            // console.log(H.simlink.href);
-        });
+        if( H.formSim ){
+            H.formSim.addEventListener("change",function(e){
+                H.updateLink();
+                // console.log(H.simlink.href);
+            });
+
+        }
     }
 
     updateLink(){
         const H = this;
         let x2;
-        H.simlink.href = "/simulator?";
+        H.simlink.href = "/simulator/execute?";
         H.simlink.href += "m="+document.getElementById("sim_method").value;
         H.simlink.href += "&f="+document.getElementById("sim_func").value;
         if( x2 = document.getElementById("sim_x2") ){

@@ -162,20 +162,57 @@ class Bisection{
 		document.getElementById('viewLink').innerHTML = "<a class='' href='/simulator/stepbystepguide"+link+"'>View Step-by-Step</a>";
 	}
 	listTable(){
-		let str = '<thead><tr> <th>steps, n</th> <th>a</th> <th>b</th> <th>midpoint, x</th> <th>f(x)</th> <th>error, e</th> </tr></thead>';
+		let str =	"";
+			str +=	"<thead>";
+			str +=	"<tr>";
+
+			str +=	"	<th>steps, n</th>";
+			str +=	"	<th>a</th>";
+			str +=	"	<th>b</th> ";
+			str +=	"	<th>midpoint, x</th>";
+			str +=	"	<th>f(x)</th> ";
+			str +=	"	<th>error, e</th> ";
+/*
+			str +=	"	<th id='th1'>steps, n</th>";
+			str +=	"	<th id='th2'>a</th>";
+			str +=	"	<th id='th3'>b</th> ";
+			str +=	"	<th id='th4'>midpoint, x</th>";
+			str +=	"	<th id='th5'>f(x)</th> ";
+			str +=	"	<th id='th6'>error, e</th> ";
+*/
+/*
+			str +=	"	<th scope='col'>steps, n</th>";
+			str +=	"	<th scope='col'>a</th>";
+			str +=	"	<th scope='col'>b</th> ";
+			str +=	"	<th scope='col'>midpoint, x</th>";
+			str +=	"	<th scope='col'>f(x)</th> ";
+			str +=	"	<th scope='col'>error, e</th> ";
+*/
+			str +=	"</tr>";
+			str +=	"</thead>";
 		let row = this.tableItr.length;
-		
-		str += "<tbody>";
+		let j;
+
+			str += "<tbody>";
 		for(let i = 1; i < row; i++) {
-			
+			j=1;
 			str += "<tr>";
-			str += "<td class='td-cent'>"+ (i) +"</td>";
+
+			str += "	<td class='td-cent'>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
-				str += "<td > "+itm+ "</td>";
+			str += "	<td> "+itm+ "</td>";
+
+			// str += "	<td headers='th"+(j++)+"' class='td-cent'>"+ (i) +"</td>";
+			// this.tableItr[i].forEach(itm=>{
+			// str += "	<td headers='th"+(j++)+"'> "+itm+ "</td>";
+
+			// str += "	<td class='td-cent'>"+ (i) +"</td>";
+			// this.tableItr[i].forEach(itm=>{
+			// str += "	<td > "+itm+ "</td>";
 			});
 			str += "</tr>";
 		}
-		str += "</tbody>";
+			str += "</tbody>";
 
 		document.getElementById("tableIter").innerHTML = str;
 	}

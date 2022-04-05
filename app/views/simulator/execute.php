@@ -14,7 +14,6 @@
 		</h1>
 	</div>
 	<?php navHeader(6); ?>
-
 </header>
 
 <body class="main-body">
@@ -72,7 +71,7 @@
 
 	<?php scriptings();?>
 	<?php scripts_graph();?>
-	<script src="pub/lib/js/controls/simulation.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/controls/simulation.js"></script>
 	
 </body>
 <?=footers()?>

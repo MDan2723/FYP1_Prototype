@@ -35,7 +35,7 @@ button {
 }
 
 .row {
-    padding: 5px 0;
+    padding: 5px;
 }
 .bottom, .top-comment {
     display: flex;

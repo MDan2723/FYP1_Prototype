@@ -22,7 +22,7 @@ class Secant{
     
     iteration(){
         const S = this;
-        var x = S.x,
+        let x = S.x,
             fx = [],
             e = null,
             result = null,
@@ -138,7 +138,7 @@ class Secant{
 
     // Writings
 	writeLink(){
-		var link = '';
+		let link = '';
 		link += '?m='+2;
 		link += '&f='+expr;
 		link += '&x=['+this.x[0]+']';
@@ -147,19 +147,29 @@ class Secant{
 		document.getElementById('viewLink').innerHTML = "<a class='' href='/simulator/stepbystepguide/index.html"+link+"'>View Step-by-Step</a>";
 	}
 	listTable(){
-		var str = '<thead><tr> <th>steps, n</th> <th>Xn</th> <th>f(Xn)</th> <th>Xn+1</th> <th>error, e</th> </tr></thead>';
-
-        str += "<tbody>";
-		for(var i = 0; i < this.tableItr.length; i++) {
-            
+        let str =	"";
+            str +=	"<thead>";
+            str +=	"<tr>";
+            str +=	"	<th id='th1'>steps, n</th>";
+            str +=	"	<th id='th2'>Xn</th>";
+            str +=	"	<th id='th3'>f(Xn)</th> ";
+            str +=	"	<th id='th4'>Xn+1</th>";
+            str +=	"	<th id='th5'>error, e</th> ";
+            str +=	"</tr>";
+            str +=	"</thead>";
+        
+        let j;
+            str += "<tbody>";
+		for(let i = 0; i < this.tableItr.length; i++) {
+            j=1;    
 			str += "<tr>";
-			str += "<td>"+ (i) +"</td>";
+			str += "    <td headers='th"+(j++)+"'>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
-                str += "<td> "+itm+ "</td>";
+            str += "    <td headers='th"+(j++)+"'> "+itm+ "</td>";
 			});
 			str += "</tr>";
 		}
-        str += "</tbody>";
+            str += "</tbody>";
 
 		document.getElementById("tableIter").innerHTML = str;
 	}
@@ -176,7 +186,7 @@ class Secant{
 
     // Trigger Handling
     fieldCritX1(){
-        var input = $('#fieldX1');
+        let input = $('#fieldX1');
 		const S = this;
 
 		input.val(S.x[0]);
@@ -188,7 +198,7 @@ class Secant{
         });
     }
     fieldCritX2(){
-        var input = $('#fieldX2');
+        let input = $('#fieldX2');
 		const S = this;
 
 		input.val(S.x[1]);
@@ -200,7 +210,7 @@ class Secant{
         });
     }
 	fieldTolCrit(){
-		var input = $('#fieldTol');
+		let input = $('#fieldTol');
 		const S = this;
 
 		input.val(S.tol);

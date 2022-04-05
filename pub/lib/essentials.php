@@ -13,6 +13,7 @@ function heads( $title ){
 		<link rel="shortcut icon" type="image/svg" href="<?=BASE_URL?>pub/icons/bxs-chart.svg">
 		<style>
 			<?php require_once 'pub/lib/css/SS2.css';?>
+			<?php require_once 'pub/lib/css/cursor.css';?>
 			<?php require_once 'pub/lib/css/form.css';?>
 			<?php require_once 'pub/lib/css/texts.css';?>
 			<?php require_once 'pub/lib/css/lists.css';?>
@@ -52,23 +53,27 @@ function navHeader( $page ){
                 <i class='bx bx-search pointer'></i><input type="text" placeholder="Search..." value="">
                 <span class="tooltip">Search</span>
             </li>
-			<li><a href="/simulator/simhistory">
+			<li><a href="<?=BASE_URL?>simulator">
+				<i class='bx bx-line-chart'></i><span class="links-name">Simulator</span>
+				</a><span class="tooltip">Simulator</span>
+			</li>
+			<li><a href="<?=BASE_URL?>simulator/simhistory">
 				<i class='bx bx-history'></i><span class="links-name">Sim History</span>
 				</a><span class="tooltip">Sim History</span>
 			</li>
-            <li><a href="/notes">
+            <li><a href="<?=BASE_URL?>notes">
                 <i class='bx bx-notepad'></i><span class="links-name">Notes</span>
                 </a><span class="tooltip">Notes</span>
             </li>
-			<li><a href="/exercises">
+			<li><a href="<?=BASE_URL?>exercises">
 				<i class='bx bx-file-blank'></i><span class="links-name">Exercises</span>
                 </a><span class="tooltip">Exercises</span>
             </li>
-            <li><a href="/forum">
+            <li><a href="<?=BASE_URL?>forum">
                 <i class='bx bxs-conversation'></i><span class="links-name">Forum</span>
                 </a><span class="tooltip">Forum</span>
             </li>
-            <li><a href="/settings">
+            <li><a href="<?=BASE_URL?>settings">
                 <i class='bx bx-cog' ></i><span class="links-name">Setting</span>
                 </a><span class="tooltip">Setting</span>
             </li>
@@ -130,40 +135,93 @@ function footers(){
 }
 
 // ----------- NOTES & EXERCISE -----------
-function exercisesTbl1(){
+function exercisesTable(){
+	$source_num = 3;
 	?>
-	<div class='f_cent'>
-		<table class='tbl1'>
-			<tr>
-				<th>Author</th>
-				<th>Title</th>
-				<th>Description</th>
-				<th>Date</th>
-				<th>Rating</th>
-			</tr>
-
+	<div class='forum'>
+		<ol>
 			<?php
-			for( $i=0; $i<3; $i++ ){
+			if($source_num == 0){
 				?>
-				<tr>
-					<td>author_<?=$i+123?></td>
-					<td>title_<?=$i+123?></td>
-					<td>comment_<?=$i+123?></td>
-					<td>15/11/2021 11:50</td>
-					<td>45%</td>
-				</tr>
+				<p class="">
+					No sim history found; try simulating.
+				</p>
 				<?php
+			}else{
+				for( $i=1; $i<=$source_num; $i++ ){
+					?>
+					<li class="row">
+					<a href="<?=BASE_URL?>exercises?id=<?=$i?>">
+							<h4 class="title">
+								Exercise_<?=$i?>
+							</h4>
+							<div class="bottom">
+								<p class="timestamp">
+									Date_<?=$i?>
+								</p>
+								<p class="difficulty">
+									Difficulty_<?=$i?>
+								</p>
+								<p class="rating">
+									Rating_<?=$i?>
+								</p>
+							</div>
+						</a>
+					</li>
+					<?php
+				}
+					
 			}
-			
 			?>
-		</table>
+			
+		</ol>
 
 	</div>
 	<?php
 }
-function notesTbl1(){
+function notesTable(){
+	$source_num = 3;
 	?>
-	<div class='f_cent'>
+	<div class='forum'>
+		<ol>
+			<?php
+			if($source_num == 0){
+				?>
+				<p class="">
+					No sim history found; try simulating.
+				</p>
+				<?php
+			}else{
+				for( $i=1; $i<=$source_num; $i++ ){
+					?>
+					<li class="row">
+					<a href="<?=BASE_URL?>notes?id=<?=$i?>">
+							<h4 class="title">
+								Note_<?=$i?>
+							</h4>
+							<div class="bottom">
+								<p class="timestamp">
+									Date_<?=$i?>
+								</p>
+								<p class="difficulty">
+									Difficulty_<?=$i?>
+								</p>
+								<p class="rating">
+									Rating_<?=$i?>
+								</p>
+							</div>
+						</a>
+					</li>
+					<?php
+				}
+					
+			}
+			?>
+			
+		</ol>
+
+	</div>
+	<!-- <div class='f_cent'>
 		<table class='tbl1'>
 			<tr>
 				<th>Author</th>
@@ -186,7 +244,7 @@ function notesTbl1(){
 			?>
 		</table>
 
-	</div>
+	</div> -->
 	<?php
 }
 
@@ -256,17 +314,8 @@ function simHistoryList(){
 				for( $i=0; $i<$list_data->num_rows; $i++ ){
 					?>
 					<li class="row">
-						<a href="/thread?id=">
-							<h4 class="title">
-								Start
-								<!-- <?="title"?> -->
-							</h4>
-							<div class="bottom">
-								<p class="">
-									4/3/2022 12:00
-									<!-- <?="timestamp"?> -->
-								</p>
-							</div>
+						<a href="<?=BASE_URL?>simulator/">
+							<p></p>
 						</a>
 					</li>
 					<?php

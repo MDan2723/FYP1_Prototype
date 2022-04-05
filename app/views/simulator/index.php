@@ -29,50 +29,63 @@
 					<canvas id="graphCanvas" width="500" height="500" style="position: absolute; z-index: 0;"></canvas>
 					<canvas id="gPointer" width="500" height="500" style="position: absolute; z-index: 1;"></canvas>
 				</div>
-				<div id="graphForm">
-					<div class="t_cent">
-						<h3 id="methodName"></h3>
+				<div id="graphForm" class="t_cent">
+					<!-- <div class="formSimulation">
+						<div id="inputFunc" class="marg">
+							<input class="in1" id="fieldFunc" type='text' placeholder="Function / Formula"/>
+						</div>
+						<hr>
+						<div class="marg">
+							<div class="t_cent">
+								<select id='sim_method' name="method" class='in1'>
+									<option value='1'>Bisection Method</option>
+									<option value='2'>Secant Method</option>
+									<option value='3'>Newton Method</option>
+								</select>
+							</div>
+							<div id="criteria"></div>
+						</div>
+						<hr>
+						<div class="pad marg">
+							<input class="in1" id="fieldTol" type='number' min='0.000001' step='0.000001' placeholder="Tolerance"/>
+						</div>
+						<div class="pad marg">
+							<a id="simlink" href="<?=BASE_URL?>simulator/execute"><button class='in1' type='submit'>Simulate</button><a>
+						</div>
+
+					</div> -->
+					<div id='formSimulation' class='form-sim'>
+
+						<div>
+							<input id='sim_func' class='in1' type='text' name='func' placeholder='function, f(x)'>
+						</div>
+
+						<div class=''>
+							<select id='sim_method' name="method" class='in1'>
+								<option value='1'>Bisection Method</option>
+								<option value='2'>Secant Method</option>
+								<option value='3'>Newton Method</option>
+							</select>
+							<div id="criteria"></div>
+							<input id='sim_tol' class='in1' type='number' name='tol' step="0.000001" placeholder='tolerance'>
+						</div>
+
+						<div class=''>
+							<a id="simlink" href="<?=BASE_URL?>simulator/execute"><button class='in1'>Simulate</button><a>
+						</div>
 					</div>
-					<div id="inputFunc" class="pad marg">
-						Function / Formula
-						<br>
-						<input id="fieldFunc" type='text' />
-					</div>
-					<hr>
-					<div id="inputCrit" class="pad marg">
-					</div>
-					<hr>
-					<div class="pad marg">
-						Tolerance
-						<br>
-						<input id="fieldTol" type='number' min='0.000001' step='0.000001' />
-					</div>
-					<hr>
-					<div class="pad marg" id="viewLink"></div>
+                
 				</div>
 			</div>
 			<hr>
-			<div class='pad marg'>
-				<h3 class='t_cent'>Iteration Table</h3>
-				<div class='g_cent'>
-					<table id="tableIter" class="tbl1">
-						
-					</table>
-				</div>
-			</div>
-		</div>
-		
-		<hr>
-		<div class='pad marg'>
-			Final Result: 
-			<br/><h3 id="result">x = 0.000<h3>
 		</div>
 
 	</div>
 
 	<?php scriptings();?>
 	<?php scripts_graph();?>
-	<script src="pub/lib/js/controls/simulation.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/controls/simulation.js"></script>
+    <script src="<?=BASE_URL?>pub/lib/js/controls/home.js"></script>
 	
 </body>
 <?=footers()?>

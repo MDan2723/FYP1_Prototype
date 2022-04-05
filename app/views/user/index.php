@@ -7,10 +7,10 @@
 	}
 	
 	heads("user");
+    navHeader(1);
 ?>
 
 <body class="main-body">
-    <?php navHeader(1); ?>
     
 	<div class="cent pad marg f_cent t_cent">
 		<main class="">

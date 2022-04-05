@@ -6,14 +6,17 @@
             FORUM
         </h1>
     </div>
+    <?php navHeader(4); ?>
 </header>
 
 <body class="main-body">
-    <?php navHeader(4); ?>
 
     <div class='cent pad marg'>
         <div class='desc'>
-            <h3>THREADS</h3>
+            <div class="grid-2">
+                <h3 class="t_left">THREADS</h3>
+                <h3 class="t_right"><i class='bx bx-plus'></i></h3>
+            </div>
             <hr>
             <?=forumList();?>
         </div>

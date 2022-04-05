@@ -6,10 +6,10 @@
             SETTINGS
         </h1>
     </div>
+    <?php navHeader(5); ?>
 </header>
 
 <body class="main-body">
-    <?php navHeader(5); ?>
 
     <div class='cent pad marg'>
         <div class='desc'>

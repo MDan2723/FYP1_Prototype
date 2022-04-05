@@ -3,9 +3,9 @@ a{
 	color:black;
 }
 
-.t_cent{
-    text-align:center;
-}
+.t_left{ text-align:left; }
+.t_right{ text-align:right; }
+.t_cent{ text-align:center; }
 
 .txt_bold{
 	font-weight:bold

@@ -1,9 +1,4 @@
 
-
-.pointer{
-    cursor:pointer;
-}
-
 .main-body{
     position: relative;
     min-height: 100vh;
@@ -25,7 +20,10 @@
 .sidebar.active{
     width: 240px;
 }
-
+.sidebar.active ~ .main-body{
+    width: calc(100%-240px);
+    left: 240px;
+}
 .sidebar .logo-content .logo a{
     color: #fff;
     display: flex;
@@ -166,7 +164,7 @@
 
 .sidebar .profile-content .profile{
     position: relative;
-    padding: 10px 6px;
+    padding: 6px;
     height: 60px;
     background: none;
     transition: all 0.4s ease;
@@ -285,5 +283,4 @@
 .sidebar.active ~ .home-content{
     width: calc(100%-240px);
     left: 240px;
-
 }

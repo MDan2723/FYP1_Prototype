@@ -22,7 +22,7 @@ class Newton{
         N.guide = [];
         N.tableItr = [];
         
-        var root = findRootExpr();
+        let root = findRootExpr();
         if(root.length>1){
 			c_log('more than 1 root detected');
 			// c_log(root);
@@ -33,7 +33,7 @@ class Newton{
         N.G.graphCenter( root, math.abs(root-this.x[0]) );
 
         // c_log( expr );
-        var expr2 = math.derivative(expr,'x').toString();
+        let expr2 = math.derivative(expr,'x').toString();
         // c_log( expr2 );
 
         let x = this.x,
@@ -92,7 +92,7 @@ class Newton{
         const   N = this,
                 G = N.G,
                 gCtx = G.ctxGraph;
-		var g = N.guide,
+		let g = N.guide,
             i = 1;
 		g.forEach(el => {
 			gCtx.beginPath();
@@ -103,7 +103,7 @@ class Newton{
 		});
 
         gCtx.beginPath();
-        for( var i=1; i<g.length; i++ ){
+        for( let i=1; i<g.length; i++ ){
 			gCtx.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
 			gCtx.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
         }
@@ -111,7 +111,7 @@ class Newton{
 
         gCtx.setLineDash([4, 2]);
         gCtx.beginPath();
-        for(var i=1; i<g.length; i++) {
+        for(let i=1; i<g.length; i++) {
             gCtx.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
             gCtx.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
         }
@@ -121,7 +121,7 @@ class Newton{
 
     // Writings
 	writeLink(){
-		var link = '';
+		let link = '';
 		link += '?m='+3;
 		link += '&f='+expr;
 		link += '&x=['+this.x[0]+']';
@@ -130,17 +130,30 @@ class Newton{
 		document.getElementById('viewLink').innerHTML = "<a class='' href='/simulator/stepbystepguide/index.html"+link+"'>View Step-by-Step</a>";
 	}
 	listTable(){
-		var str = "<tr> <th>steps, n</th> <th>Xn</th> <th>f(Xn)</th> <th>f'(Xn)</th> <th>Xn+1</th> <th>error, e</th> </tr>";
-
-		for(var i = 0; i < this.tableItr.length; i++) {
-			
+        let str =	"";
+            str +=	"<thead>";
+            str +=	"<tr>";
+            str +=	"	<th id='th1'>steps, n</th>";
+            str +=	"	<th id='th2'>Xn</th>";
+            str +=	"	<th id='th3'>f(Xn)</th> ";
+            str +=	"	<th id='th4'>f'(Xn)</th> ";
+            str +=	"	<th id='th5'>Xn+1</th>";
+            str +=	"	<th id='th6'>error, e</th> ";
+            str +=	"</tr>";
+            str +=	"</thead>";
+    
+            let j;
+            str += "<tbody>";
+		for(let i = 0; i < this.tableItr.length; i++) {
+			j=1;
 			str += "<tr>";
-			str += "<td>"+ (i) +"</td>";
+			str += "    <td headers='th"+(j++)+"'>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
-				str += "<td> "+itm+ "</td>";
+            str += "    <td headers='th"+(j++)+"'>"+itm+ "</td>";
 			});
 			str += "</tr>";
 		}
+            str += "<tbody>";
 
 		document.getElementById("tableIter").innerHTML = str;
 	}
@@ -150,7 +163,7 @@ class Newton{
 
     // Trigger Handling
     fieldCritX1(){
-        var input = $('#fieldX1');
+        let input = $('#fieldX1');
 		const N = this;
 
 		input.val(N.x[0]);
@@ -161,7 +174,7 @@ class Newton{
         });
     }
 	fieldTolCrit(){
-		var input = $('#fieldTol');
+		let input = $('#fieldTol');
 		const N = this;
 
 		input.val(N.tol);

@@ -8,10 +8,10 @@
             NUMERICAL SIMULATOR
         </h1>
     </div>
+    <?php navHeader(1); ?>
 </header>
 
 <body class="main-body">
-    <?php navHeader(1); ?>
     
     <div class='cent pad marg'>
         <div class='desc'>
@@ -19,23 +19,20 @@
             <hr> make a quick numerical approximation here
         </div>
         <div id='formSimulation' class='form-sim'>
-
-            <div>
+            <input id='sim_func' class='in1' type='text' name='func' placeholder='function, f(x)'>
+            <hr>
+            <div class='block'>
                 <select id='sim_method' name="method" class='in1 block'>
                     <option value='1'>Bisection Method</option>
                     <option value='2'>Secant Method</option>
                     <option value='3'>Newton Method</option>
-                </selection>
-            </div>
-            
-            <div class='block'>
-                <input id='sim_func' class='in1' type='text' name='func' placeholder='function, f(x)'>
+                </select>
                 <div id="criteria"></div>
                 <input id='sim_tol' class='in1' type='number' name='tol' step="0.000001" placeholder='tolerance'>
             </div>
-            
+            <hr>
             <div class='block'>
-                <a id="simlink" href="/simulator"><button class='in1' type='submit'>Submit</button><a>
+                <a id="simlink" href="<?=BASE_URL?>simulator/execute"><button class='in1' type='submit'>Simulate</button><a>
                 <!-- <input class='in1' type='reset'> -->
             </div>
         </div>
@@ -51,6 +48,6 @@
     </div>
 
     <?=scriptings()?>
-    <script src="pub/lib/js/controls/home.js"></script>
+    <script src="<?=BASE_URL?>pub/lib/js/controls/home.js"></script>
 </body>
 <?=footers()?>

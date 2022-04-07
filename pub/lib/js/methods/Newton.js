@@ -12,7 +12,7 @@ class Newton{
         N.tableItr = [];
 		N.result = 0.00;
 
-        c_log(N);
+        // c_log(N);
 		document.getElementById("methodName").innerHTML = "Method: Newton";
 		document.getElementById("inputCrit").innerHTML = " Criteria <br> x1: <input id='fieldX1' type='number' />";
     }
@@ -24,18 +24,15 @@ class Newton{
         
         let root = findRootExpr();
         if(root.length>1){
-			c_log('more than 1 root detected');
+			// c_log('more than 1 root detected');
 			// c_log(root);
-			
 			root = findNearestRoot(root,this.x[0]);
 		}
-        c_log(root);
+        // c_log(root);
         N.G.graphCenter( root, math.abs(root-this.x[0]) );
-
         // c_log( expr );
         let expr2 = math.derivative(expr,'x').toString();
         // c_log( expr2 );
-
         let x = this.x,
             fx = [],
             ffx = [],
@@ -43,17 +40,14 @@ class Newton{
             e = null;
 
         // c_log("n	Xn			f(Xn)		f'(Xn)		Xn+1		e");
-        
         let i = 0;
         
         do {
             fx[i] = evalMathExpr(x[i]);
             ffx[i] = math.evaluate(expr2,{x:x[i]});
             
-
             e = Math.abs(root-x[i]);
             x[i+1] = this.formula(i,x,fx,ffx);
-            
             // c_log(i+'	'+x[i].toFixed(5)+'     '+fx[i].toFixed(5)+'		'+ffx[i].toFixed(5)+'		'+x[i+1].toFixed(5)+'		'+e.toFixed(5)+'	'+!(e > this.tol));
             
             result = x[i+1];
@@ -65,7 +59,7 @@ class Newton{
         while ( e > this.tol && i<25);
 
         N.result = result;
-        c_log(result.toString() +' ≈ '+ Math.round(parseFloat(result.toString())));
+        // c_log(result.toString() +' ≈ '+ Math.round(parseFloat(result.toString())));
         
         N.G.refreshCanvas();
 
@@ -87,36 +81,40 @@ class Newton{
 		this.tableItr[i] = arr;
 	}
 
-
     drawGuides(){
         const   N = this,
                 G = N.G,
-                gCtx = G.ctxGraph;
+                ctxG = G.ctxGraph;
 		let g = N.guide,
             i = 1;
 		g.forEach(el => {
-			gCtx.beginPath();
-			gCtx.arc( G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y'), 2 , 0, 2*Math.PI );
-			gCtx.stroke();
-            gCtx.fillText( "X"+i, G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y') );
+			ctxG.beginPath();
+            ctxG.strokeStyle = setting.guide_lines.marker;
+			ctxG.arc( G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y'), 2 , 0, 2*Math.PI );
+			ctxG.stroke();
+            ctxG.fillStyle = setting.guide_lines.marker;
+            ctxG.fillText( "X"+i, G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y') );
             i++;
 		});
 
-        gCtx.beginPath();
+        ctxG.beginPath();
+        ctxG.strokeStyle = setting.guide_lines.solid;
         for( let i=1; i<g.length; i++ ){
-			gCtx.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
-			gCtx.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
+			ctxG.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
+			ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
         }
-		gCtx.stroke();
+		ctxG.stroke();
 
-        gCtx.setLineDash([4, 2]);
-        gCtx.beginPath();
+        ctxG.setLineDash([4, 2]);
+        ctxG.beginPath();
+        ctxG.strokeStyle = setting.guide_lines.dashed;
+        // ctxG.strokeStyle = 2;
         for(let i=1; i<g.length; i++) {
-            gCtx.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
-            gCtx.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
+            ctxG.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
+            ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
         }
-        gCtx.stroke();
-        gCtx.setLineDash([0, 0]);
+        ctxG.stroke();
+        ctxG.setLineDash([0, 0]);
 	}
 
     // Writings
@@ -133,12 +131,12 @@ class Newton{
         let str =	"";
             str +=	"<thead>";
             str +=	"<tr>";
-            str +=	"	<th id='th1'>steps, n</th>";
-            str +=	"	<th id='th2'>Xn</th>";
-            str +=	"	<th id='th3'>f(Xn)</th> ";
-            str +=	"	<th id='th4'>f'(Xn)</th> ";
-            str +=	"	<th id='th5'>Xn+1</th>";
-            str +=	"	<th id='th6'>error, e</th> ";
+            str +=	"	<th>steps, n</th>";
+            str +=	"	<th>Xn</th>";
+            str +=	"	<th>f(Xn)</th> ";
+            str +=	"	<th>f'(Xn)</th> ";
+            str +=	"	<th>Xn+1</th>";
+            str +=	"	<th>error, e</th> ";
             str +=	"</tr>";
             str +=	"</thead>";
     
@@ -147,9 +145,9 @@ class Newton{
 		for(let i = 0; i < this.tableItr.length; i++) {
 			j=1;
 			str += "<tr>";
-			str += "    <td headers='th"+(j++)+"'>"+ (i) +"</td>";
-			this.tableItr[i].forEach(itm=>{
-            str += "    <td headers='th"+(j++)+"'>"+itm+ "</td>";
+			str += "    <td>"+ (i) +"</td>";
+			this.tableItr[i].forEach(itm=>{;
+			str += "	<td> "+cleanMathRound(itm)+ "</td>";
 			});
 			str += "</tr>";
 		}
@@ -188,11 +186,11 @@ class Newton{
 				N.G.refreshCanvas();
 
 			}else if( input.val()=='' ){
-				c_log("missing tolerance");
+				// c_log("missing tolerance");
 			}else if( parseFloat(input.val())==0 ){
-				c_log("unacceptable tolerance: "+input.val());
+				// c_log("unacceptable tolerance: "+input.val());
 			}else {
-				c_log("problematic input: "+input.val());
+				// c_log("problematic input: "+input.val());
 			}
 		});
 	}
@@ -205,4 +203,65 @@ class Newton{
     }
     
 
+	fieldStep(){
+		let B = this,
+			input = $('#fieldStep');
+		// B.G.graphCenter( root, (a-b)/2 );
+
+		input.change( function (e) {
+			if( input.val()!='' ){
+				B.tableResultStep()
+				B.G.refreshCanvas();
+			}else{
+				// c_log("missing step");
+			}
+		});
+
+	}
+	tableResultStep(){
+		let str =	"";
+            str +=	"<thead>";
+            str +=	"<tr>";
+            str +=	"	<th>steps, n</th>";
+            str +=	"	<th>Xn</th>";
+            str +=	"	<th>f(Xn)</th> ";
+            str +=	"	<th>f'(Xn)</th> ";
+            str +=	"	<th>Xn+1</th>";
+            str +=	"	<th>error, e</th> ";
+            str +=	"</tr>";
+            str +=	"</thead>";
+        let row = this.tableItr.length;
+		let i = 0;
+		let stepResult = 0;
+
+		let fS = document.getElementById("fieldStep");
+		if( fS != null ){
+			row = fS.value;
+			row++;
+		} 
+		
+		for(i = 1; i < row; i++) {
+			
+			str += "<tr>";
+			str += "<td class='t_cent'>"+ (i) +"</td>";
+			this.tableItr[i].forEach(itm=>{
+				str += "<td> "+cleanMathRound(itm)+ "</td>";
+			});
+			str += "</tr>";
+		}
+		if(i == row && i<this.tableItr.length){
+			str += "<tr>";
+			str += "<td class='t_cent'>"+ (i) +"</td>";
+			str += "<td> "+cleanMathRound(this.tableItr[i][0])+ "</td>";
+			str += "<td> "+cleanMathRound(this.tableItr[i][1])+ "</td>";
+			str += "</tr>";
+		}
+
+		document.getElementById("tableIter").innerHTML = str;
+
+		row--;
+		if(row==0) stepResult = 0;
+		else if(row>0) stepResult = this.tableItr[row][2];
+		document.getElementById("result").innerHTML = "x = "+(stepResult)+' ≈ '+Math.round(stepResult);
+	}
 }

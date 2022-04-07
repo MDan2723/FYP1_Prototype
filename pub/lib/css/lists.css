@@ -16,7 +16,7 @@ ul{
 .navList:hover{
 	transition:0.25s;
     
-	color: White;
+	color: #FFFCF2;
     background-color: grey;
 }
 .nlSel{
@@ -24,7 +24,7 @@ ul{
     padding:15px;
 
     border-radius:30px;
-	color: White;
+	color: #FFFCF2;
     background-color: grey;
 }
 

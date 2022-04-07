@@ -31,29 +31,37 @@ body{
 
 /*div{}*/
 
-.pad{
-	padding:10px;
-}
-.marg{
-	margin: 10px;
-}
+.pad{ padding:10px; }
+.marg{ margin: 10px; }
 
-.top{
-	width:100%;
+.top{ width:100%; }
+
+.d_reg{
+	background-color:#FFFCF2;
+	box-shadow: 0px 3px 3px 3px rgba(148, 148, 148, 0.459);
+	border-radius:10px;
 }
 .cent{
 	margin-left:auto;
 	margin-right:auto;
 	width:60em;
-	background-color:white;
+	background-color:#FFFCF2;
+	box-shadow: 0px 3px 3px 3px rgba(148, 148, 148, 0.459);
+	border-radius:10px;
+}
+.d-small{
+	/* width:30em; */
+	background-color:#FFFCF2;
 	box-shadow: 0px 3px 3px 3px rgba(148, 148, 148, 0.459);
 	border-radius:10px;
 }
 
+
+/* ------------ FLEX GRID ------------ */
 .flex{
 	display: flex;
 }
-.f_cent{
+.f-cent{
 	display: flex;
 	justify-content: center;
 }
@@ -63,13 +71,23 @@ body{
 	grid-column: 2;
 	grid-auto-flow: column;
 }
-.g_cent{
+.g-cent{
 	display: grid;
-	grid-column: 2;
-	grid-auto-flow: column;
+	grid-template-columns: auto auto;
 	justify-content: center;
 }
+.g-cent .item{
+	width:30em;
+	min-height: 17em;
+}
 
+/* ------------ DISPLAYS ------------ */
+.block{
+    display:block;
+}
+
+
+/* ------------ GENERAL ------------ */
 .desc{
 	margin: 10px;
 }
@@ -77,8 +95,4 @@ body{
 	background-color: lightGrey;
 	width:10em;
 	height:20em;
-}
-
-.block{
-    display:block;
 }

@@ -21,11 +21,11 @@
 }
 .in1:hover{
     transition:0.25s;
-    background-color:white;
+    background-color:#FFFCF2;
     border: 1px solid Grey;
 }
 .in1:focus{
-    background-color:white;
+    background-color:#FFFCF2;
     border: 1px solid Grey;
 }
 /*
@@ -35,3 +35,10 @@
   margin: 0;
 }
 */
+
+
+/* ---------- INPUT:SELECT ---------- */
+.sel-1{
+    width: 7em;
+}
+

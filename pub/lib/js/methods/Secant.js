@@ -13,7 +13,7 @@ class Secant{
 		S.result = 0.00;
 
         // c_log("Secant ready");
-		c_log(S);
+		// c_log(S);
 
 		document.getElementById("methodName").innerHTML = "Method: Secant";
 		document.getElementById("inputCrit").innerHTML = " Criteria <br> x1: <input id='fieldX1' type='number' /><br> x2: <input id='fieldX2' type='number' />";
@@ -34,14 +34,14 @@ class Secant{
 		S.G.graphCenter( root, farthestDistance(root,x[1],x[0]) );
         // c_log(root);
         if(root.length==0){
-			c_log("no root detected");
+			// c_log("no root detected");
 		}
 		else{
             if(root.length>1){
-                c_log('more than 1 root detected');
-                c_log(root);
+                // c_log('more than 1 root detected');
+                // c_log(root);
                 root = findNearestRoot(root,x[1]);
-                c_log(root);
+                // c_log(root);
             }
 
             e = Math.abs(root-x[1]);
@@ -66,7 +66,7 @@ class Secant{
                 i++;
             }
             while ( e > this.tol );
-            c_log(result.toString() +' ≈ '+ Math.round(parseFloat(result.toString())));
+            // c_log(result.toString() +' ≈ '+ Math.round(parseFloat(result.toString())));
             S.result = result;
 
             S.G.refreshCanvas();
@@ -110,12 +110,15 @@ class Secant{
 		if( stop>0 ){
             for( i=0; i<stop; i++ ){
                 ctxG.beginPath();
+                ctxG.strokeStyle = setting.guide_lines.marker;
                 ctxG.arc( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y'), 2 , 0, 2*Math.PI );
                 ctxG.stroke();
+                ctxG.fillStyle = setting.guide_lines.marker;
                 ctxG.fillText( "X"+i, G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
             };
 
             ctxG.beginPath();
+            ctxG.strokeStyle = setting.guide_lines.solid;
             for( i=1; i<stop; i++ ){
                 ctxG.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
                 ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
@@ -124,6 +127,7 @@ class Secant{
 
             ctxG.setLineDash([4, 2]);
             ctxG.beginPath();
+            ctxG.strokeStyle = setting.guide_lines.dashed;
             for( i=2; i<stop; i++) {
                 ctxG.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
                 ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
@@ -150,11 +154,11 @@ class Secant{
         let str =	"";
             str +=	"<thead>";
             str +=	"<tr>";
-            str +=	"	<th id='th1'>steps, n</th>";
-            str +=	"	<th id='th2'>Xn</th>";
-            str +=	"	<th id='th3'>f(Xn)</th> ";
-            str +=	"	<th id='th4'>Xn+1</th>";
-            str +=	"	<th id='th5'>error, e</th> ";
+            str +=	"	<th>steps, n</th>";
+            str +=	"	<th>Xn</th>";
+            str +=	"	<th>f(Xn)</th> ";
+            str +=	"	<th>Xn+1</th>";
+            str +=	"	<th>error, e</th> ";
             str +=	"</tr>";
             str +=	"</thead>";
         
@@ -163,9 +167,9 @@ class Secant{
 		for(let i = 0; i < this.tableItr.length; i++) {
             j=1;    
 			str += "<tr>";
-			str += "    <td headers='th"+(j++)+"'>"+ (i) +"</td>";
+			str += "    <td>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
-            str += "    <td headers='th"+(j++)+"'> "+itm+ "</td>";
+            str += "	<td> "+cleanMathRound(itm)+ "</td>";
 			});
 			str += "</tr>";
 		}
@@ -224,11 +228,11 @@ class Secant{
 				refreshCanvas();
 
 			}else if( input.val()=='' ){
-				c_log("missing tolerance");
+				// c_log("missing tolerance");
 			}else if( parseFloat(input.val())==0 ){
-				c_log("unacceptable tolerance: "+input.val());
+				// c_log("unacceptable tolerance: "+input.val());
 			}else {
-				c_log("problematic input: "+input.val());
+				// c_log("problematic input: "+input.val());
 			}
 		});
 	}
@@ -251,14 +255,23 @@ class Secant{
 				B.tableResultStep()
 				refreshCanvas();
 			}else{
-				c_log("missing step");
+				// c_log("missing step");
 			}
 		});
 
 	}
 	tableResultStep(){
-		let str = '<tr> <th>steps, n</th> <th>x[n]</th> <th>f(x)</th> <th>x[n+1]</th> <th>error, e</th> </tr>';
-		let row = this.tableItr.length;
+        let str =	"";
+            str +=	"<thead>";
+            str +=	"<tr>";
+            str +=	"	<th>steps, n</th>";
+            str +=	"	<th>Xn</th>";
+            str +=	"	<th>f(Xn)</th> ";
+            str +=	"	<th>Xn+1</th>";
+            str +=	"	<th>error, e</th> ";
+            str +=	"</tr>";
+            str +=	"</thead>";
+        let row = this.tableItr.length;
 		let i = 0;
 		let stepResult = 0;
 
@@ -271,17 +284,17 @@ class Secant{
 		for(i = 0; i < row; i++) {
 			
 			str += "<tr>";
-			str += "<td>"+ (i) +"</td>";
+			str += "<td class='t_cent'>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
-				str += "<td> "+itm+ "</td>";
+				str += "<td> "+cleanMathRound(itm)+ "</td>";
 			});
 			str += "</tr>";
 		}
 		if(i == row && i<this.tableItr.length){
 			str += "<tr>";
-			str += "<td>"+ (i) +"</td>";
-			str += "<td> "+this.tableItr[i][0]+ "</td>";
-			str += "<td> "+this.tableItr[i][1]+ "</td>";
+			str += "<td class='t_cent'>"+ (i) +"</td>";
+			str += "<td> "+cleanMathRound(this.tableItr[i][0])+ "</td>";
+			str += "<td> "+cleanMathRound(this.tableItr[i][1])+ "</td>";
 			str += "</tr>";
 		}
 

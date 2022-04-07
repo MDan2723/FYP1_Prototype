@@ -23,7 +23,7 @@
 		
 			
 			<h3 class='t_cent'>Graph plot/Guides</h3>
-			<div class='pad marg g_cent'>
+			<div class='pad marg g-cent'>
 				<div id="graph" style="position: relative;">
 					<canvas id="graphCanvas" width="500" height="500" style="position: absolute; z-index: 0;"></canvas>
 					<canvas id="gPointer" width="500" height="500" style="position: absolute; z-index: 1;"></canvas>
@@ -53,7 +53,7 @@
 			<hr>
 			<div class='pad marg'>
 				<h3 class='t_cent'>Iteration Table</h3>
-				<div class='g_cent'>
+				<div class='g-cent'>
 					<table id="tableIter" class="tbl1">
 						
 					</table>

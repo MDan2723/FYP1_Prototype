@@ -11,14 +11,14 @@ class Bisection{
 		this.result = 0.00;
 
 		// c_log("Bisection ready");
-		c_log(this);
+		// c_log(this);
 
 		document.getElementById("methodName").innerHTML = "Method: Bisection";
 		document.getElementById("inputCrit").innerHTML = " Criteria <br> a: <input id='fieldA' type='number' /><br> b: <input id='fieldB' type='number' />";
 	}
 
 	iteration(){
-		c_log(">> ITERATING... [ "+this.a+", "+this.b+" ]");
+		// c_log(">> ITERATING... [ "+this.a+", "+this.b+" ]");
 
 		var a = this.a,
 			b = this.b,
@@ -35,16 +35,16 @@ class Bisection{
 
 		
 		if(root.length==0){
-			c_log("no root detected");
+			// c_log("no root detected");
 		}
 		else{
 			if(root.length>1){
-				c_log('more than 1 root detected');
-				c_log(root);
+				// c_log('more than 1 root detected');
+				// c_log(root);
 				
 				// root = findNearestRoot(root,a);
 			}else{
-				c_log(farthestDistance(root,a,b));
+				// c_log(farthestDistance(root,a,b));
 				this.G.graphCenter( root, farthestDistance(root,a,b) );
 				
 				// c_log('available root = '+root);
@@ -79,7 +79,7 @@ class Bisection{
 				} while ( e > tol && i<50);
 				result = x;
 		
-				c_log('n = '+i+', '+result.toString()+' ≈ '+Math.round(parseFloat(result.toString())));
+				// c_log('n = '+i+', '+result.toString()+' ≈ '+Math.round(parseFloat(result.toString())));
 				this.result = result;
 				// c_log(this.tableItr);
 				// c_log(this.guide);
@@ -109,7 +109,7 @@ class Bisection{
 		let g = this.guide;
 		let stop = g.length;
 		const	G = this.G,
-				ctx = G.ctxGraph;
+				ctxG = G.ctxGraph;
 
 		let fS = document.getElementById("fieldStep");
 		if( fS != null ){
@@ -123,28 +123,32 @@ class Bisection{
 		if( stop>0 ){
 			// Set all points
 			for(i=0; i<stop; i++){
-				ctx.beginPath();
-				ctx.arc( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y'), 2 , 0, 2*Math.PI );
-				ctx.stroke();
-				// ctx.fillText( g[i][2], G.findCoords('math',g[i][0],'x')+2, G.findCoords('math',g[i][1],'y')+14 );
-				ctx.fillText( "x"+(i+1), G.findCoords('math',g[i][0],'x')+2, G.findCoords('math',g[i][1],'y')+12 );
+				ctxG.beginPath();
+				ctxG.strokeStyle = setting.guide_lines.marker;
+				ctxG.arc( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y'), 2 , 0, 2*Math.PI );
+				ctxG.stroke();
+				// ctxG.fillText( g[i][2], G.findCoords('math',g[i][0],'x')+2, G.findCoords('math',g[i][1],'y')+14 );			
+				ctxG.fillStyle = setting.guide_lines.marker;
+				ctxG.fillText( "x"+(i+1), G.findCoords('math',g[i][0],'x')+2, G.findCoords('math',g[i][1],'y')+12 );
 			}
 
-			ctx.beginPath();
+			ctxG.beginPath();
+			ctxG.strokeStyle = setting.guide_lines.solid;
 			for(i=2; i<stop; i++) {
-				ctx.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i-1][1],'y') );
-				ctx.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
+				ctxG.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i-1][1],'y') );
+				ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
 			}
-			ctx.stroke();
+			ctxG.stroke();
 
-			ctx.setLineDash([4, 2]);
-			ctx.beginPath();
+			ctxG.setLineDash([4, 2]);
+			ctxG.beginPath();
+			ctxG.strokeStyle = setting.guide_lines.dashed;
 			for(i=3; i<stop; i++) {
-				ctx.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
-				ctx.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i-1][1],'y') );
+				ctxG.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
+				ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i-1][1],'y') );
 			}
-			ctx.stroke();
-			ctx.setLineDash([0, 0]);
+			ctxG.stroke();
+			ctxG.setLineDash([0, 0]);
 		}
 		else{
 			// c_log("no guides recorded");
@@ -165,29 +169,12 @@ class Bisection{
 		let str =	"";
 			str +=	"<thead>";
 			str +=	"<tr>";
-
 			str +=	"	<th>steps, n</th>";
 			str +=	"	<th>a</th>";
 			str +=	"	<th>b</th> ";
 			str +=	"	<th>midpoint, x</th>";
 			str +=	"	<th>f(x)</th> ";
 			str +=	"	<th>error, e</th> ";
-/*
-			str +=	"	<th id='th1'>steps, n</th>";
-			str +=	"	<th id='th2'>a</th>";
-			str +=	"	<th id='th3'>b</th> ";
-			str +=	"	<th id='th4'>midpoint, x</th>";
-			str +=	"	<th id='th5'>f(x)</th> ";
-			str +=	"	<th id='th6'>error, e</th> ";
-*/
-/*
-			str +=	"	<th scope='col'>steps, n</th>";
-			str +=	"	<th scope='col'>a</th>";
-			str +=	"	<th scope='col'>b</th> ";
-			str +=	"	<th scope='col'>midpoint, x</th>";
-			str +=	"	<th scope='col'>f(x)</th> ";
-			str +=	"	<th scope='col'>error, e</th> ";
-*/
 			str +=	"</tr>";
 			str +=	"</thead>";
 		let row = this.tableItr.length;
@@ -200,15 +187,7 @@ class Bisection{
 
 			str += "	<td class='td-cent'>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
-			str += "	<td> "+itm+ "</td>";
-
-			// str += "	<td headers='th"+(j++)+"' class='td-cent'>"+ (i) +"</td>";
-			// this.tableItr[i].forEach(itm=>{
-			// str += "	<td headers='th"+(j++)+"'> "+itm+ "</td>";
-
-			// str += "	<td class='td-cent'>"+ (i) +"</td>";
-			// this.tableItr[i].forEach(itm=>{
-			// str += "	<td > "+itm+ "</td>";
+			str += "	<td> "+cleanMathRound(itm)+ "</td>";
 			});
 			str += "</tr>";
 		}
@@ -242,7 +221,7 @@ class Bisection{
 				B.G.refreshCanvas();
 
 			}else{
-				c_log("missing a");
+				// c_log("missing a");
 			}
 		});
 	}
@@ -260,7 +239,7 @@ class Bisection{
 				B.G.refreshCanvas();
 
 			}else{
-				c_log("missing b");
+				// c_log("missing b");
 			}
 		});
 	}
@@ -279,11 +258,11 @@ class Bisection{
 				B.G.refreshCanvas();
 
 			}else if( input.val()=='' ){
-				c_log("missing tolerance");
+				// c_log("missing tolerance");
 			}else if( parseFloat(input.val())==0 ){
-				c_log("unacceptable tolerance: "+input.val());
+				// c_log("unacceptable tolerance: "+input.val());
 			}else {
-				c_log("problematic input: "+input.val());
+				// c_log("problematic input: "+input.val());
 			}
 		});
 	}
@@ -306,7 +285,7 @@ class Bisection{
 				B.tableResultStep()
 				B.G.refreshCanvas();
 			}else{
-				c_log("missing step");
+				// c_log("missing step");
 			}
 		});
 
@@ -326,17 +305,17 @@ class Bisection{
 		for(i = 1; i < row; i++) {
 			
 			str += "<tr>";
-			str += "<td>"+ (i) +"</td>";
+			str += "<td class='t_cent'>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
-				str += "<td> "+itm+ "</td>";
+				str += "<td> "+cleanMathRound(itm)+ "</td>";
 			});
 			str += "</tr>";
 		}
 		if(i == row && i<this.tableItr.length){
 			str += "<tr>";
-			str += "<td>"+ (i) +"</td>";
-			str += "<td> "+this.tableItr[i][0]+ "</td>";
-			str += "<td> "+this.tableItr[i][1]+ "</td>";
+			str += "<td class='t_cent'>"+ (i) +"</td>";
+			str += "<td> "+cleanMathRound(this.tableItr[i][0])+ "</td>";
+			str += "<td> "+cleanMathRound(this.tableItr[i][1])+ "</td>";
 			str += "</tr>";
 		}
 

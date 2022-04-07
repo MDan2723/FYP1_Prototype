@@ -1,5 +1,11 @@
 var urlParams = parseURLParams(document.URL);
 let G = new Graph;
+let table_decimal_places = setting.table_iteration.decimal_places;
+let dp = Math.pow(10,setting.table_iteration.decimal_places);
+
+function cleanMathRound(itm){
+    return (Math.round( itm*dp ))/dp;
+}
 
 G.refreshCanvas();
 G.fieldsTriggers();

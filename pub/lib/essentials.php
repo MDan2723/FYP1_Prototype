@@ -21,6 +21,7 @@ function heads( $title ){
 			<?php require_once 'pub/lib/css/graphs.css';?>
 			<?php require_once 'pub/lib/css/sidebar.css';?>
 			<?php require_once 'pub/lib/css/forums.css';?>
+			/* <?php require_once 'pub/lib/css/tooltip.css';?> */
 		</style>
 		<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
@@ -127,7 +128,7 @@ function navHeader( $page ){
 function footers(){
 	?>
 	<footer>
-		<div class='cent pad marg f_cent'>
+		<div class='cent pad marg f-cent'>
 			<p class="">MMU Cyberjaya | Faculty of Computer & Informatics | Muhammad Danial</p>
 		</div>
 	</footer>	
@@ -221,7 +222,7 @@ function notesTable(){
 		</ol>
 
 	</div>
-	<!-- <div class='f_cent'>
+	<!-- <div class='f-cent'>
 		<table class='tbl1'>
 			<tr>
 				<th>Author</th>
@@ -330,17 +331,37 @@ function simHistoryList(){
 	<?php
 }
 
+// ----------- AUTO-LIST -----------
+function listOptionColors(){
+	?>
+    <option value="Black"       >Black</option>
+    <option disabled       		></option>
+    <!-- <option value="LightRed"   >Light Red</option> -->
+    <option value="Red"         >Red</option>
+    <option value="DarkRed"     >Dark Red</option>
+    <option disabled       		></option>
+    <option value="LightBlue"  >Light Blue</option>
+    <option value="Blue"        >Blue</option>
+    <option value="DarkBlue"    >Dark Blue</option>
+    <option disabled       		></option>
+    <option value="LightGreen" >Light Green</option>
+    <option value="Green"       >Green</option>
+    <option value="DarkGreen"   >Dark Green</option>
+    <?php
+}
+
 // ----------- SCRIPTS -----------
 function scriptings(){
 	?>
-	<script src="<?=BASE_URL?>pub/lib/js/sidebar.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/controls/sidebar.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/data/setting.js"></script>
 	<?php
 }
 function scripts_forum(){
 	?>
-	<!-- <script src="<?=BASE_URL?>pub/lib/js/controls/data.js"></script>
-	<script src="<?=BASE_URL?>pub/lib/js/controls/forum.js"></script>
-	<script src="<?=BASE_URL?>pub/lib/js/controls/thread.js"></script> -->
+	<!-- <script src="<?=BASE_URL?>pub/lib/js/controls/forum/data.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/controls/forum/forum.js"></script>
+	<script src="<?=BASE_URL?>pub/lib/js/controls/forum/thread.js"></script> -->
 	<?php
 }
 function scripts_graph(){
@@ -359,3 +380,4 @@ function scripts_graph(){
 	<script src="<?=BASE_URL?>pub/lib/js/methods/Newton.js"></script>
 	<?php
 }
+

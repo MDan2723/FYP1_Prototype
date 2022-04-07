@@ -10,11 +10,10 @@
 <header>
 	<div class='cent pad marg t_cent'>
 		<h1>
-			RESULT PAGE
+			Simulator
 		</h1>
 	</div>
 	<?php navHeader(6); ?>
-
 </header>
 
 <body class="main-body">
@@ -24,36 +23,12 @@
 		
 			
 			<h3 class='t_cent'>Graph plot/Guides</h3>
-			<div class='pad marg g_cent'>
+			<div class='pad marg g-cent'>
 				<div id="graph" style="position: relative;">
 					<canvas id="graphCanvas" width="500" height="500" style="position: absolute; z-index: 0;"></canvas>
 					<canvas id="gPointer" width="500" height="500" style="position: absolute; z-index: 1;"></canvas>
 				</div>
 				<div id="graphForm" class="t_cent">
-					<!-- <div class="formSimulation">
-						<div id="inputFunc" class="marg">
-							<input class="in1" id="fieldFunc" type='text' placeholder="Function / Formula"/>
-						</div>
-						<hr>
-						<div class="marg">
-							<div class="t_cent">
-								<select id='sim_method' name="method" class='in1'>
-									<option value='1'>Bisection Method</option>
-									<option value='2'>Secant Method</option>
-									<option value='3'>Newton Method</option>
-								</select>
-							</div>
-							<div id="criteria"></div>
-						</div>
-						<hr>
-						<div class="pad marg">
-							<input class="in1" id="fieldTol" type='number' min='0.000001' step='0.000001' placeholder="Tolerance"/>
-						</div>
-						<div class="pad marg">
-							<a id="simlink" href="<?=BASE_URL?>simulator/execute"><button class='in1' type='submit'>Simulate</button><a>
-						</div>
-
-					</div> -->
 					<div id='formSimulation' class='form-sim'>
 
 						<div>

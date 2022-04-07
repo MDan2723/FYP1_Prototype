@@ -61,7 +61,7 @@ class Graph{
 			nY =Math.round(( gS )*100000)/100000;
 
 		ctxG.beginPath();
-		ctxG.strokeStyle = "lightBlue";
+		ctxG.strokeStyle = setting.grid.line_1;
 		
 		if(  nX >2 ){ gridding(1); }
 		else if(  nX ==2 || nX >0.2 ){ gridding(10); }
@@ -88,25 +88,25 @@ class Graph{
 					ctxG.stroke();
 		
 					ctxG.beginPath();
-					ctxG.strokeStyle = "Red";
+					ctxG.strokeStyle = setting.grid.line_axis;
 					ctxG.moveTo( x, 0 );
 					ctxG.lineTo( x, cnvG.height );
 					ctxG.stroke();
 		
 					ctxG.beginPath();
-					ctxG.strokeStyle = "lightBlue";
+					ctxG.strokeStyle = setting.grid.line_1;
 				}
 				else if( Math.ceil( (i + newMinX)%10 ) == '0' ){				
 					ctxG.stroke();
 		
 					ctxG.beginPath();
-					ctxG.strokeStyle = "Blue";
+					ctxG.strokeStyle = setting.grid.line_10;
 					ctxG.moveTo( x, 0 );
 					ctxG.lineTo( x, cnvG.height );
 					ctxG.stroke();
 		
 					ctxG.beginPath();
-					ctxG.strokeStyle = "lightBlue";
+					ctxG.strokeStyle = setting.grid.line_1;
 				}
 				else{
 					ctxG.moveTo( x, 0 );
@@ -126,25 +126,25 @@ class Graph{
 					ctxG.stroke();
 		
 					ctxG.beginPath();
-					ctxG.strokeStyle = "Red";
+					ctxG.strokeStyle = setting.grid.line_axis;
 					ctxG.moveTo( 0, y);
 					ctxG.lineTo( cnvG.width, y);
 					ctxG.stroke();
 		
 					ctxG.beginPath();
-					ctxG.strokeStyle = "lightBlue";
+					ctxG.strokeStyle = setting.grid.line_1;
 				}
 				else if( Math.ceil( (i + newMinY)%10 ) == '0' ){
 					ctxG.stroke();
 		
 					ctxG.beginPath();
-					ctxG.strokeStyle = "Blue";
+					ctxG.strokeStyle = setting.grid.line_10;
 					ctxG.moveTo( 0, y);
 					ctxG.lineTo( cnvG.width, y);
 					ctxG.stroke();
 		
 					ctxG.beginPath();
-					ctxG.strokeStyle = "lightBlue";
+					ctxG.strokeStyle = setting.grid.line_1;
 				}
 				else{
 					ctxG.moveTo( 0, y);
@@ -165,7 +165,7 @@ class Graph{
 			mathX, mathY;
 	
 		ctxG.beginPath();
-		ctxG.strokeStyle = "Black";
+		ctxG.strokeStyle = setting.graph.curve;
 	
 		for(var i=0; i<n; i++){
 			perX = i/(n-1);
@@ -332,7 +332,6 @@ class Graph{
 				point = G.pointer;
 
 		cnvP.onmousemove = function (e){
-			
 			var rect = cnvP.getBoundingClientRect(),
 				// coords = {
 				// 	x: e.clientX - rect.left,
@@ -344,8 +343,32 @@ class Graph{
 			G.clearCanvas(cnvP,ctxP);
 
 			ctxP.beginPath();
-			ctxP.arc( coorX, coorY, 3 , 0, 2*Math.PI );
+			ctxP.strokeStyle = setting.pointer.color
+			ctxP.fillStyle = setting.pointer.color
+			switch(setting.pointer.shape){
+				case "circle":
+					ctxP.arc( coorX, coorY, setting.pointer.size, 0, 2*Math.PI );
+					break;
+				case "axe":
+					ctxP.fillText( "⨉", coorX-6, coorY+5 );
+					break;
+				case "arrow":
+					ctxP.fillText( "ↆ", coorX-6, coorY );
+					break;
+				case "triangle":
+					ctxP.fillText( "▲", coorX-8, coorY+9 );
+					break;
+				case "square":
+					ctxP.fillText( "▢", coorX-6, coorY+5 );
+					break;
+				default:
+					ctxP.arc( coorX, coorY, setting.pointer.size, 0, 2*Math.PI );
+					break;
+			}
+
+
 			ctxP.stroke();
+			ctxP.fillStyle = setting.pointer.coords;
 			ctxP.fillText( "( "+point.mathX.toFixed(4)+", "+point.mathY.toFixed(4)+" )", 10, 20 );
 		}
 	}

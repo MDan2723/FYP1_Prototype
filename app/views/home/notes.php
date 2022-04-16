@@ -1,7 +1,7 @@
 <?=heads("Notes")?>
 
 <header>
-    <div class='cent pad marg t_cent'>
+    <div class='cent pad marg t-cent'>
         <h1>NOTES</h1>
     </div>
     <?php navHeader(3); ?>
@@ -14,10 +14,16 @@
         <div class='desc'>
             <h3>AVAILABLE NOTES</h3>
             <hr>
-            <?=notesTable()?>
+            <?=noteList()?>
         </div>
     </div>
-
+    <div class='cent pad marg '>
+        <div class='desc'>
+            <h3>AVAILABLE SOURCES</h3>
+            <hr>
+            <?=sourceList()?>
+        </div>
+    </div>
     <?=scriptings()?>
 
 </body>

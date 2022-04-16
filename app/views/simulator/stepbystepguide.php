@@ -8,7 +8,7 @@
 </head>
 
 <header>
-	<div class='cent pad marg t_cent'>
+	<div class='cent pad marg t-cent'>
 		<h1>
 			STEP-BY-STEP
 		</h1>
@@ -18,11 +18,11 @@
 
 <body class="main-body">
 	<div class='cent pad marg'>
-		<div class='pad marg t_cent'>
-			<h3><t id="methodName"></t></h3>
-			f = <t id="fieldFunc" class="txt_bold"></t>, 
-			<t id="inputCrit"></t>,
-			t = <t id="fieldTol" class="txt_bold"></t>
+		<div class='pad marg t-cent'>
+			<h3><t id="writeMethod"></t></h3>
+			f = <t id="writeFunc" class="t-bold"></t>, 
+			<t id="writeCriteria"></t>,
+			t = <t id="writeTolerance" class="t-bold"></t>
 		</div>
 
 		<div class='pad marg g-cent'>
@@ -31,7 +31,7 @@
 				<canvas id="gPointer" width="500" height="500" style="position: absolute; z-index: 1;"></canvas>
 			</div>
 			<div id="graphForm">
-				<h3 class="t_cent">Step-by-step</h3>
+				<h3 class="t-cent">Step-by-step</h3>
 				<div class="pad marg">
 					Steps, n: <input id="fieldStep" type='number' min='0' max='10' step='1' value='0'/>
 				</div>
@@ -40,7 +40,7 @@
 		</div>
 		<hr>
 		<div class='pad marg'>
-			<h3 class='t_cent'>Iteration Table</h3>
+			<h3 class='t-cent'>Iteration Table</h3>
 			<div class='g-cent'>
 				<table id="tableIter" class="tbl1"></table>
 			</div>

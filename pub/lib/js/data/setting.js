@@ -9,18 +9,21 @@ var default_setting =
         line_1: "LightBlue",
         line_10: "Blue",
         line_axis: "Red",
-        grid_number: "Integer"
+        grid_number: "Moderate"
     },
     pointer: {
         shape: "circle",
         size: 3,
         color: "Red",
-        coords: "Black"
+        coords: {
+            color: "Blue",
+            size: 14
+                }
     },
     guide_lines: {
         solid:  "Green",
         dashed: "Green",
-        marker: "Black"
+        marker: "DarkGreen"
     },
     table_iteration: {
         decimal_places:  12

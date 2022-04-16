@@ -8,7 +8,7 @@
 </head>
 
 <header>
-	<div class='cent pad marg t_cent'>
+	<div class='cent pad marg t-cent'>
 		<h1>
 			Simulator
 		</h1>
@@ -22,13 +22,13 @@
 		<div class=''>
 		
 			
-			<h3 class='t_cent'>Graph plot/Guides</h3>
+			<h3 class='t-cent'>Graph plot/Guides</h3>
 			<div class='pad marg g-cent'>
 				<div id="graph" style="position: relative;">
 					<canvas id="graphCanvas" width="500" height="500" style="position: absolute; z-index: 0;"></canvas>
 					<canvas id="gPointer" width="500" height="500" style="position: absolute; z-index: 1;"></canvas>
 				</div>
-				<div id="graphForm" class="t_cent">
+				<div id="graphForm" class="t-cent">
 					<div id='formSimulation' class='form-sim'>
 
 						<div>
@@ -46,7 +46,7 @@
 						</div>
 
 						<div class=''>
-							<a id="simlink" href="<?=BASE_URL?>simulator/execute"><button class='in1'>Simulate</button><a>
+							<a id="simlink" href="<?=BASE_URL?>simulator/execute"><input type='button' class='in1' value='Simulate'><a>
 						</div>
 					</div>
                 

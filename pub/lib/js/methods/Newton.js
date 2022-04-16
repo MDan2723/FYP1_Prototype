@@ -13,8 +13,10 @@ class Newton{
 		N.result = 0.00;
 
         // c_log(N);
-		document.getElementById("methodName").innerHTML = "Method: Newton";
-		document.getElementById("inputCrit").innerHTML = " Criteria <br> x1: <input id='fieldX1' type='number' />";
+        if(document.getElementById("methodName")){
+            document.getElementById("methodName").innerHTML = "Method: Newton";
+            document.getElementById("inputCrit").innerHTML = " Criteria <br> x1: <input id='fieldX1' type='number' />";
+        }
     }
 
     iteration(){
@@ -22,45 +24,56 @@ class Newton{
         N.guide = [];
         N.tableItr = [];
         
-        let root = findRootExpr();
-        if(root.length>1){
+        let root = findRootExpr(),
+            errorMessage = document.getElementById('error_message');
+        // c_log(root);
+        if(root.length == 0){
+			if(errorMessage) errorMessage.innerHTML = "Error; No root detected.<hr>";
+        }
+        else if(root.length>=1){
+            if(errorMessage) errorMessage.innerHTML = "";
 			// c_log('more than 1 root detected');
 			// c_log(root);
 			root = findNearestRoot(root,this.x[0]);
+            
+            if(root.constructor.name!="Number"){
+                if(errorMessage) errorMessage.innerHTML = "Error; No root detected.<hr>";
+            }
+            else{
+                N.G.graphCenter( root, math.abs(root-this.x[0]) );
+                // c_log( expr );
+                let expr2 = math.derivative(expr,'x').toString();
+                // c_log( expr2 );
+                let x = this.x,
+                    fx = [],
+                    ffx = [],
+                    result = null,
+                    e = null;
+        
+                // c_log("n	Xn			f(Xn)		f'(Xn)		Xn+1		e");
+                let i = 0;
+                
+                do {
+                    fx[i] = evalMathExpr(x[i]);
+                    ffx[i] = math.evaluate(expr2,{x:x[i]});
+                    
+                    e = Math.abs(root-x[i]);
+                    x[i+1] = this.formula(i,x,fx,ffx);
+                    // c_log(i+'	'+x[i].toFixed(5)+'     '+fx[i].toFixed(5)+'		'+ffx[i].toFixed(5)+'		'+x[i+1].toFixed(5)+'		'+e.toFixed(5)+'	'+!(e > this.tol));
+                    
+                    result = x[i+1];
+                    N.saveTable(i, [ x[i], fx[i], ffx[i], x[i+1], e ]);
+                    N.saveGuides((i),[ x[i], fx[i], 'l']);
+                    i++;
+                    if(ffx[i]==0) break;
+                }
+                while ( e > this.tol && i<25);
+        
+                N.result = result;
+                // c_log(result.toString() +' ≈ '+ Math.round(parseFloat(result.toString())));
+                
+            }
 		}
-        // c_log(root);
-        N.G.graphCenter( root, math.abs(root-this.x[0]) );
-        // c_log( expr );
-        let expr2 = math.derivative(expr,'x').toString();
-        // c_log( expr2 );
-        let x = this.x,
-            fx = [],
-            ffx = [],
-            result = null,
-            e = null;
-
-        // c_log("n	Xn			f(Xn)		f'(Xn)		Xn+1		e");
-        let i = 0;
-        
-        do {
-            fx[i] = evalMathExpr(x[i]);
-            ffx[i] = math.evaluate(expr2,{x:x[i]});
-            
-            e = Math.abs(root-x[i]);
-            x[i+1] = this.formula(i,x,fx,ffx);
-            // c_log(i+'	'+x[i].toFixed(5)+'     '+fx[i].toFixed(5)+'		'+ffx[i].toFixed(5)+'		'+x[i+1].toFixed(5)+'		'+e.toFixed(5)+'	'+!(e > this.tol));
-            
-            result = x[i+1];
-            N.saveTable(i, [ x[i], fx[i], ffx[i], x[i+1], e ]);
-            N.saveGuides((i),[ x[i], fx[i], 'l']);
-            i++;
-            if(ffx[i]==0) break;
-        }
-        while ( e > this.tol && i<25);
-
-        N.result = result;
-        // c_log(result.toString() +' ≈ '+ Math.round(parseFloat(result.toString())));
-        
         N.G.refreshCanvas();
 
         if(N.boolWrite){
@@ -86,35 +99,47 @@ class Newton{
                 G = N.G,
                 ctxG = G.ctxGraph;
 		let g = N.guide,
-            i = 1;
-		g.forEach(el => {
-			ctxG.beginPath();
-            ctxG.strokeStyle = setting.guide_lines.marker;
-			ctxG.arc( G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y'), 2 , 0, 2*Math.PI );
-			ctxG.stroke();
-            ctxG.fillStyle = setting.guide_lines.marker;
-            ctxG.fillText( "X"+i, G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y') );
-            i++;
-		});
+            i = 1,
+            stop = g.length;
 
-        ctxG.beginPath();
-        ctxG.strokeStyle = setting.guide_lines.solid;
-        for( let i=1; i<g.length; i++ ){
-			ctxG.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
-			ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
+        let fS = document.getElementById("fieldStep");
+        if( fS != null ){
+            stop = parseInt(fS.value);
+            stop++;
+            fS.max = g.length;
+            fS.max--;
         }
-		ctxG.stroke();
 
-        ctxG.setLineDash([4, 2]);
-        ctxG.beginPath();
-        ctxG.strokeStyle = setting.guide_lines.dashed;
-        // ctxG.strokeStyle = 2;
-        for(let i=1; i<g.length; i++) {
-            ctxG.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
-            ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
+        if( stop>0 ){
+            for( i=0; i<stop; i++ ){
+                ctxG.beginPath();
+                ctxG.strokeStyle = setting.guide_lines.marker;
+                ctxG.arc( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y'), 2 , 0, 2*Math.PI );
+                ctxG.stroke();
+                ctxG.fillStyle = setting.guide_lines.marker;
+                ctxG.fillText( "X"+i, G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
+            }
+    
+            ctxG.beginPath();
+            ctxG.strokeStyle = setting.guide_lines.solid;
+            for( i=1; i<g.length; i++ ){
+                ctxG.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
+                ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
+            }
+            ctxG.stroke();
+    
+            ctxG.setLineDash([4, 2]);
+            ctxG.beginPath();
+            ctxG.strokeStyle = setting.guide_lines.dashed;
+            // ctxG.strokeStyle = 2;
+            for( i=1; i<g.length; i++) {
+                ctxG.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
+                ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
+            }
+            ctxG.stroke();
+            ctxG.setLineDash([0, 0]);
+
         }
-        ctxG.stroke();
-        ctxG.setLineDash([0, 0]);
 	}
 
     // Writings
@@ -125,7 +150,7 @@ class Newton{
 		link += '&x=['+this.x[0]+']';
 		link += '&tol='+this.tol;
 		// c_log(link);
-		document.getElementById('viewLink').innerHTML = "<a class='' href='/simulator/stepbystepguide/index.html"+link+"'>View Step-by-Step</a>";
+		document.getElementById('viewLink').innerHTML = "<a class='' href='/simulator/stepbystepguide"+link+"'>View Step-by-Step</a>";
 	}
 	listTable(){
         let str =	"";
@@ -158,6 +183,28 @@ class Newton{
 	writeResult(){
 		document.getElementById("result").innerHTML = "x = "+(this.result)+' ≈ '+Math.round(this.result);
 	}
+    writeCriterias(){
+		
+		urlParams = parseURLParams(document.URL);
+		let up = urlParams;
+			up.x = up.x.toString();
+			up.x = up.x.replace('[','').replace(']','');
+			up.x = up.x.split(',');
+            
+		var method; 
+		switch( parseInt(up.m) ){
+			case 1: method = "Bisection"; 
+				break;
+			case 2: method = "Secant"; 
+				break;
+			case 3: method = "Newton"; 
+				break;
+		}
+		document.getElementById("writeMethod").innerHTML = method+' Method';
+		document.getElementById("writeFunc").innerHTML = up.f;
+		document.getElementById("writeCriteria").innerHTML = "[ x1 = <t class='t-bold'>"+up.x[0]+"</t> ]";
+		document.getElementById("writeTolerance").innerHTML = up.tol;
+    }
 
     // Trigger Handling
     fieldCritX1(){
@@ -204,14 +251,15 @@ class Newton{
     
 
 	fieldStep(){
-		let B = this,
+		let N = this,
 			input = $('#fieldStep');
-		// B.G.graphCenter( root, (a-b)/2 );
+		// N.G.graphCenter( root, (a-b)/2 );
 
 		input.change( function (e) {
 			if( input.val()!='' ){
-				B.tableResultStep()
-				B.G.refreshCanvas();
+				N.tableResultStep()
+				// N.iteration();
+				N.G.refreshCanvas();
 			}else{
 				// c_log("missing step");
 			}
@@ -243,7 +291,7 @@ class Newton{
 		for(i = 1; i < row; i++) {
 			
 			str += "<tr>";
-			str += "<td class='t_cent'>"+ (i) +"</td>";
+			str += "<td class='t-cent'>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
 				str += "<td> "+cleanMathRound(itm)+ "</td>";
 			});
@@ -251,7 +299,7 @@ class Newton{
 		}
 		if(i == row && i<this.tableItr.length){
 			str += "<tr>";
-			str += "<td class='t_cent'>"+ (i) +"</td>";
+			str += "<td class='t-cent'>"+ (i) +"</td>";
 			str += "<td> "+cleanMathRound(this.tableItr[i][0])+ "</td>";
 			str += "<td> "+cleanMathRound(this.tableItr[i][1])+ "</td>";
 			str += "</tr>";

@@ -1,7 +1,7 @@
 <?=heads("Settings")?>
 
 <header>
-    <div class='cent pad marg t_cent'>
+    <div class='cent pad marg t-cent'>
         <h1>
             SETTINGS
         </h1>
@@ -23,7 +23,7 @@
                             <?=listOptionColors()?>
                         </select>
                     </td>
-                <tr>
+                </tr>
             </table>
         </div>
         <div class='item d-small pad marg'>
@@ -39,7 +39,7 @@
                         </select>
                     </td>
                     <td id="color-indicator"></td>
-                <tr>
+                </tr>
                 <tr>
                     <td>Line 10's</td>
                     <td colspan='2'>
@@ -47,7 +47,7 @@
                             <?=listOptionColors()?>
                         </select>
                     </td>
-                <tr>
+                </tr>
                 <tr>
                     <td>Line Axis</td>
                     <td colspan='2'>
@@ -55,18 +55,19 @@
                             <?=listOptionColors()?>
                         </select>
                     </td>
-                <tr>
+                </tr>
                 <tr>
                     <td>Grid Numbering</td>
                     <td colspan='2'>
                         <select class="sel-1" id="grid_num">
                             <option>Disable</option>
+                            <option>Moderate</option>
                             <option>Integer</option>
                             <option>Even</option>
                             <option>Odd</option>
                         </select>
                     </td>
-                <tr>
+                </tr>
             </table>
 
         </div>
@@ -82,12 +83,9 @@
                         <select class="sel-1" id="point_shape">
                             <option value="circle">◯</option>
                             <option value="axe">⨉</option>
-                            <option value="arrow">ↆ</option>
-                            <option value="triangle">▲</option>
-                            <option value="square">▢</option>
                         </select>
                     </td>
-                <tr>
+                </tr>
                 <tr>
                     <td>Pointer Size</td>
                     <td colspan='2'>
@@ -96,9 +94,14 @@
                             <option value="3">3</option>
                             <option value="4">4</option>
                             <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
                         </select>
                     </td>
-                <tr>
+                </tr>
                 <tr>
                     <td>Pointer Color</td>
                     <td colspan='2'>
@@ -106,15 +109,26 @@
                             <?=listOptionColors()?>
                         </select>
                     </td>
-                <tr>
+                </tr>
                 <tr>
                     <td>Coordinates Color</td>
                     <td colspan='2'>
-                        <select class="sel-1" id="point_coords">
+                        <select class="sel-1" id="point_coords_color">
                             <?=listOptionColors()?>
                         </select>
                     </td>
+                </tr>
                 <tr>
+                    <td>Coordinates Font Size</td>
+                    <td colspan='2'>
+                        <select class="sel-1" id="point_coords_size">
+                            <option>12</option>
+                            <option>14</option>
+                            <option>16</option>
+                            <option>18</option>
+                        </select>
+                    </td>
+                </tr>
             </table>
 
         </div>
@@ -130,7 +144,7 @@
                             <?=listOptionColors()?>
                         </select>
                     </td>
-                <tr>
+                </tr>
                 <tr>
                     <td>Dashed Line Color</td>
                     <td colspan='2'>
@@ -138,7 +152,7 @@
                             <?=listOptionColors()?>
                         </select>
                     </td>
-                <tr>
+                </tr>
                 <tr>
                     <td>Marker Color</td>
                     <td colspan='2'>
@@ -146,7 +160,7 @@
                             <?=listOptionColors()?>
                         </select>
                     </td>
-                <tr>
+                </tr>
             </table>
 
         </div>
@@ -167,7 +181,7 @@
                             <option value="12">12</option>
                         </select>
                     </td>
-                <tr>
+                </tr>
             </table>
 
         </div>

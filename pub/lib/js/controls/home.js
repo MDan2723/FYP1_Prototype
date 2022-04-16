@@ -8,9 +8,9 @@ class Home{
         // H.sim_input = document.getElementById("sim_input");
         // console.log(H.sim_input);
 
-        H.criterias = ["<input id='sim_x1' class='in1' type='number' name='x' placeholder='start, a'><input id='sim_x2' class='in1' type='number' name='x' placeholder='end, b'>",
-                        "<input id='sim_x1' class='in1' type='number' name='x' placeholder='start, x1'><input id='sim_x2' class='in1' type='number' name='x' placeholder='follow, x2'>",
-                        "<input id='sim_x1' class='in1' type='number' name='x' placeholder='start, x1'>" ];
+        H.criterias = ["<input id='sim_x1' class='in1 criteria' type='number' name='x' placeholder='start, a'><input id='sim_x2' class='in1 criteria' type='number' name='x' placeholder='end, b'>",
+                        "<input id='sim_x2' class='in1 criteria' type='number' name='x' placeholder='start, x1'><input id='sim_x1' class='in1 criteria' type='number' name='x' placeholder='follow, x2'>",
+                        "<input id='sim_x1' class='in1 criteria' type='number' name='x' placeholder='start, x1'>" ];
         H.criteria.innerHTML = H.criterias[0];
     }
 

@@ -12,7 +12,7 @@
 
 <body class="main-body">
     
-	<div class="cent pad marg f-cent t_cent">
+	<div class="cent pad marg f-cent t-cent">
 		<main class="">
 			<div class="">
                 <hr>

@@ -1,10 +1,11 @@
 .form-sim{
     padding:10px;
     margin:10px;
-    background-color:lightGrey;
-    border: 1px solid Grey;
+    background-color: #CCC5B9;
+    border-style: none;
     border-radius:5px;
 }
+/* ---------------- input ---------------- */
 .in1{
     height:2em;
     width:15em;
@@ -12,29 +13,35 @@
     padding:0px;
     margin: 3px 0px 3px 0px;
 
-    background-color:lightGrey;
-    border: 1px solid Grey;
-    border-radius:20px;
+    background-color:#FFFCF2;
+    border: 1px solid #403D39;
+    border-radius:10px;
 
     text-align:center;
-    color:black;
+    color: #252422;
+}
+.in1:hover::placeholder {
+    color: #FFFCF2;
 }
 .in1:hover{
     transition:0.25s;
-    background-color:#FFFCF2;
-    border: 1px solid Grey;
+    color: #FFFCF2;
+    background-color:#EB5E28;
+    border: 1px solid #EB5E28;
 }
 .in1:focus{
-    background-color:#FFFCF2;
-    border: 1px solid Grey;
+    background-color:#EB5E28;
+    border: 1px solid #252422;
+    color:#FFFCF2;
 }
-/*
-.clr::-webkit-outer-spin-button,
-.clr::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.in1:focus::placeholder {
+    color: #FFFCF2;
 }
-*/
+
+.in1.criteria{
+    width:100px;
+}
+
 
 
 /* ---------- INPUT:SELECT ---------- */

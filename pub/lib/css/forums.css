@@ -2,33 +2,50 @@ a {
     text-decoration: none;
     color: black;
 }
-.forum ol li{
-    margin-left: 30px;
-}
+
 p {
     margin: 5px 0;
 }
 
 .top-bar {
-    background-color: skyblue;
+    background-color: #CCC5B9;
     padding: 0 40px;
 }
 
-textarea {
-    width: 80%;
+.forum-textarea {
     height: 80px;
+    width:100%;
+    max-width:100%;
 }
-button {
+.forum-btn {
     display: block;
-    margin: 10px 0;
+
+    height:2em;
+    width:15em;
+
+    padding:0px;
+    margin: 3px 0px 3px 0px;
+
+    background-color:#403D39;
+    border: none;
+    border-radius:10px;
+
+    text-align:center;
+    color: #FFFCF2;
+}
+.forum-btn:hover {
+    background-color: #EB5E28;
+    border: none;
+    color: #FFFCF2;
 }
 
 .main {
-    background-color: #F6F6EF;
+    background-color: #CCC5B9;
     padding: 10px 40px;
+    border-radius: 12px;
 }
 .comments {
-    margin: 40px 0;
+    margin: 10px 0;
 }
 .comment {
     margin: 10px 0;
@@ -39,7 +56,6 @@ button {
 }
 .bottom, .top-comment {
     display: flex;
-    color: grey;
     font-size: 12px;
 }
 .timestamp {
@@ -47,4 +63,8 @@ button {
 }
 .comment-ts {
     padding-left: 10px;
+}
+
+.btn{
+    text-decoration: none;
 }

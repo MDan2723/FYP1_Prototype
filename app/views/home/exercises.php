@@ -2,7 +2,7 @@
 <?=heads("Exercises")?>
 
 <header>
-    <div class='cent pad marg t_cent'>
+    <div class='cent pad marg t-cent'>
         <h1>EXERCISES</h1>
     </div>
     <?php navHeader(2); ?>
@@ -15,7 +15,7 @@
         <div class='desc'>
             <h3>AVAILABLE EXERCISES</h3>
             <hr>
-            <?=exercisesTable()?>
+            <?=exerciseList()?>
         </div>
 
     </div>

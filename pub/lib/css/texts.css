@@ -1,12 +1,23 @@
 a{
 	text-decoration: none;
-	color:black;
+	color:none;
 }
 
-.t_left{ text-align:left; }
-.t_right{ text-align:right; }
-.t_cent{ text-align:center; }
+.t-left{ text-align:left; }
+.t-right{ text-align:right; }
+.t-cent{ text-align:center; }
 
-.txt_bold{
-	font-weight:bold
+.t-s18{ font-size:18px; }
+.t-s42{ font-size:42px; }
+.t-bold{ font-weight:bold }
+
+.t-shadow{
+	text-shadow: 0px 0px 20px #252422;
 }
+
+.t-white{ color:#FFFCF2; }
+.t-grey{ color:#CCC5B9; }
+.t-active{ color:#EB5E28; }
+
+
+.a-white:hover{ color:#FFFCF2; }

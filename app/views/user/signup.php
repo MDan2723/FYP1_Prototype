@@ -6,8 +6,8 @@
 ?>
 <?=heads("Signup")?>
 
-<body>
-	<div class="cent pad marg f-cent t_cent">
+<body class='v-cent'>
+	<div class="cent pad marg f-cent t-cent">
 		<main class="">
 			<div class="">
 				<?php
@@ -30,6 +30,8 @@
 							<br><input type='password' name='pass-repeat' placeholder='Repeat Password' required/>
 							
 							<br><input type='submit' name='submit' value='signup'/>
+							<br>
+							<br>
 						<?php
 							if($data!=null){
 								echo "<p>";

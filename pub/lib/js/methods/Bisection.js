@@ -13,8 +13,11 @@ class Bisection{
 		// c_log("Bisection ready");
 		// c_log(this);
 
-		document.getElementById("methodName").innerHTML = "Method: Bisection";
-		document.getElementById("inputCrit").innerHTML = " Criteria <br> a: <input id='fieldA' type='number' /><br> b: <input id='fieldB' type='number' />";
+		if(document.getElementById("methodName")){
+			document.getElementById("methodName").innerHTML = "Method: Bisection";
+			document.getElementById("inputCrit").innerHTML = " Criteria <br> a: <input id='fieldA' type='number' /><br> b: <input id='fieldB' type='number' />";
+		}
+
 	}
 
 	iteration(){
@@ -32,10 +35,11 @@ class Bisection{
 
 		this.guide = [];
 		this.tableItr = [];
-
+		let errorMessage = document.getElementById('error_message');
 		
 		if(root.length==0){
 			// c_log("no root detected");
+			errorMessage.innerHTML = "Error; No root detected.<hr>";
 		}
 		else{
 			if(root.length>1){
@@ -43,8 +47,11 @@ class Bisection{
 				// c_log(root);
 				
 				// root = findNearestRoot(root,a);
+				errorMessage.innerHTML = "Error; More than one root detected.<hr>";
 			}else{
 				// c_log(farthestDistance(root,a,b));
+				if(errorMessage)
+				errorMessage.innerHTML = "";
 				this.G.graphCenter( root, farthestDistance(root,a,b) );
 				
 				// c_log('available root = '+root);
@@ -105,11 +112,11 @@ class Bisection{
 	}
 
 	drawGuides(){
-		let i = 1;
-		let g = this.guide;
-		let stop = g.length;
 		const	G = this.G,
 				ctxG = G.ctxGraph;
+		let i = 1,
+			g = this.guide,
+			stop = g.length;
 
 		let fS = document.getElementById("fieldStep");
 		if( fS != null ){
@@ -199,26 +206,44 @@ class Bisection{
 		document.getElementById("result").innerHTML = "x = "+(this.result)+' ≈ '+Math.round(this.result);
 	}
 	writeCriterias(){
-		// c_log(urlParams);
-		// document.getElementById("").innerHTML = ;
-		document.getElementById("fieldFunc").innerHTML = urlParams.f;
-		document.getElementById("inputCrit").innerHTML = "[ a = <t class='txt_bold'>"+urlParams.a+"</t>, b = <t class='txt_bold'>"+urlParams.b+"</t> ]";
-		document.getElementById("fieldTol").innerHTML = urlParams.tol;
+
+		urlParams = parseURLParams(document.URL);
+		let up = urlParams;
+			up.x = up.x.toString();
+			up.x = up.x.replace('[','').replace(']','');
+			up.x = up.x.split(',');
+		c_log(up);
+		var method; 
+		switch( parseInt(up.m) ){
+			case 1: method = "Bisection"; 
+				break;
+			case 2: method = "Secant"; 
+				break;
+			case 3: method = "Newton"; 
+				break;
+		}
+		document.getElementById("writeMethod").innerHTML = method+' Method';
+		document.getElementById("writeFunc").innerHTML = up.f;
+		document.getElementById("writeCriteria").innerHTML = "[ a = <t class='t-bold'>"+up.x[0]+"</t>, b = <t class='t-bold'>"+up.x[1]+"</t> ]";
+		document.getElementById("writeTolerance").innerHTML = up.tol;
 	}
 
 	// Trigger Handling
 	fieldStartCrit(){
-		var input = $('#fieldA');
 		const B = this;
+		var inputA = $('#fieldA');
+		var inputB = document.getElementById('fieldB');
+		
+		inputB.min = B.a+1;
+		inputA.val(B.a);
 
-		input.val(B.a);
-
-		input.change( function (e) {
+		inputA.change( function (e) {
 			// c_log(this.a,input.val());
-			if( input.val()!='' ){
-				B.a = parseFloat(input.val());
+			if( inputA.val()!='' ){
+				B.a = parseFloat(inputA.val());
 				B.iteration();
 				B.G.refreshCanvas();
+				inputB.min = parseInt(inputA.val())+1;
 
 			}else{
 				// c_log("missing a");
@@ -226,18 +251,20 @@ class Bisection{
 		});
 	}
 	fieldEndCrit(){
-		var input = $('#fieldB');
 		const B = this;
+		var inputB = $('#fieldB');
+		var inputA = document.getElementById('fieldA');
+		
+		inputA.max = B.b-1;
+		inputB.val(B.b);
 
-		input.val(B.b);
-
-		input.change( function (e) {
+		inputB.change( function (e) {
 			// c_log(this.a,input.val());
-			if( input.val()!='' ){
-				B.b = parseFloat(input.val());
+			if( inputB.val()!='' ){
+				B.b = parseFloat(inputB.val());
 				B.iteration();
 				B.G.refreshCanvas();
-
+				inputA.max = parseInt(inputB.val())-1;
 			}else{
 				// c_log("missing b");
 			}
@@ -283,6 +310,7 @@ class Bisection{
 		input.change( function (e) {
 			if( input.val()!='' ){
 				B.tableResultStep()
+				B.iteration();
 				B.G.refreshCanvas();
 			}else{
 				// c_log("missing step");
@@ -305,7 +333,7 @@ class Bisection{
 		for(i = 1; i < row; i++) {
 			
 			str += "<tr>";
-			str += "<td class='t_cent'>"+ (i) +"</td>";
+			str += "<td class='t-cent'>"+ (i) +"</td>";
 			this.tableItr[i].forEach(itm=>{
 				str += "<td> "+cleanMathRound(itm)+ "</td>";
 			});
@@ -313,7 +341,7 @@ class Bisection{
 		}
 		if(i == row && i<this.tableItr.length){
 			str += "<tr>";
-			str += "<td class='t_cent'>"+ (i) +"</td>";
+			str += "<td class='t-cent'>"+ (i) +"</td>";
 			str += "<td> "+cleanMathRound(this.tableItr[i][0])+ "</td>";
 			str += "<td> "+cleanMathRound(this.tableItr[i][1])+ "</td>";
 			str += "</tr>";

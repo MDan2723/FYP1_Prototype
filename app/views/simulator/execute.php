@@ -1,4 +1,4 @@
-<?=heads("Graphing Calculator")?>
+<?=heads("Simulator")?>
 <head>
 	<meta charset=utf-8 />
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/0.15.0/math.min.js"></script>
@@ -8,11 +8,6 @@
 </head>
 
 <header>
-	<div class='cent pad marg t_cent'>
-		<h1>
-			RESULT PAGE
-		</h1>
-	</div>
 	<?php navHeader(6); ?>
 </header>
 
@@ -20,16 +15,14 @@
 
 	<div class='cent pad marg'>
 		<div class=''>
-		
-			
-			<h3 class='t_cent'>Graph plot/Guides</h3>
 			<div class='pad marg g-cent'>
 				<div id="graph" style="position: relative;">
 					<canvas id="graphCanvas" width="500" height="500" style="position: absolute; z-index: 0;"></canvas>
 					<canvas id="gPointer" width="500" height="500" style="position: absolute; z-index: 1;"></canvas>
 				</div>
 				<div id="graphForm">
-					<div class="t_cent">
+					<div class="t-active" id="error_message"></div>
+					<div class="t-cent">
 						<h3 id="methodName"></h3>
 					</div>
 					<div id="inputFunc" class="pad marg">
@@ -44,7 +37,7 @@
 					<div class="pad marg">
 						Tolerance
 						<br>
-						<input id="fieldTol" type='number' min='0.000001' step='0.000001' />
+						<input id="fieldTol" type='number' min='0.000000000001' step='0.000000000001' />
 					</div>
 					<hr>
 					<div class="pad marg" id="viewLink"></div>
@@ -52,7 +45,7 @@
 			</div>
 			<hr>
 			<div class='pad marg'>
-				<h3 class='t_cent'>Iteration Table</h3>
+				<h3 class='t-cent'>Iteration Table</h3>
 				<div class='g-cent'>
 					<table id="tableIter" class="tbl1">
 						

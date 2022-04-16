@@ -30,10 +30,21 @@ ul{
 
 
 /* .forum ol{} */
-/* .forum ol li{} */
-.forum ol li:nth-child(even) {
-    background-color: #f2f2f2;
+.list ol li{
+    margin-left: 30px;
 }
+.list ol li{
+    padding: 5px 10px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+.list ol li:hover {
+    background-color: #EB5E28;
+}
+.list ol li:hover > a{
+    color: #FFFCF2;
+}
+
 
 .bottom p{
     margin: 5px 10px;

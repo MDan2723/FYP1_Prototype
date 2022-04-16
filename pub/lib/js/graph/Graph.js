@@ -57,98 +57,202 @@ class Graph{
 				gS = gD.size,
 				gW = gD.mathWindow;
 		let	x, y, perX, perY,
-			nX =Math.round(( gS )*100000)/100000,
-			nY =Math.round(( gS )*100000)/100000;
+			newSize = cleanRound(gS,5);
 
 		ctxG.beginPath();
 		ctxG.strokeStyle = setting.grid.line_1;
 		
-		if(  nX >2 ){ gridding(1); }
-		else if(  nX ==2 || nX >0.2 ){ gridding(10); }
-		else if(  nX ==0.2 || nX >0.02 ){ gridding(100); }
-		else if(  nX ==0.02 || nX >0.002 ){ gridding(1000); }
-		else if(  nX ==0.002 || nX >0.0002 ){ gridding(10000); }
-		else if(  nX ==0.0002 || nX >0.00002 ){ gridding(100000); }
+		if(  newSize >2 ){ gridding(1); }
+		else if(  newSize ==2 || newSize >0.2 ){ gridding(10); }
+		else if(  newSize ==0.2 || newSize >0.02 ){ gridding(100); }
+		else if(  newSize ==0.02 || newSize >0.002 ){ gridding(1000); }
+		else if(  newSize ==0.002 || newSize >0.0002 ){ gridding(10000); }
+		else if(  newSize ==0.0002 || newSize >0.00002 ){ gridding(100000); }
 	
 		function gridding(scale){
-			nX*=scale;
-			nY*=scale;
-			var newMinX = gW.minX*scale,
-				newMinY = gW.minY*scale;
-	
-			// x-axis
-			for(var i=0; i<=nX; i++){
-	
-				perX = i/nX;
-				x = perX * cnvG.width;
+			newSize*=scale;
+			let newMinX = Math.round(gW.minX*scale),
+				newMinY = Math.round(gW.minY*scale);
+			
+			for(let j=0;j<3;j++){
+				
+				// x-axis
+				for(let i=0; i<=newSize; i++){
 		
-				// console.log((i+newMinX)+'	 :	'+x);
+					perX = i/newSize;
+					x = perX * cnvG.width;
+			
+					// console.log((i+newMinX)+'	 :	'+x);
+					switch(j){
+						case 0:
+							if( Math.ceil( (i + newMinX)%10 ) != '0' && Math.round( i + newMinX ) != '0' ){
+								ctxG.moveTo( x, 0 );
+								ctxG.lineTo( x, cnvG.height );
+							}
+							break;
+						case 1:
+							if( Math.ceil( (i + newMinX)%10 ) == '0' && Math.round( i + newMinX ) != '0' ){				
+								ctxG.stroke();
+					
+								ctxG.beginPath();
+								ctxG.strokeStyle = setting.grid.line_10;
+								ctxG.moveTo( x, 0 );
+								ctxG.lineTo( x, cnvG.height );
+								ctxG.stroke();
+					
+								ctxG.beginPath();
+								ctxG.strokeStyle = setting.grid.line_1;
+							}
+							break;
+						case 2:
+							if( Math.round( i + newMinX ) == '0' ){
+								ctxG.stroke();
+					
+								// drawing y-axis
+								ctxG.beginPath();
+								ctxG.strokeStyle = setting.grid.line_axis;
+								ctxG.moveTo( x, 0 );
+								ctxG.lineTo( x, cnvG.height );
+								ctxG.stroke();
 		
-				if( Math.round( i + newMinX ) == '0' ){
-					ctxG.stroke();
+								// numbering y-axis
+								numbering('y');
 		
-					ctxG.beginPath();
-					ctxG.strokeStyle = setting.grid.line_axis;
-					ctxG.moveTo( x, 0 );
-					ctxG.lineTo( x, cnvG.height );
-					ctxG.stroke();
-		
-					ctxG.beginPath();
-					ctxG.strokeStyle = setting.grid.line_1;
+								// reset
+								ctxG.beginPath();
+								ctxG.strokeStyle = setting.grid.line_1;
+							}
+							break;
+					}
+					
+			
 				}
-				else if( Math.ceil( (i + newMinX)%10 ) == '0' ){				
-					ctxG.stroke();
+			
+				// y-axis
+				for(let i=0; i<=newSize; i++){
+					perY = i/newSize;
+					y = (1-perY) * cnvG.height;
+			
+					// console.log((i+newMinY)+' :	'+y);
+			
+					switch(j){
+						case 0:
+							if( Math.ceil( (i + newMinY)%10 ) != '0' && Math.round( i + newMinY ) != '0' ){
+								ctxG.moveTo( 0, y);
+								ctxG.lineTo( cnvG.width, y);
+							}
+							break;
+						case 1:
+							if( Math.ceil( (i + newMinY)%10 ) == '0' && Math.round( i + newMinY ) != '0' ){
+								ctxG.stroke();
+					
+								ctxG.beginPath();
+								ctxG.strokeStyle = setting.grid.line_10;
+								ctxG.moveTo( 0, y);
+								ctxG.lineTo( cnvG.width, y);
+								ctxG.stroke();
+					
+								ctxG.beginPath();
+								ctxG.strokeStyle = setting.grid.line_1;
+							}
+							break;
+						case 2:
+							if( Math.round( i + newMinY ) == '0' ){
+								ctxG.stroke();
+					
+								ctxG.beginPath();
+								ctxG.strokeStyle = setting.grid.line_axis;
+								ctxG.moveTo( 0, y);
+								ctxG.lineTo( cnvG.width, y);
+								ctxG.stroke();
 		
-					ctxG.beginPath();
-					ctxG.strokeStyle = setting.grid.line_10;
-					ctxG.moveTo( x, 0 );
-					ctxG.lineTo( x, cnvG.height );
-					ctxG.stroke();
-		
-					ctxG.beginPath();
-					ctxG.strokeStyle = setting.grid.line_1;
+								// numbering x-axis
+								numbering('x');
+								
+								ctxG.beginPath();
+								ctxG.strokeStyle = setting.grid.line_1;
+							}
+							break;
+					}
 				}
-				else{
-					ctxG.moveTo( x, 0 );
-					ctxG.lineTo( x, cnvG.height );
-				}
-		
 			}
-		
-			// y-axis
-			for(var i=0; i<=nY; i++){
-				perY = i/nY;
-				y = (1-perY) * cnvG.height;
-		
-				// console.log((i+newMinY)+' :	'+y);
-		
-				if( Math.round( i + newMinY ) == '0' ){
-					ctxG.stroke();
-		
-					ctxG.beginPath();
-					ctxG.strokeStyle = setting.grid.line_axis;
-					ctxG.moveTo( 0, y);
-					ctxG.lineTo( cnvG.width, y);
-					ctxG.stroke();
-		
-					ctxG.beginPath();
-					ctxG.strokeStyle = setting.grid.line_1;
-				}
-				else if( Math.ceil( (i + newMinY)%10 ) == '0' ){
-					ctxG.stroke();
-		
-					ctxG.beginPath();
-					ctxG.strokeStyle = setting.grid.line_10;
-					ctxG.moveTo( 0, y);
-					ctxG.lineTo( cnvG.width, y);
-					ctxG.stroke();
-		
-					ctxG.beginPath();
-					ctxG.strokeStyle = setting.grid.line_1;
-				}
-				else{
-					ctxG.moveTo( 0, y);
-					ctxG.lineTo( cnvG.width, y);
+			
+			function numbering(xy){
+				let noteX, noteY;
+				switch(xy){
+					case 'x':	// numbering for X-axis
+						for(let j=0; j<=newSize; j++){
+							perX = j/newSize;
+							x = perX * cnvG.width;
+							noteX = Math.round(j+newMinX)/scale;
+							switch(setting.grid.grid_number){
+								case "Disable":
+									break;
+								case "Moderate":
+									if( gD.size>10 ){
+										if( (noteX)%5==0 ) writeX(j);
+									}else{
+										if( (noteX)%1==0 && scale==1 ) writeX(j);
+										else if( (noteX*scale)%5==0 ) writeX(j);
+									}
+									break;
+								case "Integer":
+									if( noteX%1==0 ){ writeX(j);}
+									break;
+								case "Odd":
+									if( noteX%2!=0 ){ writeX(j); }
+									break;
+								case "Even":
+									if( noteX%2==0 ){ writeX(j); }
+									break;
+								default: writeX(j);
+									break;
+							}
+						}
+						function writeX(j){
+							ctxG.fillStyle = setting.grid.line_axis;
+							ctxG.font = "12px Arial";
+							ctxG.fillText( (j+newMinX)/scale, x+2, y+12 );
+						}
+
+						break;
+
+					case 'y':	// numbering for Y-axis
+						for(let j=0; j<=newSize; j++){
+							perY = j/newSize;
+							y = (1-perY) * cnvG.height;
+							noteY = (j+newMinY)/scale;
+							switch(setting.grid.grid_number){
+								case "Disable":
+									break;
+								case "Moderate":
+									if( gD.size>10 ){
+										if( (noteY)%5==0 ) writeY(j);
+									}else{
+										if( (noteY)%1==0 && scale==1 ) writeY(j);
+										else if( (noteY*scale)%5==0 ) writeY(j);
+									}
+									break;
+								case "Integer":
+									if( noteY%1==0 ){ writeY(j); }
+									break;
+								case "Odd":
+									if( noteY%2!=0 ){ writeY(j); }
+									break;
+								case "Even":
+									if( noteY%2==0 ){ writeY(j); }
+									break;
+								default:
+									writeY(j);
+									break;
+							}
+						}
+						function writeY(j){
+							ctxG.fillStyle = setting.grid.line_axis;
+							ctxG.font = "12px Arial";
+							ctxG.fillText( (j+newMinY)/scale, x+2, y+12 );
+						}
+						break;
 				}
 			}
 		}
@@ -160,14 +264,14 @@ class Graph{
 				gD = this.graphData,
 				gW = gD.mathWindow,
 				n = this.n;
-		var	x, y, i,
+		let	x, y, i,
 			perX, perY,
 			mathX, mathY;
 	
 		ctxG.beginPath();
 		ctxG.strokeStyle = setting.graph.curve;
 	
-		for(var i=0; i<n; i++){
+		for(let i=0; i<n; i++){
 			perX = i/(n-1);
 	
 			mathX = perX * (gW.maxX-gW.minX) + gW.minX;
@@ -228,11 +332,11 @@ class Graph{
 
 	// Magnification Handling
 	magnification(e){
-		var G = this,
+		let G = this,
 			pCnv = G.cnvPointr;
 
 		pCnv.addEventListener("wheel", function(e){
-			var	gS = G.graphData.size;
+			let	gS = G.graphData.size;
 
 			e.preventDefault();
 			if( e.deltaY>0 ){ // zooming out
@@ -266,13 +370,29 @@ class Graph{
 
 	}
 	magnify(m){
-		const gD = this.graphData;
+		const	gD = this.graphData,
+				gS = gD.size;
 
 		gD.size += m*2;
-		gD.size = (Math.round(gD.size*100000))/100000;
+		gD.size = cleanRound(gD.size,7);
 		
+		// if(gS>20){ updateCentPoint(0); }
+		if(m>0){
+			if(gS>1){ updateCentPoint(0); }
+			else if(gS==1 || gS>0.1){ updateCentPoint(1); }
+			else if(gS==0.1 || gS>0.01){ updateCentPoint(2); }
+			else if(gS==0.01 || gS>0.001){ updateCentPoint(3); }
+			else if(gS==0.001 || gS>0.0001){ updateCentPoint(4); }
+			else if(gS==0.0001 || gS>0.00001){ updateCentPoint(5); }
+		}
+
+		function updateCentPoint(dp){
+			gD.centPoint.x = cleanRound(gD.centPoint.x,dp);
+			gD.centPoint.y = cleanRound(gD.centPoint.y,dp);
+		}
 		this.updateMathWin();
 		this.refreshCanvas();
+		// c_log(gD.size+": "+gD.centPoint.x+","+gD.centPoint.y);
 	}
 	
 	// Move Handling
@@ -298,13 +418,19 @@ class Graph{
 	moveGraph(event) {
 		event.preventDefault();
 		
-		const	gL = this.graphData.centPoint;
-		let ms = 1;
+		const	gD = this.graphData,
+				gL = gD.centPoint,
+				gS = gD.size;
+		let ms;
 
-		// if(mag>2){ ms = 1; }
-		// else if(mag>0.2){ ms = 0.1; }
-		// else if(mag>0.02){ ms = 0.01;	}
-		// else{ ms = 1; }
+		if(gS>20){ ms = 5; }
+		else if(gS>2){ ms = 1; }
+		else if(gS>0.2){ ms = 0.1;	}
+		else if(gS>0.02){ ms = 0.01;	}
+		else if(gS>0.002){ ms = 0.001;	}
+		else if(gS>0.0002){ ms = 0.0001;	}
+		else if(gS>0.00002){ ms = 0.00001;	}
+		else{ ms = 1; }
 
 		switch (event.keyCode) {
 			case 37:	// left
@@ -332,7 +458,7 @@ class Graph{
 				point = G.pointer;
 
 		cnvP.onmousemove = function (e){
-			var rect = cnvP.getBoundingClientRect(),
+			let rect = cnvP.getBoundingClientRect(),
 				// coords = {
 				// 	x: e.clientX - rect.left,
 				// 	y: e.clientY - rect.top
@@ -345,22 +471,20 @@ class Graph{
 			ctxP.beginPath();
 			ctxP.strokeStyle = setting.pointer.color
 			ctxP.fillStyle = setting.pointer.color
+			ctxP.font = (parseInt(setting.pointer.size)*4)+"px Arial";
 			switch(setting.pointer.shape){
 				case "circle":
 					ctxP.arc( coorX, coorY, setting.pointer.size, 0, 2*Math.PI );
 					break;
 				case "axe":
-					ctxP.fillText( "⨉", coorX-6, coorY+5 );
+					let pointSize = parseInt(setting.pointer.size);
+					// ctxP.fillText( "⨉", coorX-6, coorY+5 );
+					ctxP.moveTo(coorX - pointSize, coorY - pointSize); ctxP.lineTo(coorX + pointSize, coorY + pointSize);
+					ctxP.moveTo(coorX + pointSize, coorY - pointSize); ctxP.lineTo(coorX - pointSize, coorY + pointSize);
 					break;
-				case "arrow":
-					ctxP.fillText( "ↆ", coorX-6, coorY );
-					break;
-				case "triangle":
-					ctxP.fillText( "▲", coorX-8, coorY+9 );
-					break;
-				case "square":
-					ctxP.fillText( "▢", coorX-6, coorY+5 );
-					break;
+				// case "square":
+				// 	ctxP.fillText( "▢", coorX-6, coorY+5 );
+				// 	break;
 				default:
 					ctxP.arc( coorX, coorY, setting.pointer.size, 0, 2*Math.PI );
 					break;
@@ -368,8 +492,9 @@ class Graph{
 
 
 			ctxP.stroke();
-			ctxP.fillStyle = setting.pointer.coords;
-			ctxP.fillText( "( "+point.mathX.toFixed(4)+", "+point.mathY.toFixed(4)+" )", 10, 20 );
+			ctxP.fillStyle = setting.pointer.coords.color;
+			ctxP.font = setting.pointer.coords.size+"px Arial";
+			ctxP.fillText( "( "+point.mathX.toFixed(setting.table_iteration.decimal_places)+", "+point.mathY.toFixed(setting.table_iteration.decimal_places)+" )", 10, 16+(setting.pointer.coords.size/4) );
 		}
 	}
 
@@ -378,7 +503,7 @@ class Graph{
 		const	cnvG = this.cnvGraph,
 				gW = this.graphData.mathWindow,
 				point = this.pointer;
-		var perX, perY, mathX, mathY;
+		let perX, perY, mathX, mathY;
 		
 		switch(from){
 			case 'coor':

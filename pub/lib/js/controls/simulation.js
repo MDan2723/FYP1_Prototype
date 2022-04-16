@@ -20,14 +20,14 @@ if(urlParams){
             var numSim = new Bisection( G, parseInt(up.x[0]), parseInt(up.x[1]), parseFloat(urlParams.tol), true );
             break;
         case 2:
-            var numSim = new Secant( G, parseInt(up.x[1]), parseInt(up.x[0]), 0.00001, true );
+            var numSim = new Secant( G, parseInt(up.x[1]), parseInt(up.x[0]), parseFloat(urlParams.tol), true );
             break;
         case 3:
-            var numSim = new Newton( G, parseInt(up.x[0]), 0.001, true );
+            var numSim = new Newton( G, parseInt(up.x[0]), parseFloat(urlParams.tol), true );
             break;
         default:
             c_log("running default");
-            var numSim = new Bisection( G, parseInt(up.x[0]), parseInt(up.x[1]), 0.001, true );
+            var numSim = new Bisection( G, parseInt(up.x[0]), parseInt(up.x[1]), parseFloat(urlParams.tol), true );
             break;
     }
 }

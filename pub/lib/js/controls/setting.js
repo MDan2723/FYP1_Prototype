@@ -11,11 +11,12 @@ selections[4]   = document.querySelector('#grid_num');
 selections[5]   = document.querySelector('#point_shape');
 selections[6]   = document.querySelector('#point_size');
 selections[7]   = document.querySelector('#point_color');
-selections[8]   = document.querySelector('#point_coords');
-selections[9]   = document.querySelector('#guide_solidLine');
-selections[10]   = document.querySelector('#guide_dashedLine');
-selections[11]  = document.querySelector('#guide_marker');
-selections[12]  = document.querySelector('#iter_decimalPlace');
+selections[8]   = document.querySelector('#point_coords_color');
+selections[9]   = document.querySelector('#point_coords_size');
+selections[10]   = document.querySelector('#guide_solidLine');
+selections[11]   = document.querySelector('#guide_dashedLine');
+selections[12]  = document.querySelector('#guide_marker');
+selections[13]  = document.querySelector('#iter_decimalPlace');
 
 function selectionEvents(){
     selections[0].addEventListener('change', function() {
@@ -51,23 +52,27 @@ function selectionEvents(){
         localStorage.setItem('setting', JSON.stringify(setting));
     });
     selections[8].addEventListener('change', function() {
-        setting.pointer.coords = selections[8].value;
+        setting.pointer.coords.color = selections[8].value;
         localStorage.setItem('setting', JSON.stringify(setting));
     });
     selections[9].addEventListener('change', function() {
-        setting.guide_lines.solid = selections[9].value;
+        setting.pointer.coords.size = selections[9].value;
         localStorage.setItem('setting', JSON.stringify(setting));
     });
     selections[10].addEventListener('change', function() {
-        setting.guide_lines.dashed = selections[10].value;
+        setting.guide_lines.solid = selections[10].value;
         localStorage.setItem('setting', JSON.stringify(setting));
     });
     selections[11].addEventListener('change', function() {
-        setting.guide_lines.marker = selections[11].value;
+        setting.guide_lines.dashed = selections[11].value;
         localStorage.setItem('setting', JSON.stringify(setting));
     });
     selections[12].addEventListener('change', function() {
-        setting.table_iteration.decimal_places = selections[12].value;
+        setting.guide_lines.marker = selections[12].value;
+        localStorage.setItem('setting', JSON.stringify(setting));
+    });
+    selections[13].addEventListener('change', function() {
+        setting.table_iteration.decimal_places = selections[13].value;
         localStorage.setItem('setting', JSON.stringify(setting));
     });
 
@@ -82,11 +87,12 @@ function updateSelector(){
     selections[5].value = setting.pointer.shape;
     selections[6].value = setting.pointer.size;
     selections[7].value = setting.pointer.color;
-    selections[8].value = setting.pointer.coords;
-    selections[9].value = setting.guide_lines.solid;
-    selections[10].value = setting.guide_lines.dashed;
-    selections[11].value = setting.guide_lines.marker;
-    selections[12].value = setting.table_iteration.decimal_places;
+    selections[8].value = setting.pointer.coords.color;
+    selections[9].value = setting.pointer.coords.size;
+    selections[10].value = setting.guide_lines.solid;
+    selections[11].value = setting.guide_lines.dashed;
+    selections[12].value = setting.guide_lines.marker;
+    selections[13].value = setting.table_iteration.decimal_places;
 }
 
 updateSelector();

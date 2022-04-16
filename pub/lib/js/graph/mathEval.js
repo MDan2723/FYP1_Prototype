@@ -34,8 +34,6 @@ function findRootExpr(tempExpr){
 			return rootFinder(expression);
 		}
 	}
-	// console.log(r);
-	// return parseInt((x.toString().split(',',1)).toString().split('[')[1]);
 }
 function rootFinder(expression){
 	var x = nerdamer.solve('0='+expression, 'x'),
@@ -59,13 +57,13 @@ function findRangeRoot(r,x1,x2){
 	var newR = [], i=0;
 	r.forEach(el=>{
 		if( el>x1 && el<x2 ){
-			console.log( x1+' -->', el, '<-- '+x2 );
+			// console.log( x1+' -->', el, '<-- '+x2 );
 			newR[i] = el;
 			i++;
 		}
 		else if(el==x1 || el==x2 ){
 			// ( el==x1 )? c_log( x1+' = '+ el):c_log( x2+' = '+ el);
-			console.log( 'root -->', el);
+			// console.log( 'root -->', el);
 			newR[i] = el;
 			i++;
 		}
@@ -89,4 +87,9 @@ function farthestDistance(root,x1,x2){
 		return Math.abs(root-x1);
 	else
 		return Math.abs(root-x2);
+}
+
+function cleanRound(value,decimalplace){
+	let temp = Math.pow(10,decimalplace);
+	return Math.round(value*temp)/temp;
 }

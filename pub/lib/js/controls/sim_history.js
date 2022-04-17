@@ -3,7 +3,8 @@ console.log("History-ing");
 var btn = document.querySelector('sim_link');
 btn.addEventListener('click', function() {
     console.log("saving sim");
-    var f = document.querySelector('in_func');
+    var f = document.querySelector('in_func').value,
+        f = f.replace(' ','');
     var m = document.querySelector('in_meth');
     var x1 = document.querySelector('in_x1');
     var x2 = document.querySelector('in_x2');
@@ -14,13 +15,13 @@ btn.addEventListener('click', function() {
     
 
     var sim = {
-        function: f.value,
+        function: f,
         method: m.value,
         x: x,
         tol: tol.value
     }
     // addSimHistory(comment);
     // txt.value = '';
-    setting.sim_history.push(sim);
-    localStorage.setItem('setting', JSON.stringify(setting));
+    // setting.sim_history.push(sim);
+    // localStorage.setItem('setting', JSON.stringify(setting));
 })

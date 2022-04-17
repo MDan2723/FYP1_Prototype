@@ -2,7 +2,7 @@
 	if(isset($_SESSION['user'])){
 		$user = unserialize($_SESSION['user']);
 	}else{
-		header("Location: ".BASE_URL."login");
+		header("Location: ".BASE_URL."user/login");
 		exit();
 	}
 	
@@ -10,7 +10,7 @@
     navHeader(1);
 ?>
 
-<body class="main-body">
+<body class="v-cent main-body">
     
 	<div class="cent pad marg f-cent t-cent">
 		<main class="">
@@ -33,4 +33,3 @@
 	</div>
     <?=scriptings()?>
 </body>
-<?=footers()?>

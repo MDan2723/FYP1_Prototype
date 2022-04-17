@@ -13,8 +13,8 @@
 
 <body class="main-body">
     
-    <div class='cent marg header-image t-v-cent t-cent'>
-        <h1 class="t-white t-shadow t-s42">
+    <div class='cent marg t-v-cent t-cent'>
+        <h1 class="t-s42">
             <i class='bx bx-chart' ></i>
             NUMERICAL SIMULATOR
         </h1>
@@ -61,7 +61,7 @@
             </div>
             <br>
             <div class=''>
-                <a id="simlink" href="<?=BASE_URL?>simulator/execute"><button class='in1' type='submit'>Execute</button></a>
+                <a id="simlink" href="<?=BASE_URL?>simulator/execute?m=1&f=((x+3)/4)^2-4&x=[4,7]&tol=0.0001"><button class='in1' type='submit'>Execute</button></a>
                 <!-- <input class='in1' type='reset'> -->
             </div>
         </div>

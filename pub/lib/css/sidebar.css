@@ -1,9 +1,10 @@
 
 .main-body{
     position: relative;
-    min-height: 100vh;
+    min-height: 98vh;
     width: 100%;
     /* overflow: hidden; */
+    overflow-x: hidden;
 }
 
 .sidebar{
@@ -32,12 +33,12 @@
     width: 100%;
     align-items: center;
     opacity: 0;
-    /* pointer-events: none; */
+    pointer-events: none;
     transition: all 0.5s ease;
 }
 .sidebar.active .logo-content .logo a{
     opacity: 1;
-    /* pointer-events: none; */
+    pointer-events:all;
 }
 .logo-content .logo a i{
     font-size: 28px;

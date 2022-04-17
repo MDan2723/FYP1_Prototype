@@ -17,12 +17,13 @@ function rtrn(){
 }
 
 if(isset($_POST['submit'])){
+	$DB = new Database();
 //	testData($_POST);
 	
 	switch( strtolower($_POST['submit']) ){
-		case "makeComment": $THREAD->makeComment();
+		case "post thread": $DB->makeThread();
 		    break;
-		case "addRating": $THREAD->addRating();
+		case "post comment": $DB->makeComment();
 		    break;
 		default: echo "no input made";
             break;

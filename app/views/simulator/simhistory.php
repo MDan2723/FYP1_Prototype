@@ -20,12 +20,11 @@
                     simHistoryList( $user->getData()['id'] );
                 }
                 else{
-                    echo "<a href='".BASE_URL."account/login'>Login or Sign up to use this feature.</a>";
+                    echo "<a href='".BASE_URL."user/login'>Login or Sign up to use this feature.</a>";
                 }
             ?>
 
         </div>
-
     </div>
     <?=scriptings();?>
 </body>

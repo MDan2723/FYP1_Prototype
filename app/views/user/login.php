@@ -7,7 +7,7 @@
 <?=heads("Login")?>
 
 <body class="v-cent">
-	<div class="cent pad marg f-cent t-cent">
+	<div class="cent-reg pad marg f-cent t-cent">
 
 		<main class="">
 			<div class="">
@@ -22,13 +22,13 @@
 					<br>
 					<?php
 						if($data!=null){
-							echo "<p>";
+							echo "<p class='t-error'>";
 							switch($data){
-								case 'sqlerror': echo "SQL ERROR:<br>please wait while the website is being updated";
+								case 'sqlerror': echo "SQL ERROR: please wait while the website is being updated";
 								break;
-								case 'wrongpwd': echo "PASSWORD ERROR:<br>please try again";
+								case 'wrongpwd': echo "PASSWORD ERROR: please try again";
 								break;
-								case 'nouser': echo "NO RECORDED NAME OR EMAIL:<br>please try a registered user name/email.";
+								case 'nouser': echo "NO RECORDED NAME OR EMAIL: please try a registered user name/email.";
 								break;
 								default:
 							

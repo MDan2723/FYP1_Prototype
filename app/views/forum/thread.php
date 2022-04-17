@@ -30,15 +30,27 @@
                     <p class="timestamp"> <?=$row["date"]?> </p>
                     <p class="comment-count">
                         <?php
-                        
                             echo $commentCount;
-                            if($commentCount==1)
-                                echo " comment";
-                            else
-                                echo " comments";
+                            if($commentCount==1) echo " comment";
+                            else echo " comments";
                         ?> 
                     </p>
-                    <p class="rating"> <?=rating('thread',$row["id"])?></p>
+                    <?php
+                        if(isset($_SESSION['user'])){
+                            ?>
+                            <p class="rating pointer" onclick="makeRating('thread','<?=$_GET['id']?>')"> 
+                                <?=showRating('thread',$row["id"])?>
+                            </p>
+                            <?php
+                        }
+                        else{
+                            ?>
+                            <p class="rating"> 
+                                <?=showRating('thread',$row["id"])?>
+                            </p>
+                            <?php
+                        }
+                    ?>
                 </div>
                 <hr>
                 <p class="description"> <?=$row["description"]?> </p>

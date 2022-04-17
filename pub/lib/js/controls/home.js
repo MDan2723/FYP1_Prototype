@@ -27,10 +27,14 @@ class Home{
 
     updateLink(){
         const H = this;
-        let x2;
+        let x2,
+            func = document.getElementById("sim_func").value;
+        func = func.replace(/\s/g,'');
+        document.getElementById("sim_func").value = func;
+
         H.simlink.href = "/simulator/execute?";
         H.simlink.href += "m="+document.getElementById("sim_method").value;
-        H.simlink.href += "&f="+document.getElementById("sim_func").value;
+        H.simlink.href += "&f="+func;
         if( x2 = document.getElementById("sim_x2") ){
             H.simlink.href += "&x=["+document.getElementById("sim_x1").value+ ","+ (x2.value) +"]";
         }else{

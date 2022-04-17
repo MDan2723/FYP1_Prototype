@@ -46,7 +46,7 @@
 						</div>
 
 						<div class=''>
-							<a id="simlink" href="<?=BASE_URL?>simulator/execute"><input type='button' class='in1' value='Simulate'><a>
+							<a id="simlink" href="<?=BASE_URL?>simulator/execute?m=1&f=((x+3)/4)^2-4&x=[4,7]&tol=0.0001"><input type='button' class='in1' value='Simulate'><a>
 						</div>
 					</div>
                 

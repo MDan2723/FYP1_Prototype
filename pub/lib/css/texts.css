@@ -18,6 +18,7 @@ a{
 .t-white{ color:#FFFCF2; }
 .t-grey{ color:#CCC5B9; }
 .t-active{ color:#EB5E28; }
+.t-error{ color:RED; }
 
 
 .a-white:hover{ color:#FFFCF2; }

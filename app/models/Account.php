@@ -39,9 +39,9 @@ class Account{
 						rtrn();
 					}
 				}
-				else{ go_to("login/wrongpwd"); }
+				else{ go_to("user/login/wrongpwd"); }
 			}
-			else{ go_to("login/nouser"); }
+			else{ go_to("user/login/nouser"); }
 		}
 	}
 	
@@ -55,31 +55,31 @@ class Account{
 		$db = new Database;
 		
 		if( empty($name) || empty($email) || empty($pass) || empty($passRepeat)){
-			go_to("signup/emptyfields");
+			go_to("user/signup/emptyfields");
 		}
 		else if(!filter_var($email, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9 ]*$/", $name)){
-			go_to("signup/invalidemailusername");
+			go_to("user/signup/invalidemailusername");
 		}
 		else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-			go_to("signup/invalidemail");
+			go_to("user/signup/invalidemail");
 		}
 		else if(!preg_match("/^[a-zA-Z0-9 ]*$/", $name)){
-			go_to("signup/invalidusername");
+			go_to("user/signup/invalidusername");
 		}
 		else if( $pass !== $passRepeat ){
-			go_to("signup/passwordcheck");
+			go_to("user/signup/passwordcheck");
 		}
 		else{
 			if(!$resultCheck = $db->readTbl("accounts","*","WHERE name = '$name' OR email = '$email'")){
-				go_to("signup/usernametaken");
+				go_to("user/signup/usernametaken");
 			}
 			else{
 				$hashedPwd = password_hash($pass, PASSWORD_DEFAULT);
 				$qry = "INSERT INTO accounts ( name, email, password ) VALUES ( '$name', '$email', '$hashedPwd' )";
 				if($db->runQuery($qry))
-					go_to("signup/success");
+					go_to("user/signup/success");
 				else 
-					go_to("signup/sqlerror");
+					go_to("user/signup/sqlerror");
 			}
 		}
 	}

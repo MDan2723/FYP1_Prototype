@@ -30,13 +30,16 @@ if(makePostBtn){
 
     makePostBtn.onclick= function(){
         postToggle = !postToggle;
+        let baseurl = window.location.origin;
         if(postToggle){
-            postMaker.innerHTML = `<div class="main">
-            <hr>
-            <input type='text' id='in_title' name='title' placeholder='Insert title here'>
-            <br>
-            <textarea class='forum-textarea' id="in_description" name='title' placeholder='insert description here'></textarea>
-            <button class='forum-btn' id="btn_comment">submit your forum post</button>
+            postMaker.innerHTML = 
+            `<div class="main">
+                <form method='POST' action='`+baseurl+`/includes/forum'>
+                    <input type='text' id='in_title' name='title' placeholder='Insert title here' required>
+                    <br>
+                    <textarea class='forum-textarea' id="in_description" name='desc' placeholder='insert description here' required></textarea>
+                    <input type='submit' class='forum-btn' name='submit' value='post thread'/>
+                </form>
             </div>
             `;
         }

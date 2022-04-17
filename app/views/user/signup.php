@@ -7,7 +7,7 @@
 <?=heads("Signup")?>
 
 <body class='v-cent'>
-	<div class="cent pad marg f-cent t-cent">
+	<div class="cent-reg pad marg f-cent t-cent">
 		<main class="">
 			<div class="">
 				<?php
@@ -34,21 +34,21 @@
 							<br>
 						<?php
 							if($data!=null){
-								echo "<p>";
+								echo "<p class='t-error'>";
 								switch($data){
-									case 'emptyfields': echo "";
+									case 'emptyfields': echo "please fill up the whole form";
 										break;
-									case 'invalidemailusername': echo "";
+									case 'invalidemailusername': echo "ERROR: this email/username is invalid. please try again";
 										break;
-									case 'invalidemail': echo "";
+									case 'invalidemail': echo "ERROR: Invalid email. please try again";
 										break;
-									case 'invalidusername': echo "";
+									case 'invalidusername': echo "ERROR: Invalid username. please try again";
 										break;
-									case 'passwordcheck': echo "";
+									case 'passwordcheck': echo "ERROR: Invalid repeat-password. please try again";
 										break;
-									case 'usernametaken': echo "";
+									case 'usernametaken': echo "ERROR: Taken username. please try again";
 										break;
-									case 'sqlerror': echo "";
+									case 'sqlerror': echo "SERVER ERROR: please try again another time";
 										break;
 									default:
 								

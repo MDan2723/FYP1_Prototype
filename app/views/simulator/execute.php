@@ -1,4 +1,21 @@
-<?=heads("Simulator")?>
+<?php
+	if(isset($_SESSION['user'])){
+		$DB = new Database();
+		$user = unserialize($_SESSION['user']);
+		$user_id = $user->getData()['id'];
+		$_GET['f'] = str_replace(" ","+",$_GET['f']);
+		
+		$_GET['x'] = str_replace(']','',str_replace('[','',$_GET['x']));
+		$_GET['x'] = explode(',',$_GET['x']);
+
+		if(!$DB->isInHistory($user_id,$_GET['f'])){
+			$DB->addSimHistory($user_id,$_GET);
+		}
+	}
+	
+	
+	heads("Simulator");
+?>
 <head>
 	<meta charset=utf-8 />
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/mathjs/0.15.0/math.min.js"></script>

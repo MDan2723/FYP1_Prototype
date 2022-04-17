@@ -267,23 +267,26 @@ function sourceList(){
 }
 
 // ----------- FORUM -----------
-function rating($type,$id){
+function showRating($type,$id){
 	$DB = new Database();
 	switch($type){
 		case 'thread':
 			$rate = $DB->threadRateCounter($id);
-			echo "$rate <i class='bx bx-upvote t-bold'></i>";
 			break;
 		case 'comment':
 			$rate = $DB->commentRateCounter($id);
-			echo "$rate <i class='bx bx-upvote'></i>";
 			break;
 	}
-
-	// $rate = ;
-	// for($i=0;$i<5;$i++){
-	// 	echo "<i class='bx bx-star' ></i>";
-	// }
+	if( isset($_SESSION['user']) ){
+		$user_id = unserialize($_SESSION['user'])->getData()['id'];
+		if( $DB->hasRated($type,$user_id,$id) )
+			echo "$rate <i class='bx bxs-upvote'></i>";
+		else
+			echo "$rate <i class='bx bx-upvote'></i>";
+	}
+	else{
+		echo "$rate <i class='bx bx-upvote'></i>";
+	}
 }
 function forumList(){
 	$DB = new Database();
@@ -322,7 +325,9 @@ function forumList(){
 											echo " comments";
 									?> 
 								</p>
-                    			<p class="rating"> <?=rating('thread',$row["id"])?></p>
+                    			<p class="rating">
+									<?=showRating('thread',$row["id"])?>
+								</p>
 							</div>
 						</a>
 					</li>
@@ -360,7 +365,22 @@ function forumComments($id){
 					<div class="bottom">
 						<h2 class="title"> <?=$row["author"]?> </h2>
 						<p class="timestamp"> <?=$row["date"]?> </p>
-                    	<p class="rating"> <?=rating('comment',$row["id"])?></p>
+						<?php
+							if(isset($_SESSION['user'])){
+								?>
+								<p class="rating pointer" onclick="makeRating('comment','<?=$row['id']?>')"> 
+									<?=showRating('comment',$row["id"])?>
+								</p>
+								<?php
+							}
+							else{
+								?>
+								<p class="rating"> 
+									<?=showRating('comment',$row["id"])?>
+								</p>
+								<?php
+							}
+						?>
 					</div>
 					<p class="description"> <?=$row["description"]?> </p>
 				</li>

@@ -17,7 +17,7 @@
                 <h3 class="t-left">THREADS</h3>
                 <?php
                 if(isset($_SESSION['user']))
-                    echo '<h3 class="t-right pointer" id="make-post-btn"><i class="bx bx-plus"></i></h3>';
+                    echo '<h3 class="t-right"><i class="bx bx-plus pointer" id="make-post-btn"></i></h3>';
                 ?>
                 
             </div>

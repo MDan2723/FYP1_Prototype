@@ -112,6 +112,9 @@ class Database{
 		$qry = "INSERT INTO sim_history ( acc_id, method, function, x1, x2, tolerance ) VALUES ( $user_id,$m,'$f',$x1,$x2,$tol )";
 		if(!$DB->runQuery($qry)) echo "sql error<br>";
 	}
+	public function delete(){
+		
+	}
 
 	// ----------	THREADS ----------
 	function ifExist($table,$select,$where){
@@ -164,7 +167,19 @@ class Database{
 	
 	// ----------	COMMENTS ----------
 	function makeComment(){
-		echo 'commenting';
+		$DB = new Database();
+		if( isset($_POST) ){
+			$user_id = unserialize($_SESSION['user'])->getData()['id'];
+			$thread_id = $_POST['thread_id'];
+			$desc = $_POST['desc'];
+			
+			if( !$this->ifExist("comments","*","WHERE thread_id = $thread_id AND description = '$desc'") ){
+				$qry = "INSERT INTO comments (  thread_id, acc_id, description, date ) VALUES ( $thread_id, $user_id, '$desc', CURRENT_TIMESTAMP )";
+				if(!$DB->runQuery($qry)) echo "sql error<br>";
+
+			}
+		}
+		go_to('forum/thread?id='.$thread_id);
 	}
 	function commentRateCounter($id){
 		$DB = new Database();

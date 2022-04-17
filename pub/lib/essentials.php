@@ -291,8 +291,8 @@ function showRating($type,$id){
 function forumList(){
 	$DB = new Database();
 	$result =  $DB->readTbl("threads t INNER JOIN accounts a ON a.id = t.acc_id",
-								"t.id, a.name AS author, t.date, t.title, t.description",
-								"");
+								"t.id, a.id AS author_id, a.name AS author, t.date, t.title, t.description",
+								"ORDER BY t.date DESC");
 	$list_data =  $DB->tableToListRow($result);
 	
 	?>
@@ -306,28 +306,34 @@ function forumList(){
 				</p>
 				<?php
 			}else{
+				// reverse($list_data);
 				for( $i=0; $i<count($list_data); $i++ ){
 					$row = $list_data[$i];
 					$commentCount = $DB->threadCommentNumber($row['id']);
 					?>
 					<li class="row">
 						<a href="<?=BASE_URL?>forum/thread?id=<?=$row["id"]?>">
-							<h4 class="title"> <?=$row["title"]?> </h4>
-							<div class="bottom">
-                    			<p class="author"> <?=$row["author"]?> </p>
-								<p class="timestamp"> <?=$row["date"]?> </p>
-								<p class="comment-count">
-									<?php 
-										echo $commentCount;
-										if($commentCount==1)
-											echo " comment";
-										else
-											echo " comments";
-									?> 
-								</p>
-                    			<p class="rating">
-									<?=showRating('thread',$row["id"])?>
-								</p>
+							<div class="pad">
+								<div class="t-left">
+									<h4 class="title"> <?=$row["title"]?> </h4>
+									<div class="bottom">
+										<p class="author"> <?=$row["author"]?> </p>
+										<p class="timestamp"> <?=$row["date"]?> </p>
+										<p class="comment-count">
+											<?php 
+												echo $commentCount;
+												if($commentCount==1)
+													echo " comment";
+												else
+													echo " comments";
+											?> 
+										</p>
+										<p class="rating">
+											<?=showRating('thread',$row["id"])?>
+										</p>
+									</div>
+
+								</div>
 							</div>
 						</a>
 					</li>
@@ -343,7 +349,7 @@ function forumComments($id){
 	$DB = new Database();
 	$result =  $DB->readTbl("comments c
 								INNER JOIN accounts a ON a.id = c.acc_id",
-								"c.id, a.name AS author, c.description, c.date",
+								"c.id, a.id AS author_id, a.name AS author, c.description, c.date",
 								"WHERE c.thread_id = '$id'");
 	
 	$list_data =  $DB->tableToListRow($result);
@@ -361,28 +367,43 @@ function forumComments($id){
 			for( $i=0; $i<count($list_data); $i++ ){
 				$row = $list_data[$i];
 				?>
-				<li class="row">
-					<div class="bottom">
-						<h2 class="title"> <?=$row["author"]?> </h2>
-						<p class="timestamp"> <?=$row["date"]?> </p>
-						<?php
-							if(isset($_SESSION['user'])){
-								?>
-								<p class="rating pointer" onclick="makeRating('comment','<?=$row['id']?>')"> 
-									<?=showRating('comment',$row["id"])?>
-								</p>
-								<?php
-							}
-							else{
-								?>
-								<p class="rating"> 
-									<?=showRating('comment',$row["id"])?>
-								</p>
-								<?php
-							}
-						?>
+				<li class="row grid-2">
+					<div class="t-left">
+						<div class="bottom">
+							<h2 class="title"> <?=$row["author"]?> </h2>
+							<p class="timestamp"> <?=$row["date"]?> </p>
+							<?php
+								if(isset($_SESSION['user'])){
+									?>
+									<p class="rating pointer" onclick="makeRating('comment','<?=$row['id']?>')"> 
+										<?=showRating('comment',$row["id"])?>
+									</p>
+									<?php
+								}
+								else{
+									?>
+									<p class="rating"> 
+										<?=showRating('comment',$row["id"])?>
+									</p>
+									<?php
+								}
+							?>
+						</div>
+						<p class="description"> <?=$row["description"]?> </p>
 					</div>
-					<p class="description"> <?=$row["description"]?> </p>
+					<div class="t-right">
+                    <?php
+                        if(isset($_SESSION['user'])){
+                            $user_id = unserialize($_SESSION['user'])->getData()['id'];
+                            if( $row['author_id'] == $user_id ){
+                                ?>
+                                <h4 class='t-s24 pad'><i class='pointer bx bx-trash' onclick="deletePost('comment','<?=$row['id']?>')"></i></h4>
+                                <?php
+                            }
+                        }
+                    ?>
+
+					</div>
 				</li>
 				<?php
 			}

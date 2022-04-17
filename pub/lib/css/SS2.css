@@ -10,8 +10,8 @@
 html{
 	background-color: #FFFCF2;
 	opacity: 1;
-	background-image:	linear-gradient(#EB5E28 2.5px, transparent 2.5px), 
-						linear-gradient(to right, #EB5E28 2.5px, #403D39 2.5px);
+	background-image:	linear-gradient(#47433d 2.5px, transparent 2.5px), 
+						linear-gradient(to right, #47433d 2.5px, #403D39 2.5px);
 	background-size: 50px 50px;
 }
 

@@ -68,3 +68,7 @@ p {
 .btn{
     text-decoration: none;
 }
+
+.thread-description{
+    min-height: 15vh;
+}

@@ -28,8 +28,8 @@
         <div id='formSimulation' class='form-sim'>
             <input id='sim_func' class='in1' type='text' name='func' placeholder='function, f(x)'>
             <!-- <div class="tooltip note block-inline"></div> -->
-            <div class="tooltip note"><i class='bx bx-question-mark'></i>
-                <span class="tooltiptext note">
+            <div class="tooltip right"><i class='bx bxs-note'></i>
+                <span class="tooltiptext right">
                     make sure the function is valid: 
                     <br>e.g. sin(x), sqrt(x), ((x+3)/4)^2-4
                     <br>- if the function does not have any root, an error message will appear.
@@ -43,8 +43,8 @@
                     <option value='2'>Secant Method</option>
                     <option value='3'>Newton Method</option>
                 </select>
-                <div class="tooltip note"><i class='bx bx-question-mark'></i>
-                    <span class="tooltiptext note">
+                <div class="tooltip right"><i class='bx bxs-note'></i>
+                    <span class="tooltiptext right">
                         Choose a method and the criteria will change.
                         <br>- Fill the criteria with the 'x' range/start for the method to work with. 
                     </span>
@@ -52,8 +52,8 @@
                 
                 <div id="criteria"></div>
                 <input id='sim_tol' class='in1' type='number' name='tol' min='0.000000000001' max='0.1' step="0.000000000001" placeholder='tolerance'>
-                <div class="tooltip note"><i class='bx bx-question-mark'></i>
-                    <span class="tooltiptext note">
+                <div class="tooltip right"><i class='bx bxs-note'></i>
+                    <span class="tooltiptext right">
                         tolerances are usually in decimal.
                         <br> 0.1 - 0.000001
                     </span>
@@ -63,6 +63,11 @@
             <div class=''>
                 <a id="simlink" href="<?=BASE_URL?>simulator/execute?m=1&f=((x+3)/4)^2-4&x=[4,7]&tol=0.0001"><button class='in1' type='submit'>Execute</button></a>
                 <!-- <input class='in1' type='reset'> -->
+                <div class="tooltip right"><i class='bx bxs-note'></i>
+                    <span class="tooltiptext right">
+                        execute without inputs for default example.
+                    </span>
+                </div>
             </div>
         </div>
     </div>

@@ -12,21 +12,27 @@
 
 <body class="v-cent main-body">
     
-	<div class="cent pad marg f-cent t-cent">
+	<div class="cent-reg pad marg f-cent t-cent">
 		<main class="">
+            <img src="<?=BASE_URL?>pub/images/user-circle-solid-120.png">
 			<div class="">
                 <hr>
-                <?php 
-                    $data = $user->getData();
-                    echo "Username:";
-                    echo "<h4 style='margin:0px;'>".$data['name']."</h2>"; 
-                ?>
+                <div class="grid-2" style="width:300px;">
+                    <div class="t-left">
+                        <?php 
+                            $data = $user->getData();
+                            echo "<h2 style='margin:0px;'>".$data['name']."</h2>";
+                            echo "<p style='margin:0px;'>".$data['email']."</p>"; 
+                        ?>
+
+                    </div>
+                    <div class="t-right">
+                        <h4 class='t-s24 pad'><i class='pointer bx bx-trash' onclick="deletePost('thread','<?=$row['id']?>')"></i></h4>
+
+                    </div>
+                </div>
                 <hr>
-                <?php 
-                    echo "E-mail:";
-                    echo "<h4 style='margin:0px;'>".$data['email']."</h2>"; 
-                ?>
-                <hr>
+                                
 			</div>
 		</main>
 		

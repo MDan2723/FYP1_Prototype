@@ -49,7 +49,7 @@ function navHeader( $page ){
         </div>
         <ul>
             <li>
-                <i class='bx bx-search pointer'></i><input type="text" placeholder="Search..." value="">
+                <i class='bx bx-search pointer'></i><input class='in-search' type="text" placeholder="Search..." value="">
                 <span class="tooltip">Search</span>
             </li>
 			<li><a href="<?=BASE_URL?>simulator">

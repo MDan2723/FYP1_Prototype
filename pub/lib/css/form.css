@@ -6,6 +6,9 @@
     border-radius:5px;
 }
 /* ---------------- input ---------------- */
+input{
+    padding: 2px 5px;
+}
 .in1{
     height:2em;
     width:15em;

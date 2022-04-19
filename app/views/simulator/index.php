@@ -33,6 +33,12 @@
 
 						<div>
 							<input id='sim_func' class='in1' type='text' name='func' placeholder='function, f(x)'>
+								<div class="tooltip down"><i class='bx bxs-note'></i><span class="tooltiptext down">
+									make sure the function is valid: 
+									<br>e.g. sin(x), sqrt(x), ((x+3)/4)^2-4
+									<br>- if the function does not have any root, an error message will appear.
+									<br>- .
+								</span></div>
 						</div>
 
 						<div class=''>
@@ -41,12 +47,27 @@
 								<option value='2'>Secant Method</option>
 								<option value='3'>Newton Method</option>
 							</select>
+								<div class="tooltip down"><i class='bx bxs-note'></i><span class="tooltiptext down">
+									Choose a method and the criteria will change.
+									<br>- Fill the criteria with the 'x' range/start for the method to work with. 
+								</span></div>
+
 							<div id="criteria"></div>
 							<input id='sim_tol' class='in1' type='number' name='tol' step="0.000001" placeholder='tolerance'>
+								<div class="tooltip down"><i class='bx bxs-note'></i><span class="tooltiptext down">
+									tolerances are usually in decimal.
+									<br> 0.1 - 0.000001
+								</span></div>
 						</div>
 
 						<div class=''>
-							<a id="simlink" href="<?=BASE_URL?>simulator/execute?m=1&f=((x+3)/4)^2-4&x=[4,7]&tol=0.0001"><input type='button' class='in1' value='Simulate'><a>
+							<a id="simlink" href="<?=BASE_URL?>simulator/execute?m=1&f=((x+3)/4)^2-4&x=[4,7]&tol=0.0001"><button class='in1' type='submit'>Execute</button><a>
+								
+							<div class="tooltip down"><i class='bx bxs-note'></i>
+								<span class="tooltiptext down">
+									execute without inputs for default example.
+								</span>
+							</div>
 						</div>
 					</div>
                 

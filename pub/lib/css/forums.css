@@ -3,9 +3,8 @@ a {
     color: black;
 }
 
-p {
-    margin: 5px 0;
-}
+p { margin: 5px 0; }
+textarea{ padding: 2px 5px; }
 
 .top-bar {
     background-color: #CCC5B9;

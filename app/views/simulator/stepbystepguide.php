@@ -18,12 +18,6 @@
 
 <body class="main-body">
 	<div class='cent pad marg'>
-		<div class='pad marg t-cent'>
-			<h3><t id="writeMethod"></t></h3>
-			f = <t id="writeFunc" class="t-bold"></t>, 
-			<t id="writeCriteria"></t>,
-			t = <t id="writeTolerance" class="t-bold"></t>
-		</div>
 
 		<div class='pad marg g-cent'>
 			<div id="graph" style="position: relative;">
@@ -31,9 +25,25 @@
 				<canvas id="gPointer" width="500" height="500" style="position: absolute; z-index: 1;"></canvas>
 			</div>
 			<div id="graphForm">
-				<h3 class="t-cent">Step-by-step</h3>
-				<div class="pad marg">
-					Steps, n: <input id="fieldStep" type='number' min='0' max='10' step='1' value='0'/>
+				<h3 class="pad t-cent">Step-by-step</h3>
+				<hr>
+				<div class='pad marg t-cent'>
+					<h3><t id="writeMethod"></t></h3>
+					function: <t id="writeFunc" class="t-bold"></t>
+					<br>
+					x: <t id="writeCriteria"></t>
+					<br>
+					tolerance: <t id="writeTolerance" class="t-bold"></t>
+				</div>
+				<hr>
+				<div class="pad marg t-cent">
+					Steps, n: <input class='t-cent' id="fieldStep" type='number' min='0' max='10' step='1' value='0'/>
+					<div class="tooltip down"><i class='bx bxs-note'></i>
+                    <span class="tooltiptext down">
+						click in the input and use up-down arrow keys to regulate the steps.
+                        <br>
+                    </span>
+                </div>
 				</div>
 				<hr>
 			</div>

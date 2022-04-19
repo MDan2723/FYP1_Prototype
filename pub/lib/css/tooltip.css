@@ -1,11 +1,11 @@
-.tooltip.note {
+/* -------- right -------- */
+.tooltip.right {
     position: relative;
     display: inline-block;
-    border-bottom: 1px dotted #252422;
     color: #252422;
 }
 
-.tooltip.note .tooltiptext.note {
+.tooltip.right .tooltiptext.right {
     visibility: hidden;
     opacity: 0;
     width: 400px;
@@ -23,7 +23,37 @@
     transition: all 0.2s ease;
 }
 
-.tooltip.note:hover .tooltiptext {
+.tooltip.right:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* -------- down -------- */
+.tooltip.down {
+    position: relative;
+    display: inline-block;
+    color: #252422;
+}
+
+.tooltip.down .tooltiptext.down {
+    visibility: hidden;
+    opacity: 0;
+    width: 300px;
+    background-color: #EB5E28;
+    color: #fff;
+    /* text-align: center; */
+    border-radius: 6px;
+    padding: 3px 10px;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 30px;
+    left: -215px;
+    transition: all 0.2s ease;
+}
+
+.tooltip.down:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }

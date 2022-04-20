@@ -24,21 +24,21 @@ input{
     color: #252422;
 }
 .in1:hover::placeholder {
-    color: #FFFCF2;
+    color: #FFFFFF;
 }
 .in1:hover{
     transition:0.25s;
-    color: #FFFCF2;
+    color: #FFFFFF;
     background-color:#EB5E28;
     border: 1px solid #EB5E28;
 }
 .in1:focus{
     background-color:#EB5E28;
     border: 1px solid #252422;
-    color:#FFFCF2;
+    color:#FFFFFF;
 }
 .in1:focus::placeholder {
-    color: #FFFCF2;
+    color: #FFFFFF;
 }
 
 .in1.criteria{

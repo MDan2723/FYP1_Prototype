@@ -55,7 +55,7 @@
 
 .sidebar #menu-btn{
     position: absolute;
-    color: #FFFCF2;
+    color: #FFFFFF;
     left: 50%;
     top: 6px;
     font-size: 20px;
@@ -116,12 +116,12 @@
     background-color: #403D39;
     padding-left: 50px;
     font-size: 18px;
-    color: #FFFCF2;
+    color: #FFFFFF;
 }
 .sidebar ul li .bx-search{
     position: absolute;
     z-index: 99;
-    color: #FFFCF2;
+    color: #FFFFFF;
     font-size: 22px;
     transition: all 0.5s ease;
 }
@@ -130,7 +130,7 @@
     color: #EB5E28;
 }
 .sidebar ul li a{
-    color: #FFFCF2;
+    color: #FFFFFF;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -139,7 +139,7 @@
     white-space: nowrap;
 }
 .sidebar ul li a:hover{
-    color: #FFFCF2;
+    color: #FFFFFF;
     background-color: #EB5E28;
 }
 
@@ -161,7 +161,7 @@
 }
 .sidebar .profile-content{
     position: absolute;
-    color: #FFFCF2;
+    color: #FFFFFF;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -197,7 +197,7 @@
 }
 .profile .profile-details a .name-job{
     margin-left: 10px;
-    color: #FFFCF2;
+    color: #FFFFFF;
 }
 .profile .profile-details .name{
     font-size: 15px;
@@ -213,7 +213,7 @@
     line-height: 50px;
     text-align: center;
 
-    color: #FFFCF2;
+    color: #FFFFFF;
     font-size: 20px;
     border-radius: 12px;
     cursor: pointer;
@@ -235,7 +235,7 @@
     text-align: center;
     transition: all 0.4s ease;
     background-color: #403D39;
-    color: #FFFCF2;
+    color: #FFFFFF;
 }
 .sidebar.active .profile #loggings{
     left: 88%;

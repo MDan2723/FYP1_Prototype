@@ -16,7 +16,7 @@ ul{
 .navList:hover{
 	transition:0.25s;
     
-	color: #FFFCF2;
+	color: #FFFFFF;
     background-color: grey;
 }
 .nlSel{
@@ -24,7 +24,7 @@ ul{
     padding:15px;
 
     border-radius:30px;
-	color: #FFFCF2;
+	color: #FFFFFF;
     background-color: grey;
 }
 
@@ -42,7 +42,7 @@ ul{
     background-color: #EB5E28;
 }
 .list ol li:hover > a{
-    color: #FFFCF2;
+    color: #FFFFFF;
 }
 
 

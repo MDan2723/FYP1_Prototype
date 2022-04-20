@@ -17,10 +17,10 @@ a{
 	text-shadow: 0px 0px 20px #252422;
 }
 
-.t-white{ color:#FFFCF2; }
+.t-white{ color:#FFFFFF; }
 .t-grey{ color:#CCC5B9; }
 .t-active{ color:#EB5E28; }
 .t-error{ color:RED; }
 
 
-.a-white:hover{ color:#FFFCF2; }
+.a-white:hover{ color:#FFFFFF; }

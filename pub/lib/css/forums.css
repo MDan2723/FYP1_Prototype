@@ -30,12 +30,12 @@ textarea{ padding: 2px 5px; }
     border-radius:10px;
 
     text-align:center;
-    color: #FFFCF2;
+    color: #FFFFFF;
 }
 .forum-btn:hover {
     background-color: #EB5E28;
     border: none;
-    color: #FFFCF2;
+    color: #FFFFFF;
 }
 
 .main {

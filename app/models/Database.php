@@ -135,7 +135,7 @@ class Database{
 			$desc = $_POST['desc'];
 			
 			if( !$this->ifExist("threads","*","WHERE title = '$title' AND description = '$desc'") ){
-				$qry = "INSERT INTO threads ( acc_id, date, title, description ) VALUES ( $user_id, CURRENT_TIMESTAMP, '$title', '$desc' )";
+				$qry = "INSERT INTO threads ( acc_id, date, title, description ) VALUES ( $user_id, CURRENT_TIMESTAMP, '$title', \"$desc\" )";
 				if(!$DB->runQuery($qry)) echo "sql error<br>";
 
 			}
@@ -174,7 +174,7 @@ class Database{
 			$desc = $_POST['desc'];
 			
 			if( !$this->ifExist("comments","*","WHERE thread_id = $thread_id AND description = '$desc'") ){
-				$qry = "INSERT INTO comments (  thread_id, acc_id, description, date ) VALUES ( $thread_id, $user_id, '$desc', CURRENT_TIMESTAMP )";
+				$qry = "INSERT INTO comments (  thread_id, acc_id, description, date ) VALUES ( $thread_id, $user_id, \"$desc\", CURRENT_TIMESTAMP )";
 				if(!$DB->runQuery($qry)) echo "sql error<br>";
 
 			}

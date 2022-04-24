@@ -76,7 +76,7 @@
                 </div> 
             </div>
             <hr>
-            <p class="thread-description"> <?=$row["description"]?> </p>
+            <p class="thread-description"> <?=str_replace("\n","<br>",$row["description"])?> </p>
                 
             <hr>
             <?php

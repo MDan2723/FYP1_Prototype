@@ -14,17 +14,18 @@ if( isset($_SESSION['user']) ){
 
     if( password_verify($_GET['password'],$dataUser['password'] )){
         $qry = "DELETE FROM accounts WHERE id = ".$dataUser['id'];
-
+        
         if($DB->runQuery($qry)){
-            // echo 'successful rating';
+            echo 'successful deletion';
+            unset( $_SESSION['user'] );
         }else{
-            // echo 'unsuccessful rating';
+            echo 'unsuccessful deletion';
         }
         
-        unset( $_SESSION['user'] );
     }
     else{
-        go_to("user?error=poop");
+        echo "poopy password";
+        // go_to("user?error=wrongPassword");
     }
     rtrn();
 }

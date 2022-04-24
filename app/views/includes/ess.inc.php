@@ -6,4 +6,15 @@ function go_to($url){
 	exit();
 }
 
+function rtrn(){
+	if( isset($_SESSION['from']) ){
+		header("Location: ".$_SESSION['BASE_URL'].$_SESSION['from']);
+		exit();
+	}
+	else{
+		header("Location: ".$_SESSION['BASE_URL']);
+		exit();
+	}
+}
+
 ?>

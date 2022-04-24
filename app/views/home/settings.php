@@ -11,7 +11,7 @@
 
 <body class="main-body">
     <div class="g-cent">
-        <div class='item d-small pad marg'>
+        <div class='item base d-small pad marg'>
             <div class='desc f-cent'>
                 <h3>GRAPH SETTING</h3> 
             </div>
@@ -26,7 +26,7 @@
                 </tr>
             </table>
         </div>
-        <div class='item d-small pad marg'>
+        <div class='item base d-small pad marg'>
             <div class='desc f-cent'>
                 <h3>GRID SETTINGS</h3> 
             </div>
@@ -72,7 +72,7 @@
 
         </div>
         
-        <div class='item d-small pad marg'>
+        <div class='item base d-small pad marg'>
             <div class='desc f-cent'>
                 <h3>POINTER SETTINGS</h3>
             </div>
@@ -132,7 +132,7 @@
             </table>
 
         </div>
-        <div class='item d-small pad marg'>
+        <div class='item base d-small pad marg'>
             <div class='desc f-cent'>
                 <h3>GUIDING LINES SETTINGS</h3>
             </div>
@@ -164,7 +164,7 @@
             </table>
 
         </div>
-        <div class='item d-small pad marg'>
+        <div class='item base d-small pad marg'>
             <div class='desc f-cent'>
                 <h3>ITERATION TABLE SETTINGS</h3>
             </div>

@@ -6,16 +6,6 @@ require_once BASE_DIR."app/views/includes/ess.inc.php";
 require_once BASE_DIR."app/models/Database.php";
 require_once BASE_DIR."app/models/Account.php";
 
-function rtrn(){
-	if( isset($_SESSION['from']) ){
-		header("Location: ".$_SESSION['BASE_URL'].$_SESSION['from']);
-		exit();
-	}
-	else{
-		header("Location: ".$_SESSION['BASE_URL']);
-		exit();
-	}
-}
 
 $ACC = new Account('');
 

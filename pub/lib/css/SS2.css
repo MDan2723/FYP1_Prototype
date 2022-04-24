@@ -57,12 +57,7 @@ body{
 	align-items: center;
 }
 
-.d-small{
-	/* width:30em; */
-	background-color:#FFFCF2;
-	box-shadow: 0px 3px 3px 3px #252422;
-	border-radius:10px;
-}
+.d-small{ width:30em; }
 
 
 /* ------------ FLEX GRID ------------ */

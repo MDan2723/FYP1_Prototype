@@ -12,7 +12,7 @@
 
 <body class="v-cent main-body">
     
-	<div class="cent-reg pad marg f-cent t-cent">
+	<div class="cent d-small pad f-cent t-cent">
 		<main class="">
             <img src="<?=BASE_URL?>pub/images/user-circle-solid-120.png">
 			<div class="">
@@ -27,7 +27,9 @@
 
                     </div>
                     <div class="t-right">
-                        <h4 class='t-s24 pad'><i class='pointer bx bx-trash' onclick="deletePost('thread','<?=$row['id']?>')"></i></h4>
+                        <h4 class='t-s24 pad'>
+                            <i class='pointer bx bx-trash' onclick="deleteAccount(<?=$data['id']?>)"></i>
+                        </h4>
 
                     </div>
                 </div>
@@ -37,5 +39,21 @@
 		</main>
 		
 	</div>
+    <script>
+        function deleteAccount(id){
+            
+            if(window.confirm("Are you sure you want to delete your account?")){
+                let password = prompt("Insert user password to confirm deletion");
+                if(password){
+                    let baseurl = window.location.origin;
+                    let requestDelete = new XMLHttpRequest();
+        
+                    requestDelete.open('POST',baseurl+'/includes/deleteAccount?password='+password);
+                    requestDelete.send();
+                    window.location.reload();
+                }
+            }
+        }
+    </script>
     <?=scriptings()?>
 </body>

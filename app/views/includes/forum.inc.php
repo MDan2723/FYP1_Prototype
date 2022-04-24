@@ -5,16 +5,7 @@ require_once BASE_DIR."pub/lib/ess.debug.php";
 require_once BASE_DIR."app/views/includes/ess.inc.php";
 require_once BASE_DIR."app/models/Database.php";
 
-function rtrn(){
-	if( isset($_SESSION['from']) ){
-		header("Location: ".$_SESSION['BASE_URL'].$_SESSION['from']);
-		exit();
-	}
-	else{
-		header("Location: ".$_SESSION['BASE_URL']);
-		exit();
-	}
-}
+
 
 if(isset($_POST['submit'])){
 	$DB = new Database();

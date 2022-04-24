@@ -7,15 +7,15 @@
 <?=heads("Signup")?>
 
 <body class='v-cent'>
-	<div class="cent-reg pad marg f-cent t-cent">
+	<div class="cent d-small pad marg f-cent t-cent">
 		<main class="">
-			<div class="">
+			<div class="d-small pad">
 				<?php
 				if( $data!=null AND $data=='success'){
 					?>
 					<h1> SIGN UP: successful! </h1>
 					<hr>
-					<h4> <a href="<?=BASE_URL?>login">Login to your new user account.</a> </h4>
+					<h4> <a href="<?=BASE_URL?>user/login">Login to your new user account.</a> </h4>
 					<?php
 				}
 				else{

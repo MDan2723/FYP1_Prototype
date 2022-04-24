@@ -7,10 +7,10 @@
 <?=heads("Login")?>
 
 <body class="v-cent">
-	<div class="cent-reg pad marg f-cent t-cent">
+	<div class="cent base d-small pad marg f-cent t-cent">
 
 		<main class="">
-			<div class="">
+			<div class="d-small pad">
 				<h1> LOGIN </h1>
 				<hr>
 				<form action='<?=BASE_URL?>includes/account' method='POST'>

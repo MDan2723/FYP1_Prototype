@@ -70,6 +70,9 @@ class Secant{
                 i++;
             }
             while ( e > this.tol );
+
+            fx[i] = evalMathExpr(x[i]);
+            S.saveGuides((i),[ x[i], fx[i],'l']);
             // c_log(result.toString() +' ≈ '+ Math.round(parseFloat(result.toString())));
             S.result = result;
 
@@ -99,37 +102,55 @@ class Secant{
                 G = S.G,
                 ctxG = G.ctxGraph;
 		let g = S.guide,
-            i = 1;
+            i = 1,
+            stop = g.length;
 
-        g.forEach(el=>{
+        let fS = document.getElementById("fieldStep");
+        if( fS != null ){
+            stop = parseInt(fS.value);
+            stop++;
+            fS.max = g.length;
+            fS.max-=2;
+        }
+
+        if( stop>0 ){
+            for( i=0; i<=stop; i++ ){
+                if(i<g.length){
+                    ctxG.beginPath();
+                    ctxG.strokeStyle = setting.guide_lines.marker;
+                    ctxG.arc( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y'), 2 , 0, 2*Math.PI );
+                    ctxG.stroke();
+                    ctxG.fillStyle = setting.guide_lines.marker;
+                    ctxG.fillText( "X"+i, G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
+                }
+            };
+
             ctxG.beginPath();
-            ctxG.strokeStyle = setting.guide_lines.marker;
-            ctxG.arc( G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y'), 2 , 0, 2*Math.PI );
+            ctxG.strokeStyle = setting.guide_lines.solid;
+            for( i=1; i<stop; i++ ){
+                if(i<g.length-1){
+                    ctxG.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
+                    ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
+                    ctxG.lineTo( G.findCoords('math',g[i+1][0],'x'), G.findCoords('math',0,'y') );
+                }
+            }
             ctxG.stroke();
-            ctxG.fillStyle = setting.guide_lines.marker;
-            ctxG.fillText( "X"+i, G.findCoords('math',el[0],'x'), G.findCoords('math',el[1],'y') );
-            i++;
-        });
 
-        ctxG.beginPath();
-        ctxG.strokeStyle = setting.guide_lines.solid;
-        for( i=1; i<g.length-1; i++ ){
-            ctxG.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
-            ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
-            ctxG.lineTo( G.findCoords('math',g[i+1][0],'x'), G.findCoords('math',0,'y') );
+            ctxG.setLineDash([4, 2]);
+            ctxG.beginPath();
+            ctxG.strokeStyle = setting.guide_lines.dashed;
+            for( i=1; i<stop; i++) {
+                if(i<g.length-1){
+                    ctxG.moveTo( G.findCoords('math',g[i+1][0],'x'), G.findCoords('math',0,'y') );
+                    ctxG.lineTo( G.findCoords('math',g[i+1][0],'x'), G.findCoords('math',g[i+1][1],'y') );
+                }
+            }
+            ctxG.stroke();
+            ctxG.setLineDash([0, 0]);
         }
-        ctxG.stroke();
-
-        ctxG.setLineDash([4, 2]);
-        ctxG.beginPath();
-        ctxG.strokeStyle = setting.guide_lines.dashed;
-        for( i=2; i<g.length; i++) {
-            ctxG.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
-            ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
+        else{
+            // c_log("no guides recorded");
         }
-        ctxG.stroke();
-        ctxG.setLineDash([0, 0]);
-            
 	}
 
     // Writings
@@ -322,52 +343,4 @@ class Secant{
 		document.getElementById("result").innerHTML = "x = "+(stepResult)+' ≈ '+Math.round(stepResult);
 	}
     
-    drawStepGuides(){
-        const   S = this,
-                G = S.G,
-                ctxG = G.ctxGraph;
-		let g = S.guide,
-            i = 1,
-            stop = g.length;
-
-        let fS = document.getElementById("fieldStep");
-        if( fS != null ){
-            stop = parseInt(fS.value);
-            stop++;
-            fS.max = g.length;
-            fS.max--;
-        }
-
-		if( stop>0 ){
-            for( i=0; i<(stop+1); i++ ){
-                ctxG.beginPath();
-                ctxG.strokeStyle = setting.guide_lines.marker;
-                ctxG.arc( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y'), 2 , 0, 2*Math.PI );
-                ctxG.stroke();
-                ctxG.fillStyle = setting.guide_lines.marker;
-                ctxG.fillText( "X"+i, G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
-            };
-
-            ctxG.beginPath();
-            ctxG.strokeStyle = setting.guide_lines.solid;
-            for( i=1; i<stop; i++ ){
-                ctxG.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
-                ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
-            }
-            ctxG.stroke();
-
-            ctxG.setLineDash([4, 2]);
-            ctxG.beginPath();
-            ctxG.strokeStyle = setting.guide_lines.dashed;
-            for( i=2; i<stop; i++) {
-                ctxG.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
-                ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
-            }
-            ctxG.stroke();
-            ctxG.setLineDash([0, 0]);
-        }
-        else{
-            // c_log("no guides recorded");
-        }
-	}
 }

@@ -30,10 +30,12 @@
             <!-- <div class="tooltip note block-inline"></div> -->
             <div class="tooltip right"><i class='bx bxs-note'></i>
                 <span class="tooltiptext right">
-                    make sure the function is valid: 
+                    make sure the function is valid:
                     <br>e.g. sin(x), sqrt(x), ((x+3)/4)^2-4
-                    <br>- if the function does not have any root, an error message will appear.
-                    <br>- .
+                    <ul class="ul-reg">
+                        <li>if the function does not have any root, an error message will appear.</li>
+                        <li>if the function has more than 1 root, some methods won't work and simulator will not execute.</li>
+                    </ul>
                 </span>
             </div>
 
@@ -46,7 +48,9 @@
                 <div class="tooltip right"><i class='bx bxs-note'></i>
                     <span class="tooltiptext right">
                         Choose a method and the criteria will change.
-                        <br>- Fill the criteria with the 'x' range/start for the method to work with. 
+                        <ul class="ul-reg">
+                            <li>Fill the criteria with the 'x' range/start for the method to work with.</li>
+                        </ul>
                     </span>
                 </div>
                 

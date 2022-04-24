@@ -14,7 +14,7 @@
 	}
 	
 	
-	heads("Simulator");
+	heads("Simulator: ".$_GET['f']);
 ?>
 <head>
 	<meta charset=utf-8 />

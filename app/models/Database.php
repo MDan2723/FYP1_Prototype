@@ -109,6 +109,7 @@ class Database{
 		$x1 = $input['x'][0];
 		$x2 = $input['x'][1];
 		$tol = $input['tol'];
+
 		$qry = "INSERT INTO sim_history ( acc_id, method, function, x1, x2, tolerance ) VALUES ( $user_id,$m,'$f',$x1,$x2,$tol )";
 		if(!$DB->runQuery($qry)) echo "sql error<br>";
 	}

@@ -122,7 +122,7 @@ class Newton{
     
             ctxG.beginPath();
             ctxG.strokeStyle = setting.guide_lines.solid;
-            for( i=1; i<g.length; i++ ){
+            for( i=1; i<stop; i++ ){
                 ctxG.moveTo( G.findCoords('math',g[i-1][0],'x'), G.findCoords('math',g[i-1][1],'y') );
                 ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
             }
@@ -132,7 +132,7 @@ class Newton{
             ctxG.beginPath();
             ctxG.strokeStyle = setting.guide_lines.dashed;
             // ctxG.strokeStyle = 2;
-            for( i=1; i<g.length; i++) {
+            for( i=1; i<stop; i++) {
                 ctxG.moveTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',0,'y') );
                 ctxG.lineTo( G.findCoords('math',g[i][0],'x'), G.findCoords('math',g[i][1],'y') );
             }
@@ -309,7 +309,7 @@ class Newton{
 
 		row--;
 		if(row==0) stepResult = 0;
-		else if(row>0) stepResult = this.tableItr[row][2];
+		else if(row>0) stepResult = this.tableItr[row][3];
 		document.getElementById("result").innerHTML = "x = "+(stepResult)+' ≈ '+Math.round(stepResult);
 	}
 }

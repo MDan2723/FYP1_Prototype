@@ -135,9 +135,9 @@ function footers(){
 
 // ----------- NOTES & EXERCISE -----------
 function exerciseList(){
-	$arrExercises = [	["Starter Exercise","#","Danial R.", "easy"],
-						["Intermediate Exercise","#","Danial R.", "medium"],
-						["Advanced Exercise","#","Danial R.", "hard"]
+	$arrExercises = [	["Starter Exercise","#","M.Danial", "easy"],
+						["Intermediate Exercise","#","M.Danial", "medium"],
+						["Advanced Exercise","#","M.Danial", "hard"]
 					];
 	$source_num = count($arrExercises);
 	?>
@@ -177,9 +177,9 @@ function exerciseList(){
 	<?php
 }
 function noteList(){
-	$arrNotes = [	['Bisection Method','#',"Danial R."],
-					['Secant Method','#',"Danial R."],
-					['Newton Method','#',"Danial R."]
+	$arrNotes = [	['Bisection Method','#',"M.Danial"],
+					['Secant Method','#',"M.Danial"],
+					['Newton Method','#',"M.Danial"]
 				];
 	$source_num = count($arrNotes);
 	?>
@@ -389,7 +389,7 @@ function forumComments($id){
 								}
 							?>
 						</div>
-						<p class="description"> <?=$row["description"]?> </p>
+						<p class="description"> <?=str_replace("\n","<br>",$row["description"])?> </p>
 					</div>
 					<div class="t-right">
                     <?php

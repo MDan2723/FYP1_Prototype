@@ -310,7 +310,7 @@ class Bisection{
 		input.change( function (e) {
 			if( input.val()!='' ){
 				B.tableResultStep()
-				B.iteration();
+				// B.iteration();
 				B.G.refreshCanvas();
 			}else{
 				// c_log("missing step");
